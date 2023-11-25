@@ -47,7 +47,7 @@
           <i class="fas fa-bars"></i>
         </a>
 
-        <a href="#" class="brand-logo">
+        <a href="https://solital.github.io/site/" class="brand-logo">
           <img src="../img/solital-logo-2-sm-trans-2.png" alt="Solital Framework">
         </a>
       </header>
@@ -317,16 +317,19 @@
       <div class="dashboard-content">
         <div class="container">
 
-          <section class="container-fluid section">
+          <section class="container section">
             <div class="row">
-              <div class="col-md-12 w-100">
+              <div class="col-md-12 col-sm-12 w-100">
                 <h1 class="mt-4 font-weight-normal title-page">Dump</h1>
               </div>
 
-              <div class="col-md-12 mt-3">
+              <div class="col-md-12 col-sm-12 mt-3">
                 
 
                 <ul class="ml-5 mb-5">
+                  
+                    <li><a href="#excluding-tables-from-the-dump">Excluding tables from the dump</a></li>
+                  
                   
                     <li><a href="#for-windows">For Windows</a></li>
                   
@@ -338,6 +341,10 @@
 <pre><code class="language-bash">php vinci db:dump
 </code></pre>
 <p>Any dump files you run will be stored in <code>app/Storage/dump</code>.</p>
+<h2 id="excluding-tables-from-the-dump">Excluding tables from the dump</h2>
+<p>If there are tables in your database that you do not want to dump, use the <code>--exclude</code> argument</p>
+<pre><code class="language-bash">php vinci db:dump --exclude=table1,table2
+</code></pre>
 <h2 id="for-windows">For Windows</h2>
 <p>The process to perform the dump on Windows is a little different, you first need to edit the <code>database.yaml</code> file. You will need to indicate the location of <code>mysqldump</code> as shown below:</p>
 <pre><code class="language-yaml">dump_windows:
@@ -370,7 +377,7 @@
               <hr>
 
               <div class="row text-center mt-3">
-                <div class="col-md-12 ml-2">
+                <div class="col-md-12 col-sm-12 ml-2">
                   Built with <a href="https://www.mkdocs.org">MkDocs</a>.
                 </div>
               </div>
@@ -378,7 +385,7 @@
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2023-11-10 11:10:40.074420+00:00
+              Docs Build Date UTC : 2023-11-25 00:18:51.088963+00:00
               -->
 
           </section>

@@ -47,7 +47,7 @@
           <i class="fas fa-bars"></i>
         </a>
 
-        <a href="#" class="brand-logo">
+        <a href="https://solital.github.io/site/" class="brand-logo">
           <img src="../img/solital-logo-2-sm-trans-2.png" alt="Solital Framework">
         </a>
       </header>
@@ -317,13 +317,13 @@
       <div class="dashboard-content">
         <div class="container">
 
-          <section class="container-fluid section">
+          <section class="container section">
             <div class="row">
-              <div class="col-md-12 w-100">
+              <div class="col-md-12 col-sm-12 w-100">
                 <h1 class="mt-4 font-weight-normal title-page">Cache</h1>
               </div>
 
-              <div class="col-md-12 mt-3">
+              <div class="col-md-12 col-sm-12 mt-3">
                 
 
                 <ul class="ml-5 mb-5">
@@ -331,6 +331,9 @@
                     <li><a href="#how-to-use-psr6psr-16">How to use - PSR6/PSR-16</a></li>
                   
                     <li><a href="#clear-cache">Clear cache</a></li>
+                  
+                  
+                    <li><a href="#cache-drive">Cache drive</a></li>
                   
                   
                     <li><a href="#http-cache">HTTP Cache</a></li>
@@ -424,6 +427,16 @@ print_r($list2);
 <p>To clear the entire cache created with the <code>Cache</code> class, use the <code>clear</code> function.</p>
 <pre><code class="language-php">$cache-&gt;clear();
 </code></pre>
+<h2 id="cache-drive">Cache drive</h2>
+<p><strong>Memcache</strong></p>
+<p>To use the Memcache drive, first make sure you have this drive installed on your machine. To change the Solital cache drive, change the <code>cache.yaml</code> file in the <code>app/config/</code> folder.</p>
+<pre><code class="language-yaml"># Set cache type
+cache_drive: memcache
+
+# (If memcache is used) Set host and port
+cache_host: 127.0.0.1
+cache_port: 11211
+</code></pre>
 <h2 id="http-cache">HTTP Cache</h2>
 <p>Font by <a href="" title="https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers">heroku</a></p>
 <p>The modern day developer has a wide variety of techniques and technologies available to improve application performance and end-user experience. One of the most frequently overlooked technologies is that of the HTTP cache.</p>
@@ -504,7 +517,7 @@ $cache-&gt;eTag('value');
               <hr>
 
               <div class="row text-center mt-3">
-                <div class="col-md-12 ml-2">
+                <div class="col-md-12 col-sm-12 ml-2">
                   Built with <a href="https://www.mkdocs.org">MkDocs</a>.
                 </div>
               </div>
@@ -512,7 +525,7 @@ $cache-&gt;eTag('value');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2023-11-10 11:10:40.043177+00:00
+              Docs Build Date UTC : 2023-11-25 00:18:51.061818+00:00
               -->
 
           </section>
