@@ -511,6 +511,12 @@ User::select()-&gt;where('id', 2)-&gt;getUnique();
  */
 User::select(&quot;name&quot;)-&gt;get();
 </code></pre>
+<p>You can return the latest values from the database in descending order using the <code>latest</code> method:</p>
+<pre><code class="language-php">User::latest()-&gt;get();
+</code></pre>
+<p>By default, the <code>latest</code> method will sort using the <code>created_at</code> column. If this column does not exist in your table, you can pass the noe of another column as a parameter.</p>
+<pre><code class="language-php">User::latest('users')-&gt;get();
+</code></pre>
 <p><strong>WHERE</strong></p>
 <p>If you need the <code>WHERE</code> clause, use <code>where()</code> method.</p>
 <pre><code class="language-php">/** 
@@ -539,6 +545,13 @@ User::select()-&gt;where(&quot;brand&quot;, 'visa')-&gt;and(&quot;cvv&quot;, '50
  * With OR clause
  */
 User::select()-&gt;where(&quot;brand&quot;, 'visa')-&gt;or(&quot;cvv&quot;, '502')-&gt;get();
+</code></pre>
+<p><strong>Multiple WHERE</strong></p>
+<p>To save time and avoid using the <code>and</code> method, you can pass an array as a parameter in the <code>where</code> method with multiple conditions.</p>
+<pre><code class="language-php">User::select()-&gt;where([
+  'brand', 'visa',
+  'cvv', '502'
+])-&gt;get();
 </code></pre>
 <p><strong>LIKE and BETWEEN</strong></p>
 <p>You can combine the <code>where</code> method with other search methods such as <code>like</code> and <code>between</code>.</p>
@@ -1070,7 +1083,7 @@ GROUP BY created_at, order_status, idSession&quot;, 3);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2023-11-25 00:18:51.113266+00:00
+              Docs Build Date UTC : 2023-11-30 16:48:25.096540+00:00
               -->
 
           </section>
