@@ -90,10 +90,6 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="../installation/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Installing
-      </a>
-    
       <a href="../environment-variables/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Environment Variables
       </a>
@@ -108,6 +104,10 @@
     
       <a href="../exceptions/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Exceptions
+      </a>
+    
+      <a href="../application-api/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> API Application
       </a>
     
   </div>
@@ -392,7 +392,7 @@ $pool-&gt;commit();
 <p>You can cache through PSR-16. To do this, perform the instance of the Cache class as follows:</p>
 <pre><code class="language-php">use Solital\Cache\SimpleCache;
 
-$cache = new SimpleCache();
+$cache = new SimpleCache(); // Or use `cache()` helper
 
 $list = User::select()-&gt;get();
 
@@ -450,14 +450,32 @@ print_r($list2);
 <pre><code class="language-php">$cache-&gt;clear();
 </code></pre>
 <h2 id="cache-drive">Cache drive</h2>
-<p><strong>Memcache</strong></p>
-<p>To use the Memcache drive, first make sure you have this drive installed on your machine. To change the Solital cache drive, change the <code>cache.yaml</code> file in the <code>app/config/</code> folder.</p>
+<p>To use the cache in Solital you will need to install a caching extension using PECL.</p>
+<p>To make life easier for developers, you can use the <a href="https://github.com/brenno-duarte/php-pecl-extensions">brenno-duarte/php-pecl-extensions</a> package to install PECL extensions.</p>
+<pre><code>composer require brenno-duarte/php-pecl-extensions
+</code></pre>
+<p>To change the Solital cache drive, change the <code>cache.yaml</code> file in the <code>app/config/</code> folder.</p>
+<p><strong>Memcached/Memcache</strong></p>
 <pre><code class="language-yaml"># Set cache type
-cache_drive: memcache
+cache_drive: memcached # or `memcache`
 
-# (If memcache is used) Set host and port
+# Set host and port
 cache_host: 127.0.0.1
 cache_port: 11211
+</code></pre>
+<p><strong>APCu</strong></p>
+<pre><code class="language-yaml"># Set cache type
+cache_drive: apcu
+
+# Set ttl
+cache_ttl: 600
+</code></pre>
+<p>Or, you can choose the drive using the constructor of the <code>CachePool</code>, <code>SimpleCache</code> classes and the <code>cache</code> helper.</p>
+<pre><code class="language-php">$pool = new CachePool('memcached');
+
+$cache = new SimpleCache('memcached');
+
+cache('memcached'); // Return a `SimpleCache` instance
 </code></pre>
 <h2 id="http-cache">HTTP Cache</h2>
 <p>Font by <a href="" title="https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers">heroku</a></p>
@@ -544,7 +562,7 @@ $cache-&gt;eTag('value');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-01-21 16:10:34.189973+00:00
+              Docs Build Date UTC : 2024-02-23 22:53:46.943122+00:00
               -->
 
           </section>

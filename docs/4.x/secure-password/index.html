@@ -90,10 +90,6 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="../installation/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Installing
-      </a>
-    
       <a href="../environment-variables/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Environment Variables
       </a>
@@ -108,6 +104,10 @@
     
       <a href="../exceptions/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Exceptions
+      </a>
+    
+      <a href="../application-api/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> API Application
       </a>
     
   </div>
@@ -359,6 +359,9 @@
                     <li><a href="#changing-the-value-of-pepper">Changing the value of “pepper”</a></li>
                   
                   
+                    <li><a href="#changing-peeper-encryption">Changing Peeper encryption</a></li>
+                  
+                  
                 </ul>
 
                 
@@ -375,11 +378,16 @@
   memory_cost: ''
   time_cost: ''
   threads: ''
+  crypt_type: openssl
 </code></pre>
 <p>In the <code>algorithm</code> key, you can add the following values: <code>default</code>, <code>argon2</code> and <code>argon2d</code>. For more information about other PHP constants, see <a href="https://www.php.net/manual/pt_BR/password.constants.php">this link</a>.</p>
 <h2 id="changing-the-value-of-pepper">Changing the value of “pepper”</h2>
 <p>As mentioned in the introduction, the <code>SecurePassword</code> package uses a “pepper” value. To change the value of this pepper, you can edit the value of the <code>peeper</code> key in the <code>auth.yaml</code> file.</p>
 <p><strong>NOTE: Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting.</strong></p>
+<h2 id="changing-peeper-encryption">Changing Peeper encryption</h2>
+<p>By default, peeper is encrypted using OpenSSL. You can switch to Sodium encryption by changing the value of the <code>crypt_type</code> variable in the <code>auth.yaml</code> file.</p>
+<pre><code class="language-yaml">crypt_type: sodium
+</code></pre>
                 
 
                 <hr />
@@ -412,7 +420,7 @@
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-01-21 16:10:34.283702+00:00
+              Docs Build Date UTC : 2024-02-23 22:53:47.036821+00:00
               -->
 
           </section>

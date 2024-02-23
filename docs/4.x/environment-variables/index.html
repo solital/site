@@ -90,10 +90,6 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="../installation/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Installing
-      </a>
-    
       <a href="./" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Environment Variables
       </a>
@@ -108,6 +104,10 @@
     
       <a href="../exceptions/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Exceptions
+      </a>
+    
+      <a href="../application-api/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> API Application
       </a>
     
   </div>
@@ -379,7 +379,7 @@
 <ul>
 <li>Displays all errors that Solital or PHP raises. Activate only in development mode</li>
 </ul>
-<pre><code class="language-bash">ERRORS_DISPLAY=&quot;true&quot;
+<pre><code class="language-bash">ERRORS_DISPLAY=true
 </code></pre>
 <ul>
 <li>Database connection variables. To find out more, see <a href="../katrina-orm/">Katrina ORM</a></li>
@@ -404,8 +404,8 @@ MAIL_PORT=&quot;&quot;
 <ul>
 <li>Variables used in encryption. It is recommended that you add new values to these variables.</li>
 </ul>
-<pre><code class="language-bash">FIRST_SECRET=&quot;first_secret&quot;
-SECOND_SECRET=&quot;second_secret&quot;
+<pre><code class="language-bash">FIRST_SECRET=first_secret
+SECOND_SECRET=second_secret
 </code></pre>
 <h2 id="checking-project-status">Checking project status</h2>
 <p>To check the status of Solita, you can run the <code>php vinci status</code> command. This command checks whether there are variables that have not been configured correctly.</p>
@@ -421,7 +421,7 @@ SECOND_SECRET=&quot;second_secret&quot;
                 <section aria-label="breadcrumb" class="mt-4">
                   <ol class="breadcrumb">
                     
-                      <li class="breadcrumb-item"><a href="../installation/">&#8592; Installing</a></li>
+                      <li class="breadcrumb-item"><a href="../upgrade-guide/">&#8592; Upgrade Guide</a></li>
                     
                     
                       <li class="breadcrumb-item"><a href="../yaml-files/">YAML Files &#8594;</a></li>
@@ -443,7 +443,7 @@ SECOND_SECRET=&quot;second_secret&quot;
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-01-21 16:10:34.221215+00:00
+              Docs Build Date UTC : 2024-02-23 22:53:46.974336+00:00
               -->
 
           </section>

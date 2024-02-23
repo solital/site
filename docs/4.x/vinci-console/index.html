@@ -90,10 +90,6 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="../installation/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Installing
-      </a>
-    
       <a href="../environment-variables/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Environment Variables
       </a>
@@ -108,6 +104,10 @@
     
       <a href="../exceptions/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Exceptions
+      </a>
+    
+      <a href="../application-api/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> API Application
       </a>
     
   </div>
@@ -370,6 +370,11 @@
                     <li><a href="#progress-bar">Progress Bar</a></li>
                   
                   
+                    <li><a href="#table">Table</a></li>
+                  
+                    <li><a href="#styled">Styled</a></li>
+                  
+                  
                 </ul>
 
                 
@@ -575,6 +580,11 @@ class UserCommand extends Command implements CommandInterface
     protected array $arguments = [];
 
     /**
+     * @var array
+     */
+    protected array $options = [];
+
+    /**
      * @var string
      */
     protected string $description = &quot;&quot;;
@@ -591,24 +601,17 @@ class UserCommand extends Command implements CommandInterface
     }
 }
 </code></pre>
-<p>In the <code>$command</code> variable, you will define the custom command that will be executed. The <code>$arguments</code> variable will have an array of values containing all arguments (if your custom command has no arguments, leave this variable empty). Lastly, the <code>$description</code> variable will have a short description of what the custom command does.</p>
-<p><strong>Handle method</strong></p>
+<p>In the <code>$command</code> variable, you will define the custom command that will be executed. The <code>$arguments</code> variable will have an array of values containing all arguments (if your custom command has no arguments, leave this variable empty). The variable <code>$options</code> must contain mandatory options for your command, otherwise use the options dynamically. Lastly, the <code>$description</code> variable will have a short description of what the custom command does.</p>
 <p>The handle method will contain all the code that will be executed when executing the custom command and should always return a <code>$this</code> or, if necessary, another value.</p>
 <p><strong>Using Arguments</strong></p>
 <p>Arguments can be retrieved using the <code>$arguments</code> variable:</p>
 <pre><code class="language-bash">php vinci user:cmd myArgument
 </code></pre>
 <pre><code class="language-php">protected array $arguments = ['name'];
-
-public function handle(object $arguments, object $options): mixed
-{
-    var_dump($arguments-&gt;name);
-
-    return $this;
-}
 </code></pre>
+<p>If you pass more arguments than are specified in your command's class, a warning will be displayed.</p>
 <p><strong>Using Options</strong></p>
-<p>Options are not defined in the created class, but you can check inside the <code>handle</code> method if an option exists. For example:</p>
+<p>Options can be returned dynamically, but you must check in the <code>handle</code> method whether an option exists.</p>
 <pre><code class="language-bash">php vinci user:cmd name --myOption
 </code></pre>
 <pre><code class="language-php">public function handle(object $arguments, object $options): mixed
@@ -620,18 +623,27 @@ public function handle(object $arguments, object $options): mixed
     return $this;
 }
 </code></pre>
+<p>If you have any mandatory options that must be entered when executing the command, you can define these options using the variable <code>$options</code>.</p>
+<pre><code class="language-php">protected array $options = ['--myoption', '--withArg='];
+</code></pre>
+<p>In the example above, the command must contain one of the options. If an option requires entering a value, use <code>=</code> next to the option (see the example above: <code>--withArg=</code>).</p>
+<p>This will mean that when using this option, the user will enter a value (for example: <code>--withArg=accept</code>).</p>
 <h2 id="input-and-output-commands">Input and output commands</h2>
 <p>It is very common to enter an input value on the command line when needed. Using the <code>InputOutput</code> class, you can perform this action.</p>
 <pre><code class="language-php">use Solital\Core\Console\InputOutput;
 
-(new InputOutput())-&gt;dialog('Enter a string: ')-&gt;action(function ($message) {
+$input_output = new InputOutput();
+$input_output-&gt;dialog('Enter a string: ')-&gt;action(function ($message) {
     echo $message . PHP_EOL;
 });
 </code></pre>
 <p>The <code>dialog()</code> method will display a message to the user, while the <code>action()</code> method retrieves the value entered on the command line. The <code>action()</code> method takes an anonymous function as a parameter.</p>
 <p><strong>Confirmation box</strong></p>
 <p>You can also use a "yes/no" confirmation, or any other value.</p>
-<pre><code class="language-php">(new InputOutput())-&gt;confirmDialog('What you want?', 'Y', 'N', false)-&gt;confirm(function () {
+<pre><code class="language-php">use Solital\Core\Console\InputOutput;
+
+$input_output = new InputOutput();
+$input_output-&gt;confirmDialog('What you want?', 'Y', 'N', false)-&gt;confirm(function () {
     echo &quot;accepted&quot; . PHP_EOL;
 })-&gt;refuse(function () {
     echo &quot;denied&quot; . PHP_EOL;
@@ -641,7 +653,7 @@ public function handle(object $arguments, object $options): mixed
 <p><strong>Customizing colors</strong></p>
 <p>To customize the colors of the message that is displayed from the CLI, you can pass the color name in the constructor of the <code>InputOutput</code> class.</p>
 <p>The available colors are: <code>green</code>, <code>yellow</code> and <code>blue</code>.</p>
-<pre><code class="language-php">(new InputOutput('green')) // green - yellow - blue
+<pre><code class="language-php">$input_output = new InputOutput('green'); // green - yellow - blue
 </code></pre>
 <h2 id="displaying-messages">Displaying messages</h2>
 <p>To display a message on the command line, use the <code>MessageTrait</code> trait. First, you will define a message using one of the methods below:</p>
@@ -715,6 +727,116 @@ $progressbar-&gt;resetProgressbar();
 //Terminates the progressbar and resets the object.
 $progressbar-&gt;terminateProgressbar();
 </code></pre>
+<h2 id="table">Table</h2>
+<p>You can create tables in the console. To do this, use the <code>Table</code> class. </p>
+<pre><code class="language-php">use Solital\Core\Console\Table;
+
+$table = new Table();
+
+$table-&gt;row([
+    'id'        =&gt; 1,
+    'name'      =&gt; 'Matthew S.',
+    'surname'   =&gt; 'Kramer',
+    'email'     =&gt; 'matthew@example.com',
+    'status'    =&gt; true,
+]);
+
+$table-&gt;row([
+    'id'        =&gt; 2,
+    'name'      =&gt; 'Millie J.',
+    'surname'   =&gt; 'Koenig',
+    'email'     =&gt; 'millie@example.com',
+    'status'    =&gt; false,
+]);
+
+$table-&gt;row([
+    'id'        =&gt; 3,
+    'name'      =&gt; 'Regina G.',
+    'surname'   =&gt; 'Hart',
+    'email'     =&gt; 'regina@example.com',
+    'status'    =&gt; true,
+]);
+
+echo $table;
+</code></pre>
+<p>Output : </p>
+<p><img src="https://user-images.githubusercontent.com/104234499/186993361-3917979a-0a40-4e7b-84e8-4dd5f51c1bd1.jpg" width="600"></p>
+<h3 id="styled">Styled</h3>
+<pre><code class="language-php">use Solital\Core\Console\Table;
+
+$table = new Table();
+$table-&gt;setBorderStyle(Table::COLOR_BLUE);
+$table-&gt;setCellStyle(Table::COLOR_GREEN);
+$table-&gt;setHeaderStyle(Table::COLOR_RED, Table::BOLD);
+
+$table-&gt;setColumnCellStyle('id', Table::ITALIC, Table::COLOR_LIGHT_YELLOW);
+$table-&gt;setColumnCellStyle('email', Table::BOLD, Table::ITALIC);
+
+$table-&gt;row([
+    'id'        =&gt; 1,
+    'name'      =&gt; 'Matthew S.',
+    'surname'   =&gt; 'Kramer',
+    'email'     =&gt; 'matthew@example.com',
+    'status'    =&gt; true,
+]);
+
+$table-&gt;row([
+    'id'        =&gt; 2,
+    'name'      =&gt; 'Millie J.',
+    'surname'   =&gt; 'Koenig',
+    'email'     =&gt; 'millie@example.com',
+    'status'    =&gt; false,
+]);
+
+$table-&gt;row([
+    'id'        =&gt; 3,
+    'name'      =&gt; 'Regina G.',
+    'surname'   =&gt; 'Hart',
+    'email'     =&gt; 'regina@example.com',
+    'status'    =&gt; true,
+]);
+
+echo $table;
+</code></pre>
+<p>Output : </p>
+<p><img src="https://user-images.githubusercontent.com/104234499/186993365-82c0e55d-d572-45d2-a89a-5cf60c5c9fbe.jpg" width="600"></p>
+<p>Credits - <a href="https://github.com/muhammetsafak">Muhammet ŞAFAK</a></p>
+<p><strong>Dynamic Rows</strong></p>
+<p>If you need a standard header and just add the values, use the <code>dynamicRows</code> method.</p>
+<pre><code class="language-php">use Solital\Core\Console\Table;
+
+$header = ['name', 'email', 'age'];
+
+$values = [
+  ['Foo', 'foo@email.com', 20],
+  ['Bar', 'bar@email.com', 30]
+];
+
+$table = new Table();
+$table-&gt;setHeaderStyle(Table::COLOR_LIGHT_GREEN);
+$table-&gt;dynamicRows($header, $values);
+</code></pre>
+<p><strong>Formatted Row</strong></p>
+<p>Formatted lines are a way of organizing data that contains some additional information. You can see an example of this method in use by running the <code>php vinci list</code> command.</p>
+<pre><code class="language-php">use Solital\Core\Console\Table;
+
+$values = [
+  'user' =&gt; 'Admin',
+  'email' =&gt; 'admin@gmail.com'
+];
+
+Table::formattedRowData($values);
+</code></pre>
+<p>The second parameter you can define the spacing between the information. In the third parameter you can create a margin on the left side.</p>
+<pre><code class="language-php">use Solital\Core\Console\Table;
+
+$values = [
+  'user' =&gt; 'Admin',
+  'email' =&gt; 'admin@gmail.com'
+];
+
+Table::formattedRowData($values, 50, true);
+</code></pre>
                 
 
                 <hr />
@@ -747,7 +869,7 @@ $progressbar-&gt;terminateProgressbar();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-01-21 16:10:34.299323+00:00
+              Docs Build Date UTC : 2024-02-23 22:53:47.068064+00:00
               -->
 
           </section>

@@ -90,10 +90,6 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="../installation/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Installing
-      </a>
-    
       <a href="../environment-variables/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Environment Variables
       </a>
@@ -108,6 +104,10 @@
     
       <a href="../exceptions/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Exceptions
+      </a>
+    
+      <a href="../application-api/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> API Application
       </a>
     
   </div>
@@ -392,6 +392,8 @@
                   
                     <li><a href="#create-a-new-table">Create a new table</a></li>
                   
+                    <li><a href="#timestamps">Timestamps</a></li>
+                  
                     <li><a href="#list-tables">List tables</a></li>
                   
                     <li><a href="#list-columns">List columns</a></li>
@@ -415,6 +417,12 @@
                     <li><a href="#custom-pagination">Custom Pagination</a></li>
                   
                   
+                    <li><a href="#cache">Cache</a></li>
+                  
+                  
+                    <li><a href="#multiple-connections">Multiple connections</a></li>
+                  
+                  
                     <li><a href="#types-of-data">Types of data</a></li>
                   
                   
@@ -423,13 +431,13 @@
                 
                 <h2 id="version">Version</h2>
 <p>Katrina ORM is currently at version <strong>2.x</strong>. To read documentation for previous versions choose one of the links below.</p>
-<p><a href="https://solitalframework.rf.gd/docs/3.x/katrina1/">1.x</a></p>
+<p><a href="../katrina1/">1.x</a></p>
 <h2 id="getting-started">Getting Started</h2>
 <p>Katrina ORM is a component that brings the object-oriented application development paradigm closer to the relational database paradigm. It helps to carry out common routines, such as the famous CRUD (create, read, edit and delete), in addition to having a data paging system.</p>
 <p>Katrina ORM uses the Active Record standard to manipulate the data in the database.</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
-<li>PHP &gt;= 8.0</li>
+<li>PHP &gt;= 8.3</li>
 <li>PDO extension enabled</li>
 </ul>
 <h3 id="installation">Installation</h3>
@@ -439,11 +447,11 @@
 <h3 id="settings">Settings</h3>
 <p>In Solital:</p>
 <pre><code class="language-bash"># DATABASE CONFIG
-DB_DRIVE=&quot;your_drive&quot;
-DB_HOST=&quot;your_host&quot;
-DB_NAME=&quot;your_database_name&quot;
-DB_USER=&quot;your_user&quot;
-DB_PASS=&quot;your_password&quot;
+DB_DRIVE=your_drive
+DB_HOST=your_host
+DB_NAME=your_database_name
+DB_USER=your_user
+DB_PASS=your_password
 </code></pre>
 <p>In another project:</p>
 <pre><code class="language-php">define('DB_CONFIG', [
@@ -465,12 +473,12 @@ DB_PASS=&quot;your_password&quot;
 </code></pre>
 <p>In Solital:</p>
 <pre><code class="language-bash"># DATABASE CONFIG
-DB_DRIVE=&quot;your_drive&quot;
-DB_HOST=&quot;your_host&quot;
-DB_NAME=&quot;your_database_name&quot;
-DB_USER=&quot;your_user&quot;
-DB_PASS=&quot;your_password&quot;
-SQLITE_DIR=&quot;/path/to/file/&quot;
+DB_DRIVE=your_drive
+DB_HOST=your_host
+DB_NAME=your_database_name
+DB_USER=your_user
+DB_PASS=your_password
+SQLITE_DIR=/path/to/file/
 </code></pre>
 <h2 id="initial-structure">Initial structure</h2>
 <p>To initialize the Katrina ORM in your Model, just extend the <code>Katrina</code> class.</p>
@@ -536,7 +544,7 @@ User::select(&quot;name&quot;)-&gt;get();
 <p>You can return the latest values from the database in descending order using the <code>latest</code> method:</p>
 <pre><code class="language-php">User::latest()-&gt;get();
 </code></pre>
-<p>By default, the <code>latest</code> method will sort using the <code>created_at</code> column. If this column does not exist in your table, you can pass the noe of another column as a parameter.</p>
+<p>By default, the <code>latest</code> method will sort using the <code>created_at</code> column. If this column does not exist in your table, you can pass the name of another column as a parameter.</p>
 <pre><code class="language-php">User::latest('users')-&gt;get();
 </code></pre>
 <p><strong>WHERE</strong></p>
@@ -600,6 +608,17 @@ User::select()-&gt;where(&quot;age&quot;)-&gt;between(10, 22)-&gt;get();
 <p>The <code>group by</code> SQL command requires the use of a function. Use the <code>group()</code> method together with the <code>Functions</code> class (see <a href="#functions">here</a>).</p>
 <pre><code class="language-php">User::select(null, &quot;name, &quot; . Functions::count('*', 'qtd'))-&gt;group(&quot;name&quot;)-&gt;get();
 </code></pre>
+<p><strong>COUNT</strong></p>
+<p>The <code>count</code> method returns the total number of values in a table.</p>
+<pre><code class="language-php">User::count();
+</code></pre>
+<p>If you want to specify the name of a column, use the first parameter. And to use the WHERE clause, use the second parameter.</p>
+<pre><code class="language-php">// `Email` column
+User::count(&quot;email&quot;);
+
+// `Email` column with WHERE clause
+User::count(&quot;email&quot;, &quot;email='solital@gmail.com'&quot;);
+</code></pre>
 <h3 id="using-inner-join">Using INNER JOIN</h3>
 <p>The <code>innerJoin()</code> method returns the values of two tables that have a foreign key.</p>
 <p>The first parameter represents the table containing the foreign key. The second parameter represents the <code>id</code> of the foreign key.</p>
@@ -636,8 +655,8 @@ User::customQuery(&quot;SELECT * FROM users&quot;, true);
 </code></pre>
 <h3 id="select-inside-select">SELECT inside SELECT</h3>
 <p>Some SQL queries need to have multiple SELECTs, and sometimes those SELECTs are inside other SELECTs. If you need such a query, follow the example:</p>
-<pre><code class="language-php">$sql = ORMTest::select(null, &quot;nome&quot;)-&gt;where(&quot;nome&quot;, &quot;brenno&quot;)-&gt;rawQuery();
-$result =  ORMTest::select(null, &quot;nome, idade&quot;)-&gt;where(&quot;nome&quot;, Functions::subquery($sql))-&gt;get();
+<pre><code class="language-php">$sql = User::select(null, &quot;nome&quot;)-&gt;where(&quot;nome&quot;, &quot;brenno&quot;)-&gt;rawQuery();
+$result =  User::select(null, &quot;nome, idade&quot;)-&gt;where(&quot;nome&quot;, Functions::subquery($sql))-&gt;get();
 
 var_dump($result);
 </code></pre>
@@ -765,6 +784,7 @@ $user-&gt;save();
     -&gt;varchar(&quot;email&quot;, 30)-&gt;default(&quot;harvey.specter@gmail.com&quot;)-&gt;notNull()
     -&gt;varchar(&quot;profession&quot;, 40)
     -&gt;constraint(&quot;dev_cons_fk&quot;)-&gt;foreign(&quot;type&quot;)-&gt;references(&quot;dev&quot;, &quot;iddev&quot;)
+    -&gt;createdUpdatedAt()
     /* Close the command to create the table */
     -&gt;closeTable();
 </code></pre>
@@ -773,6 +793,26 @@ $user-&gt;save();
 <pre><code class="language-php">User::createTable(&quot;your_table_name&quot;)
     -&gt;serial('id_user')-&gt;primary()
     # ...
+</code></pre>
+<h3 id="timestamps">Timestamps</h3>
+<p>If you want to change the name of the <code>created_at</code> and <code>updated_at</code> columns, use the properties below:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Solital\Components\Model;
+use Katrina\Katrina;
+
+class User extends Katrina
+{
+    protected string $created_at = 'created_date';
+    protected string $updated_at = 'updated_date';
+}
+</code></pre>
+<p>You can also rename columns when creating a table in the database using the <code>createdUpdatedAt</code> method.</p>
+<pre><code class="language-php">// ...
+
+-&gt;createdUpdatedAt('created_date', 'updated_date')
+
+// ...
 </code></pre>
 <h3 id="list-tables">List tables</h3>
 <p>To have a list of all the tables in your database, use the <code>listTables()</code> method.</p>
@@ -983,6 +1023,65 @@ GROUP BY created_at, order_status, idSession&quot;, 3);
     transition: 0.2s;
 }
 </code></pre>
+<h2 id="cache">Cache</h2>
+<p>To enable Katrina ORM caching in Solital, you must change the <code>cache_database</code> variable to <code>true</code> in the <code>cache.yaml</code> file.</p>
+<pre><code class="language-yaml"># Enable cache on Katrina ORM
+cache_database: true
+</code></pre>
+<p>To configure caching in Solital, see the documentation <a href="https://solital.github.io/site/docs/4.x/cache/#cache-drive">here</a>.</p>
+<p>If you are NOT using Katrina ORM together with Solital, you must configure the constants manually:</p>
+<pre><code class="language-php">define('DB_CACHE', [
+    'CACHE_TYPE' =&gt; 'memcached',
+    'CACHE_HOST' =&gt; '127.0.0.1',
+    'CACHE_PORT' =&gt; 11211,
+    'CACHE_TTL' =&gt; 600
+]);
+</code></pre>
+<p>Katrina ORM supports the following drivers</p>
+<ul>
+<li>Memcached</li>
+<li>Memcache</li>
+<li>APCu</li>
+</ul>
+<p>In your Model, you will need to enable caching. To do this, add the following property:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Solital\Components\Model;
+use Katrina\Katrina;
+
+class User extends Katrina
+{
+    /**
+     * @var bool|null
+     */
+    protected ?bool $cache = true;
+}
+</code></pre>
+<h2 id="multiple-connections">Multiple connections</h2>
+<p>In specific cases it is necessary to use two different databases. Katrina ORM supports you to use a second database.</p>
+<p>To do this, you must add the following variables to your <code>.env</code> file:</p>
+<pre><code class="language-bash">DB_HOST_SECONDARY=localhost
+DB_NAME_SECONDARY=second_database
+DB_USER_SECONDARY=root
+DB_PASS_SECONDARY=&quot;&quot;
+SQLITE_DIR_SECONDARY=&quot;&quot;
+</code></pre>
+<p>If you are NOT using Solital, you must create the following constants:</p>
+<pre><code class="language-php">define('DB_CONFIG_SECONDARY', [
+    'HOST' =&gt; 'localhost',
+    'DBNAME' =&gt; 'second_database',
+    'USER' =&gt; 'root',
+    'PASS' =&gt; '',
+    'SQLITE_DIR' =&gt; ''
+]);
+</code></pre>
+<p>So, to use the second connection to the other database, use the <code>connection</code> method:</p>
+<pre><code class="language-php"># Main database
+User::select()-&gt;get();
+
+# Second database
+User::connection('pgsql')::select()-&gt;get();
+</code></pre>
 <h2 id="types-of-data">Types of data</h2>
 <p>Below is listed the attributes and data supported by Katrina ORM:</p>
 <table class="table">
@@ -1105,7 +1204,7 @@ GROUP BY created_at, order_status, idSession&quot;, 3);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-01-21 16:10:34.236837+00:00
+              Docs Build Date UTC : 2024-02-23 22:53:46.989957+00:00
               -->
 
           </section>

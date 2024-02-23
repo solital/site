@@ -90,10 +90,6 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="../installation/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Installing
-      </a>
-    
       <a href="../environment-variables/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Environment Variables
       </a>
@@ -108,6 +104,10 @@
     
       <a href="../exceptions/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Exceptions
+      </a>
+    
+      <a href="../application-api/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> API Application
       </a>
     
   </div>
@@ -362,6 +362,9 @@
                     <li><a href="#adding-middleware">Adding Middleware</a></li>
                   
                   
+                    <li><a href="#restrict-access-to-ip">Restrict access to IP</a></li>
+                  
+                  
                 </ul>
 
                 
@@ -401,7 +404,7 @@ class UserMiddleware implements BaseMiddlewareInterface
 <p>If you don't want to type the entire middleware namespace, you can configure it in the <code>middleware.yaml</code> file and use the <code>middleware</code> helper.</p>
 <p><strong>middleware.yaml</strong></p>
 <pre><code class="language-yaml">middleware:
-  login: \Solital\Middleware\UserMiddleware
+  login: UserMiddleware # Or: \Solital\Middleware\UserMiddleware
 </code></pre>
 <p><strong>routes.php</strong></p>
 <pre><code class="language-php">Course::group(['prefix' =&gt; '/admin', 'middleware' =&gt; middleware('login')], function ()
@@ -413,6 +416,30 @@ class UserMiddleware implements BaseMiddlewareInterface
 <h2 id="adding-middleware">Adding Middleware</h2>
 <p>If you only have one route that needs to add middleware, use the <code>addMiddleware</code> method.</p>
 <pre><code class="language-php">Course::match(['get', 'post'], '/user/login', 'UserMiddleware@login')-&gt;addMiddleware('\Solital\Middleware\UserMiddleware:guest');
+</code></pre>
+<h2 id="restrict-access-to-ip">Restrict access to IP</h2>
+<p>You can white and/or blacklist access to IP's using the build in <code>IpRestrictAccess</code> middleware.</p>
+<p>Create your own custom Middleware and extend the <code>IpRestrictAccess</code> class.</p>
+<p>The <code>IpRestrictAccess</code> class contains two properties <code>ip_blocklist</code> and <code>ip_passlist</code> that can be added to your middleware to change which IP's that have access to your routes.</p>
+<p>You can use <code>*</code> to restrict access to a range of ips.</p>
+<pre><code class="language-php">use Solital\Core\Http\Middleware\IpRestrictAccess;
+
+class IpRestrictMiddleware extends IpRestrictAccess implements BaseMiddlewareInterface
+{
+    protected $ip_blocklist = [
+        '5.5.5.5',
+        '8.8.*',
+    ];
+
+    protected $ip_passlist = [
+        '8.8.2.2',
+    ];
+
+    public function handle(): void
+    {
+        // ...
+    }
+}
 </code></pre>
                 
 
@@ -446,7 +473,7 @@ class UserMiddleware implements BaseMiddlewareInterface
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-01-21 16:10:34.268079+00:00
+              Docs Build Date UTC : 2024-02-23 22:53:47.021200+00:00
               -->
 
           </section>
