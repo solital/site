@@ -363,7 +363,7 @@
 
                 
                 <h2 id="introduction">Introduction</h2>
-<p>Solital uses the Modern PHP Exception component to handle all exceptions and display them to the user in an intuitive and modern way.</p>
+<p>Solital uses the <a href="https://github.com/brenno-duarte/modern-php-exception">Modern PHP Exception</a> component to handle all exceptions and display them to the user in an intuitive and modern way.</p>
 <p>You can check the complete documentation for this component to better understand its use, but here you will see how this component works in Solital.</p>
 <h2 id="customizing-exceptions">Customizing exceptions</h2>
 <p>To customize exceptions, and also enable night mode, you can change the settings in the <code>exceptions.yaml</code> file.</p>
@@ -385,6 +385,18 @@ error_message: Something wrong!
 <p><strong>Load CSS files if there is no internet connection</strong></p>
 <pre><code class="language-yaml"># Use `false` only if you have no internet connection
 enable_cdn_assets: false
+</code></pre>
+<p><strong>Enable occurrences</strong></p>
+<p>If you want to have a history of all exceptions and errors that your application displays, you can enable the occurrences using the <code>enable_occurrences</code> option on <code>exceptions.yaml</code>.</p>
+<pre><code class="language-yaml">enable_occurrences: true
+</code></pre>
+<p>Don't forget to configure the database.</p>
+<pre><code class="language-yaml"># Database for Modern PHP Exceptions
+db_drive: mysql
+db_host: localhost
+db_name: database_name
+db_user: root
+db_pass: pass
 </code></pre>
 <h2 id="creating-a-solution-for-an-exception">Creating a solution for an exception</h2>
 <p>If you are creating a custom exception class, you can add a solution to resolve this exception.</p>
@@ -444,7 +456,7 @@ class CustomException extends \Exception implements SolutionInterface
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.974336+00:00
+              Docs Build Date UTC : 2024-02-25 15:46:26.035378+00:00
               -->
 
           </section>
