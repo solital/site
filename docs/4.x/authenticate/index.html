@@ -350,28 +350,40 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#defining-the-routes">Defining the routes</a></li>
+                    <li id="bullet-item">
+                      <a href="#defining-the-routes" class="menu-main-item">Defining the routes</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#setting" class="menu-children-item">Setting</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#remembering-authentication" class="menu-children-item">Remembering authentication</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#changing-default-routes" class="menu-children-item">Changing default routes</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#check-login" class="menu-children-item">Check login</a>
+                    </li>
                   
                   
-                    <li><a href="#setting">Setting</a></li>
+                    <li id="bullet-item">
+                      <a href="#logoff" class="menu-main-item">Logoff</a>
+                    </li>
                   
                   
-                    <li><a href="#remembering-authentication">Remembering authentication</a></li>
+                    <li id="bullet-item">
+                      <a href="#standard-login-structure" class="menu-main-item">Standard login structure</a>
+                    </li>
                   
                   
-                    <li><a href="#changing-default-routes">Changing default routes</a></li>
-                  
-                  
-                    <li><a href="#check-login">Check login</a></li>
-                  
-                  
-                    <li><a href="#logoff">Logoff</a></li>
-                  
-                  
-                    <li><a href="#standard-login-structure">Standard login structure</a></li>
-                  
-                  
-                    <li><a href="#authentication-using-sodium-encryption">Authentication using Sodium encryption</a></li>
+                    <li id="bullet-item">
+                      <a href="#authentication-using-sodium-encryption" class="menu-main-item">Authentication using Sodium encryption</a>
+                    </li>
                   
                   
                 </ul>
@@ -384,7 +396,7 @@
   auth_dashboard_url: /dashboard
   auth_login_url: /auth
 </code></pre>
-<h2 id="setting">Setting</h2>
+<h3 id="setting">Setting</h3>
 <p>For this, it is necessary to first define the name of the table in the <code>login</code> method. In the <code>columns</code> method, the database username and password. Then, in the <code>values</code> method, the input values of the form. Finally, the <code>register</code> method will perform the login as shown below.</p>
 <pre><code class="language-php">$res = Auth::login('auth_users')
             -&gt;columns('username', 'password')
@@ -397,7 +409,7 @@
     response()-&gt;redirect('your_login_url');
 }
 </code></pre>
-<h2 id="remembering-authentication">Remembering authentication</h2>
+<h3 id="remembering-authentication">Remembering authentication</h3>
 <p>In some cases the user wants to remain logged into the system after closing the browser. When registering a user, you can first use the <code>remember</code> method, passing the name of the form input as a parameter.</p>
 <p>In the <code>value</code> of the form input, use <code>true</code>.</p>
 <pre><code class="language-php">&lt;input type=&quot;checkbox&quot; name=&quot;inputRemember&quot; value=&quot;true&quot;&gt;
@@ -441,7 +453,7 @@ class UserController extends Controller
 
 }
 </code></pre>
-<h2 id="changing-default-routes">Changing default routes</h2>
+<h3 id="changing-default-routes">Changing default routes</h3>
 <p>If you need more routes for dashboards and logins, you can change the parameter in the <code>register()</code> function:</p>
 <pre><code class="language-php"># In routers.php
 
@@ -461,7 +473,7 @@ $res = Auth::login('auth_users')
     -&gt;values('inputEmail', 'inputPassword')
     -&gt;register('/my-second-dashboard');
 </code></pre>
-<h2 id="check-login">Check login</h2>
+<h3 id="check-login">Check login</h3>
 <p>To check if the user exists, you can create a middleware and add the <code>Auth::check()</code> method.</p>
 <pre><code class="language-php">class AuthMiddleware implements BaseMiddlewareInterface
 {
@@ -553,7 +565,7 @@ pre($decoded);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.943122+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.106291+00:00
               -->
 
           </section>

@@ -350,26 +350,46 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#encrypt">Encrypt</a></li>
+                    <li id="bullet-item">
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
                   
                   
-                    <li><a href="#decrypt">Decrypt</a></li>
+                    <li id="bullet-item">
+                      <a href="#encrypt" class="menu-main-item">Encrypt</a>
+                    </li>
                   
                   
-                    <li><a href="#check-value">Check value</a></li>
+                    <li id="bullet-item">
+                      <a href="#decrypt" class="menu-main-item">Decrypt</a>
+                    </li>
                   
                   
-                    <li><a href="#sodium-encryption">Sodium encryption</a></li>
+                    <li id="bullet-item">
+                      <a href="#check-value" class="menu-main-item">Check value</a>
+                    </li>
                   
-                    <li><a href="#generating-a-sodium-key">Generating a sodium key</a></li>
                   
-                    <li><a href="#encrypting-and-decrypting-with-sodium">Encrypting and decrypting with Sodium</a></li>
+                    <li id="bullet-item">
+                      <a href="#sodium-encryption" class="menu-main-item">Sodium encryption</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#generating-a-sodium-key" class="menu-children-item">Generating a sodium key</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#encrypting-and-decrypting-with-sodium" class="menu-children-item">Encrypting and decrypting with Sodium</a>
+                    </li>
                   
                   
                 </ul>
 
                 
-                <h2 id="encrypt">Encrypt</h2>
+                <h2 id="introduction">Introduction</h2>
+<p>Solital makes use of OpenSSL and Sodium encryption. If you are using Core &gt;= 4.2, you should find the following variables in your <code>.env</code> file: <code>APP_HASH</code>, <code>FIRST_SECRET</code> and <code>SECOND_SECRET</code>. The <code>APP_HASH</code> variable is the main variable used by Solital, but if this variable is not available, the other two can be used instead.</p>
+<p><strong>NOTE: For the variables <code>FIRST_SECRET</code> and <code>SECOND_SECRET</code>, use encrypted characters. If the variable <code>APP_HASH</code> is empty, run the command <code>php vinci generate:hash</code></strong></p>
+<h2 id="encrypt">Encrypt</h2>
 <p>To create an encrypted key, use the <code>Hash</code> class together with the static <code>encrypt</code> function as shown below:</p>
 <pre><code class="language-php">use Solital\Core\Security\Hash;
 
@@ -454,7 +474,7 @@ pre($decoded);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.958742+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.137506+00:00
               -->
 
           </section>

@@ -350,9 +350,26 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#introduction">Introduction</a></li>
+                    <li id="bullet-item">
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
                   
-                    <li><a href="#usage">Usage</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#usage" class="menu-children-item">Usage</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#adding-definitions" class="menu-children-item">Adding Definitions</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#retrieving-services-and-parameters" class="menu-children-item">Retrieving Services and Parameters</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#extending-definitions" class="menu-main-item">Extending Definitions</a>
+                    </li>
                   
                   
                 </ul>
@@ -435,12 +452,14 @@ class ServiceContainer implements ServiceProviderInterface
     }
 }
 </code></pre>
-<p>To use the container, use <code>Application::provider()</code> or <code>$container-&gt;get()</code> method:</p>
-<pre><code class="language-php">$provider = Application::provider('mailer'); // $container-&gt;get('mailer')
+<p>To use the container, use <code>container()</code> helper, <code>Application::provider()</code> or <code>$container-&gt;get()</code> method:</p>
+<pre><code class="language-php">$provider = container('mailer');
+$provider = $container-&gt;get('mailer');
+$provider = Application::provider('mailer');
 
 var_dump($provider);
 </code></pre>
-<h5 id="adding-definitions">Adding Definitions</h5>
+<h3 id="adding-definitions">Adding Definitions</h3>
 <p><strong>Services</strong> are defined by invokable callback functions. Most commonly, this is a closure (anonymous function) that explains how to create a service:</p>
 <pre><code class="language-php">$myServiceDefinition = function() {
     $obj = new Service();
@@ -476,13 +495,13 @@ $container['mailer'] = function() {
     return new Mailer();
 };
 
-$userManager = Application::provider('userManager');
+$userManager = container('userManager');
 </code></pre>
 <p>This is known as manually wiring your dependencies.</p>
-<h5 id="retrieving-services-and-parameters">Retrieving Services and Parameters</h5>
+<h3 id="retrieving-services-and-parameters">Retrieving Services and Parameters</h3>
 <p>Once an entry is added to the container, we can resolve that entry by using the <code>Container::get</code> method, or via array access:</p>
 <pre><code class="language-php">$container['myParameter'] = 'value';
-$myParameter = Application::provider('myParameter');
+$myParameter = container('myParameter');
 
 var_dump($myParameter); // outputs: 'value'
 
@@ -497,7 +516,7 @@ var_dump($myService instanceof MyService::class); // outputs: true
 <pre><code class="language-php">$container-&gt;add('myService', $container-&gt;protect(function() {
     return new MyService();
 }));
-$myServiceFactory = Application::provider('myService');
+$myServiceFactory = container('myService');
 
 var_dump($myServiceFactory instanceof \Closure); // outputs: true
 </code></pre>
@@ -508,8 +527,8 @@ var_dump($myServiceFactory instanceof \Closure); // outputs: true
     return new PDO();
 });
 
-$db = Application::provider('db');
-$db2 = Application::provider('db');
+$db = container('db');
+$db2 = container('db');
 
 var_dump($db === $db2); // outputs: true
 </code></pre>
@@ -518,12 +537,12 @@ var_dump($db === $db2); // outputs: true
     return new MyService();
 }));
 
-$myService = Application::provider('myService');
-$myService2 = Application::provider('myService');
+$myService = container('myService');
+$myService2 = container('myService');
 
 var_dump($myService === $myService2); // outputs: false
 </code></pre>
-<h5 id="extending-definitions">Extending Definitions</h5>
+<h2 id="extending-definitions">Extending Definitions</h2>
 <p>Often times you need to modify a service after it has been created. This is often times called "setter injection" or "decorating". This can be achieved by using the <code>Container::extend</code> method. The extend method is passed the instance of the object and an instance of the container in that order. </p>
 <p>An extend will fail if:</p>
 <ul>
@@ -654,7 +673,7 @@ Car created.
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.958742+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.137506+00:00
               -->
 
           </section>

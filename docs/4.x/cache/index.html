@@ -350,28 +350,48 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#how-to-use-psr6psr-16">How to use - PSR6/PSR-16</a></li>
+                    <li id="bullet-item">
+                      <a href="#how-to-use-psr6psr-16" class="menu-main-item">How to use - PSR6/PSR-16</a>
+                    </li>
                   
-                    <li><a href="#clear-cache">Clear cache</a></li>
-                  
-                  
-                    <li><a href="#cache-drive">Cache drive</a></li>
-                  
-                  
-                    <li><a href="#http-cache">HTTP Cache</a></li>
-                  
-                    <li><a href="#cache-control">Cache-Control</a></li>
-                  
-                    <li><a href="#expires">Expires</a></li>
-                  
-                    <li><a href="#time-based">Time-based</a></li>
-                  
-                    <li><a href="#etag">Etag</a></li>
-                  
-                    <li><a href="#cache-prevention">Cache prevention</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#clear-cache" class="menu-children-item">Clear cache</a>
+                    </li>
                   
                   
-                    <li><a href="#clear-solital-cache">Clear Solital Cache</a></li>
+                    <li id="bullet-item">
+                      <a href="#cache-drive" class="menu-main-item">Cache drive</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#http-cache" class="menu-main-item">HTTP Cache</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#cache-control" class="menu-children-item">Cache-Control</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#expires" class="menu-children-item">Expires</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#time-based" class="menu-children-item">Time-based</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#etag" class="menu-children-item">Etag</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#cache-prevention" class="menu-children-item">Cache prevention</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#clear-solital-cache" class="menu-main-item">Clear Solital Cache</a>
+                    </li>
                   
                   
                 </ul>
@@ -470,6 +490,13 @@ cache_drive: apcu
 # Set ttl
 cache_ttl: 600
 </code></pre>
+<p><strong>Yac</strong></p>
+<pre><code class="language-yaml"># Set cache type
+cache_drive: yac
+
+# Set ttl
+cache_ttl: 600
+</code></pre>
 <p>Or, you can choose the drive using the constructor of the <code>CachePool</code>, <code>SimpleCache</code> classes and the <code>cache</code> helper.</p>
 <pre><code class="language-php">$pool = new CachePool('memcached');
 
@@ -562,7 +589,7 @@ $cache-&gt;eTag('value');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.943122+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.121912+00:00
               -->
 
           </section>

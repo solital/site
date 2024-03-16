@@ -350,22 +350,39 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#http">HTTP</a></li>
+                    <li id="bullet-item">
+                      <a href="#http" class="menu-main-item">HTTP</a>
+                    </li>
                   
                   
-                    <li><a href="#security">Security</a></li>
+                    <li id="bullet-item">
+                      <a href="#security" class="menu-main-item">Security</a>
+                    </li>
                   
                   
-                    <li><a href="#wolf-template">Wolf Template</a></li>
+                    <li id="bullet-item">
+                      <a href="#wolf-template" class="menu-main-item">Wolf Template</a>
+                    </li>
                   
                   
-                    <li><a href="#output">Output</a></li>
+                    <li id="bullet-item">
+                      <a href="#output" class="menu-main-item">Output</a>
+                    </li>
                   
                   
-                    <li><a href="#session">Session</a></li>
+                    <li id="bullet-item">
+                      <a href="#session" class="menu-main-item">Session</a>
+                    </li>
                   
                   
-                    <li><a href="#others">Others</a></li>
+                    <li id="bullet-item">
+                      <a href="#debug" class="menu-main-item">Debug</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#others" class="menu-main-item">Others</a>
+                    </li>
                   
                   
                 </ul>
@@ -488,18 +505,6 @@ $this-&gt;passVerify($value, $hash)
 <pre><code class="language-php">pre($value)
 </code></pre>
 <ul>
-<li><code>cloner</code> uses Symfony <code>VarCloner</code> function. <a href="https://symfony.com/doc/current/components/var_dumper/advanced.html">See more</a>.</li>
-</ul>
-<pre><code class="language-php">cloner($var)
-</code></pre>
-<ul>
-<li>It is possible to make use of Symfony <code>dump</code> or <code>dd</code> functions.</li>
-</ul>
-<pre><code class="language-php">dump($var)
-
-dd($var)
-</code></pre>
-<ul>
 <li>Convert an array to JSON and display an error message in case of failure.</li>
 </ul>
 <pre><code class="language-php">encodeJSON($value)
@@ -527,6 +532,33 @@ dd($var)
  * $take: returns the requested value and removes it from the session.
  */
 session(string $key, mixed $value = null, mixed $defaultValue = null, bool $delete = false, bool $take = false)
+</code></pre>
+<h2 id="debug">Debug</h2>
+<p>Debug functions are present in the <a href="https://github.com/brenno-duarte/modern-php-exception">Modern PHP Exception component</a>.</p>
+<ul>
+<li>An easy function to pull all details of the debug backtrace.</li>
+</ul>
+<pre><code class="language-php">get_debug_backtrace()
+</code></pre>
+<ul>
+<li>Function to returns the value of var_dump() instead of outputting it.</li>
+</ul>
+<pre><code class="language-php">echo var_dump_buffer()
+</code></pre>
+<ul>
+<li>PHP function to replace var_dump(), print_r() based on the XDebug style.</li>
+</ul>
+<pre><code class="language-php">var_dump_debug()
+</code></pre>
+<ul>
+<li>Dump PHP value and die script.</li>
+</ul>
+<pre><code class="language-php">dump_die()
+</code></pre>
+<ul>
+<li>View a PHP Closure's Source.</li>
+</ul>
+<pre><code class="language-php">closure_dump()
 </code></pre>
 <h2 id="others">Others</h2>
 <ul>
@@ -567,6 +599,16 @@ $this-&gt;removeParamsUrl()
 </ul>
 <pre><code class="language-php">cache(?string $drive)
 </code></pre>
+<ul>
+<li>Memorize provides simple in-var cache for closures. It can be used to create lazy functions. Function takes closure and optional argument paramsHash. If the closure with the same arguments was run before memorize will return result from cache without the closure call. At the first call result will be calculated and stored in cache.</li>
+</ul>
+<pre><code class="language-php">memorize(Closure $lambda, $paramsHash = null)
+</code></pre>
+<ul>
+<li>Returns the container defined in the <code>ServiceContainer</code> class.</li>
+</ul>
+<pre><code class="language-php">container(string $container_name)
+</code></pre>
                 
 
                 <hr />
@@ -599,7 +641,7 @@ $this-&gt;removeParamsUrl()
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.989957+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.168749+00:00
               -->
 
           </section>

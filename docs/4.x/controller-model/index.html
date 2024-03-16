@@ -350,13 +350,24 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#introduction">Introduction</a></li>
+                    <li id="bullet-item">
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
                   
                   
-                    <li><a href="#using-controller-in-the-route">Using controller in the route</a></li>
+                    <li id="bullet-item">
+                      <a href="#using-controller-in-the-route" class="menu-main-item">Using controller in the route</a>
+                    </li>
                   
                   
-                    <li><a href="#creating-model-and-controller-with-one-command">Creating model and controller with one command</a></li>
+                    <li id="bullet-item">
+                      <a href="#creating-model-and-controller-with-one-command" class="menu-main-item">Creating model and controller with one command</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#creating-a-resource" class="menu-main-item">Creating a resource</a>
+                    </li>
                   
                   
                 </ul>
@@ -383,6 +394,61 @@ php vinci create:controller UserController
 <pre><code class="language-bash">php vinci generate:files --component=User
 </code></pre>
 <p>Remember to use the <code>--component</code> option. This command will create a Model class, a Controller class, a migration and a Seeder class.</p>
+<h2 id="creating-a-resource">Creating a resource</h2>
+<p>We often use a controller to do CRUD() operations. To create a controller in resource format, use the <code>--resource</code> option.</p>
+<pre><code class="language-bash">php vinci create:controller ResourceController --resource
+</code></pre>
+<p>When creating a resource type controller, the class will have the following structure:</p>
+<pre><code class="language-php">&lt;?php
+
+class ResourceController
+{
+    public function index() : ?string
+    {
+        echo 'index';
+        return null;
+    }
+
+    public function show($id) : ?string
+    {
+        echo 'show ' . $id;
+        return null;
+    }
+
+    public function store() : ?string
+    {
+        echo 'store';
+        return null;
+    }
+
+    public function create() : ?string
+    {
+        echo 'create';
+        return null;
+    }
+
+    public function edit($id) : ?string
+    {
+        echo 'edit ' . $id;
+        return null;
+    }
+
+    public function update($id) : ?string
+    {
+        echo 'update ' . $id;
+        return null;
+    }
+
+    public function destroy($id) : ?string
+    {
+        echo 'destroy ' . $id;
+        return null;
+    }
+}
+</code></pre>
+<p>You can use this resource on a specific route with the <code>resource()</code> method.</p>
+<pre><code class="language-php">Course::resource('/resource', ResourceController::class);
+</code></pre>
                 
 
                 <hr />
@@ -415,7 +481,7 @@ php vinci create:controller UserController
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.958742+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.137506+00:00
               -->
 
           </section>

@@ -350,16 +350,22 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#introduction">Introduction</a></li>
+                    <li id="bullet-item">
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
                   
                   
-                    <li><a href="#customizing-the-password">Customizing the password</a></li>
+                    <li id="bullet-item">
+                      <a href="#customizing-the-password" class="menu-main-item">Customizing the password</a>
+                    </li>
                   
+                    <li id="bullet-childern-item">
+                      <a href="#changing-the-value-of-pepper" class="menu-children-item">Changing the value of “pepper”</a>
+                    </li>
                   
-                    <li><a href="#changing-the-value-of-pepper">Changing the value of “pepper”</a></li>
-                  
-                  
-                    <li><a href="#changing-peeper-encryption">Changing Peeper encryption</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#changing-peeper-encryption" class="menu-children-item">Changing Peeper encryption</a>
+                    </li>
                   
                   
                 </ul>
@@ -379,12 +385,14 @@
   time_cost: ''
   threads: ''
   crypt_type: openssl
+  wait_microseconds: 25000
 </code></pre>
 <p>In the <code>algorithm</code> key, you can add the following values: <code>default</code>, <code>argon2</code> and <code>argon2d</code>. For more information about other PHP constants, see <a href="https://www.php.net/manual/pt_BR/password.constants.php">this link</a>.</p>
-<h2 id="changing-the-value-of-pepper">Changing the value of “pepper”</h2>
-<p>As mentioned in the introduction, the <code>SecurePassword</code> package uses a “pepper” value. To change the value of this pepper, you can edit the value of the <code>peeper</code> key in the <code>auth.yaml</code> file.</p>
-<p><strong>NOTE: Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting.</strong></p>
-<h2 id="changing-peeper-encryption">Changing Peeper encryption</h2>
+<h3 id="changing-the-value-of-pepper">Changing the value of “pepper”</h3>
+<p>As mentioned in the introduction, the <code>SecurePassword</code> package uses a “pepper” value. To change the value of this pepper, you can edit the value of the <code>peeper</code> key in the <code>auth.yaml</code> file. However, it is recommended to use the <code>APP_HASH</code> variable. If this variable does not exist in your project, run the command <code>php vinci generate:hash</code>.</p>
+<p>If this variable is present in the <code>.env</code> file, then you can delete the <code>peeper</code> in the <code>auth.yaml</code> file.</p>
+<p><strong>NOTE: Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting. If you are using Solital Core &gt;= 4.2, the <code>pepper</code> variable will not be present in the <code>auth.yaml</code> file. Instead, Solital will use the value of the <code>APP_HASH</code> variable.</strong></p>
+<h3 id="changing-peeper-encryption">Changing Peeper encryption</h3>
 <p>By default, peeper is encrypted using OpenSSL. You can switch to Sodium encryption by changing the value of the <code>crypt_type</code> variable in the <code>auth.yaml</code> file.</p>
 <pre><code class="language-yaml">crypt_type: sodium
 </code></pre>
@@ -420,7 +428,7 @@
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:47.036821+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.215614+00:00
               -->
 
           </section>

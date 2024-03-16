@@ -355,9 +355,9 @@
                 
                 <p>PHP's new feature Fibers allows for easier creation of asynchronous applications, and a key component of designing such an application is the event loop. The event loop is responsible for monitoring external resources for interesting events such as new input data or state changes. Once an event is detected, the event loop will resume the fibers that are interested in that event so they can process it. There are many ways to implement such a loop, ranging from a trivial sleep and resume to a complex, multifeatured event monitoring system. In this article, we'll look at a few examples and build up on the complexity as we go.</p>
 <p>Below is an example of how to use EventLoop in your project:</p>
-<pre><code class="language-php">use Solital\Core\Queue\EventLoop;
+<pre><code class="language-php">$loop = container('solital-eventloop');
 
-$loop = new EventLoop();
+// Or: new Solital\Core\Queue\EventLoop();
 
 $loop-&gt;defer(function() use ($loop){
     $loop-&gt;sleep(0.2);
@@ -367,7 +367,15 @@ $loop-&gt;defer(function() use ($loop){
         $loop-&gt;next();
     }
 });
+
 $loop-&gt;defer(function() use ($loop){
+    foreach (range(1, 10) as $value) {
+        echo $value;
+        $loop-&gt;next();
+    }
+});
+
+$loop-&gt;deferWithTimer(0.5, function() use ($loop){
     foreach (range(1, 10) as $value) {
         echo $value;
         $loop-&gt;next();
@@ -408,7 +416,7 @@ $loop-&gt;run();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.974336+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.153129+00:00
               -->
 
           </section>

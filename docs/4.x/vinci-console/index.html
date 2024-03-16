@@ -350,29 +350,55 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#access-vinci">Access Vinci</a></li>
+                    <li id="bullet-item">
+                      <a href="#access-vinci" class="menu-main-item">Access Vinci</a>
+                    </li>
                   
-                    <li><a href="#for-windows">For Windows</a></li>
-                  
-                  
-                    <li><a href="#list-of-all-commands">List of all commands</a></li>
-                  
-                  
-                    <li><a href="#custom-command">Custom Command</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#for-windows" class="menu-children-item">For Windows</a>
+                    </li>
                   
                   
-                    <li><a href="#input-and-output-commands">Input and output commands</a></li>
+                    <li id="bullet-item">
+                      <a href="#list-of-all-commands" class="menu-main-item">List of all commands</a>
+                    </li>
                   
                   
-                    <li><a href="#displaying-messages">Displaying messages</a></li>
+                    <li id="bullet-item">
+                      <a href="#custom-command" class="menu-main-item">Custom Command</a>
+                    </li>
                   
                   
-                    <li><a href="#progress-bar">Progress Bar</a></li>
+                    <li id="bullet-item">
+                      <a href="#input-and-output-commands" class="menu-main-item">Input and output commands</a>
+                    </li>
                   
                   
-                    <li><a href="#table">Table</a></li>
+                    <li id="bullet-item">
+                      <a href="#displaying-messages" class="menu-main-item">Displaying messages</a>
+                    </li>
                   
-                    <li><a href="#styled">Styled</a></li>
+                  
+                    <li id="bullet-item">
+                      <a href="#progress-bar" class="menu-main-item">Progress Bar</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#table" class="menu-main-item">Table</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#styled" class="menu-children-item">Styled</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#dynamic-rows" class="menu-children-item">Dynamic Rows</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#formatted-row" class="menu-children-item">Formatted Row</a>
+                    </li>
                   
                   
                 </ul>
@@ -595,12 +621,14 @@ class UserCommand extends Command implements CommandInterface
      * 
      * @return mixed
      */
+    #[\Override]
     public function handle(object $arguments, object $options): mixed
     {
         return $this;
     }
 }
 </code></pre>
+<p><strong>ATTENTION: Don't forget to use the <code>Override</code> attribute in the <code>handle</code></strong> method</p>
 <p>In the <code>$command</code> variable, you will define the custom command that will be executed. The <code>$arguments</code> variable will have an array of values containing all arguments (if your custom command has no arguments, leave this variable empty). The variable <code>$options</code> must contain mandatory options for your command, otherwise use the options dynamically. Lastly, the <code>$description</code> variable will have a short description of what the custom command does.</p>
 <p>The handle method will contain all the code that will be executed when executing the custom command and should always return a <code>$this</code> or, if necessary, another value.</p>
 <p><strong>Using Arguments</strong></p>
@@ -614,7 +642,8 @@ class UserCommand extends Command implements CommandInterface
 <p>Options can be returned dynamically, but you must check in the <code>handle</code> method whether an option exists.</p>
 <pre><code class="language-bash">php vinci user:cmd name --myOption
 </code></pre>
-<pre><code class="language-php">public function handle(object $arguments, object $options): mixed
+<pre><code class="language-php">#[\Override]
+public function handle(object $arguments, object $options): mixed
 {
     if (isset($options-&gt;myOption)) {
         # ...
@@ -801,7 +830,7 @@ echo $table;
 <p>Output : </p>
 <p><img src="https://user-images.githubusercontent.com/104234499/186993365-82c0e55d-d572-45d2-a89a-5cf60c5c9fbe.jpg" width="600"></p>
 <p>Credits - <a href="https://github.com/muhammetsafak">Muhammet ŞAFAK</a></p>
-<p><strong>Dynamic Rows</strong></p>
+<h3 id="dynamic-rows">Dynamic Rows</h3>
 <p>If you need a standard header and just add the values, use the <code>dynamicRows</code> method.</p>
 <pre><code class="language-php">use Solital\Core\Console\Table;
 
@@ -816,7 +845,7 @@ $table = new Table();
 $table-&gt;setHeaderStyle(Table::COLOR_LIGHT_GREEN);
 $table-&gt;dynamicRows($header, $values);
 </code></pre>
-<p><strong>Formatted Row</strong></p>
+<h3 id="formatted-row">Formatted Row</h3>
 <p>Formatted lines are a way of organizing data that contains some additional information. You can see an example of this method in use by running the <code>php vinci list</code> command.</p>
 <pre><code class="language-php">use Solital\Core\Console\Table;
 
@@ -869,7 +898,7 @@ Table::formattedRowData($values, 50, true);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:47.068064+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.231236+00:00
               -->
 
           </section>

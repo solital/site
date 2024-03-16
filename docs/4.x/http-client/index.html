@@ -350,97 +350,129 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li><a href="#requirements">Requirements</a></li>
+                    <li id="bullet-item">
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
                   
                   
-                    <li><a href="#basic-use">Basic use</a></li>
+                    <li id="bullet-item">
+                      <a href="#basic-use" class="menu-main-item">Basic use</a>
+                    </li>
                   
                   
-                    <li><a href="#supported-methods">Supported methods</a></li>
+                    <li id="bullet-item">
+                      <a href="#supported-methods" class="menu-main-item">Supported methods</a>
+                    </li>
                   
                   
-                    <li><a href="#return-types">Return types</a></li>
+                    <li id="bullet-item">
+                      <a href="#return-types" class="menu-main-item">Return types</a>
+                    </li>
                   
                   
-                    <li><a href="#sending-data">Sending data</a></li>
+                    <li id="bullet-item">
+                      <a href="#sending-data" class="menu-main-item">Sending data</a>
+                    </li>
                   
                   
-                    <li><a href="#custom-headers">Custom Headers</a></li>
+                    <li id="bullet-item">
+                      <a href="#custom-headers" class="menu-main-item">Custom Headers</a>
+                    </li>
                   
                   
-                    <li><a href="#enabling-ssl-verification">Enabling SSL verification</a></li>
+                    <li id="bullet-item">
+                      <a href="#disabling-ssl-verification" class="menu-main-item">Disabling SSL verification</a>
+                    </li>
                   
                   
-                    <li><a href="#authentication">Authentication</a></li>
+                    <li id="bullet-item">
+                      <a href="#authentication" class="menu-main-item">Authentication</a>
+                    </li>
                   
-                    <li><a href="#basic-auth">Basic Auth</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#basic-authentication" class="menu-children-item">Basic authentication</a>
+                    </li>
                   
-                    <li><a href="#bearer-authentication">Bearer authentication</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#bearer-authentication" class="menu-children-item">Bearer authentication</a>
+                    </li>
                   
                   
-                    <li><a href="#securing-your-api">Securing your API</a></li>
+                    <li id="bullet-item">
+                      <a href="#securing-your-api" class="menu-main-item">Securing your API</a>
+                    </li>
                   
-                    <li><a href="#with-basic-auth">With Basic Auth</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#with-jwt-token" class="menu-children-item">With JWT token</a>
+                    </li>
                   
-                    <li><a href="#with-digest-auth">With Digest Auth</a></li>
+                    <li id="bullet-childern-item">
+                      <a href="#with-basic-auth" class="menu-children-item">With Basic Auth</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#with-digest-auth" class="menu-children-item">With Digest Auth</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#unauthorize-an-authenticated-user" class="menu-children-item">Unauthorize an authenticated user</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#asynchronous-requests" class="menu-main-item">Asynchronous requests</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#upload-and-download" class="menu-main-item">Upload and download</a>
+                    </li>
                   
                   
                 </ul>
 
                 
-                <p>Solital has a component to manipulate the HTTP client, useful for consuming API and making HTTP requests. Before, you will need to install the component using the command below:</p>
-<pre><code>composer require solital/http-client
-</code></pre>
-<h2 id="requirements">Requirements</h2>
-<ul>
-<li>PHP &gt;= 8.0</li>
-<li>CURL extension enabled</li>
-</ul>
+                <h2 id="introduction">Introduction</h2>
+<p>Solital has a component to manipulate the HTTP client, useful for consuming API and making HTTP requests.</p>
 <h2 id="basic-use">Basic use</h2>
-<p>To make basic use of the component, you will need to instantiate the <code>HttpClient</code> class. Then, call the <code>request</code> function, passing the method (GET, POST, ...) and the url as a parameter. Then return the data.</p>
-<pre><code class="language-php">use Solital\HttpClient;
+<p>To make basic use of the component, you will need use <code>HttpClient</code> class. Then, call the function <code>get</code>, <code>post</code> or other, and the url as a parameter.</p>
+<pre><code class="language-php">use Solital\Core\Http\Client\HttpClient;
 
-$client = new HttpClient();
-$client-&gt;request(&quot;GET&quot;, &quot;http://api.url.com&quot;);
-$res = $client-&gt;toJson();
+$response = HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;responseJson();
 
-pre($res);
+pre($response);
 </code></pre>
 <h2 id="supported-methods">Supported methods</h2>
 <p>HttpClient supports the methods below.</p>
-<ul>
-<li>GET</li>
-<li>POST</li>
-<li>PUT</li>
-<li>DELETE</li>
-<li>PATCH</li>
-<li>OPTIONS</li>
-</ul>
+<pre><code class="language-php">HttpClient::get()
+HttpClient::post()
+HttpClient::put()
+HttpClient::delete()
+HttpClient::patch()
+HttpClient::options()
+</code></pre>
 <h2 id="return-types">Return types</h2>
 <p>You can return the answer in json, array or object. The methods below show an example.</p>
-<pre><code class="language-php">$client = new HttpClient();
-$client-&gt;request(&quot;GET&quot;, &quot;http://api.url.com&quot;);
-
-/** Return json */
-$res = $client-&gt;toJson();
+<pre><code class="language-php">/** Return json */
+$client-&gt;responseJson();
 
 /** Return array */
-$res = $client-&gt;toArray();
+$client-&gt;responseArray();
 
 /** Return object */
-$res = $client-&gt;toObject();
+$client-&gt;responseObject();
+</code></pre>
+<p>If you want to debug the request, use the <code>enableVerboseOutput()</code> method.</p>
+<pre><code class="language-php">$response = HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;enableVerboseOutput()-&gt;responseJson();
 
-pre($res);
+pre($response);
 </code></pre>
 <h2 id="sending-data">Sending data</h2>
-<p>If you are using a POST or PUT request, for example, and need to send data to the HTTP header, you can pass an array with the values in the <code>request</code> method.</p>
-<pre><code class="language-php">$client = new HttpClient();
+<p>If you are using a POST or PUT request, for example, and need to send data to the HTTP header, you can pass an array with the values on second parameter.</p>
+<pre><code class="language-php">$data = ['email' =&gt; 'solital@email.com'];
 
-$res = $client-&gt;request(&quot;PUT&quot;, &quot;http://api.url.com&quot;, [
-    'data' =&gt; 'your_data_values'
-])-&gt;toJson();
-
-echo $res;
+$response = HttpClient::post('http://127.0.0.1:8080/api/post', $data)-&gt;responseJson();
+$response = HttpClient::put('http://127.0.0.1:8080/api/put', $data)-&gt;responseJson();
 </code></pre>
 <h2 id="custom-headers">Custom Headers</h2>
 <p>By default, HttpClient has the following headers:</p>
@@ -448,62 +480,93 @@ echo $res;
 <li>Content-Type: application/json</li>
 <li>Accept: application/json</li>
 </ul>
-<p>To add other headers to the request, use an array in the constructor on the instance.</p>
+<p>To add other headers to the request, use <code>setHeaders</code> method.</p>
 <pre><code class="language-php">$headers = [
     'Content-Type: application/pdf'
 ];
 
-$client = new HttpClient($headers);
-#...
+HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;setHeaders($headers)-&gt;responseJson();
 </code></pre>
-<h2 id="enabling-ssl-verification">Enabling SSL verification</h2>
-<p>HttpClient by default does not perform SSL verification. To enable verification, use the <code>enableSSL</code> method.</p>
-<pre><code class="language-php">$client = new HttpClient();
-$client-&gt;enableSSL();
-#...
+<h2 id="disabling-ssl-verification">Disabling SSL verification</h2>
+<p>HttpClient, by default, use SSL verification. To disable verification, use the <code>disableSSL()</code> method.</p>
+<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;disableSSL()-&gt;responseJson();
 </code></pre>
 <h2 id="authentication">Authentication</h2>
-<h3 id="basic-auth">Basic Auth</h3>
+<h3 id="basic-authentication">Basic authentication</h3>
 <p>If you are handling an API with authentication in basic, you can use the <code>basicAuth()</code> method to do the authentication. The first parameter will be the username, while the second parameter will be the password.</p>
-<pre><code class="language-php">$client = new HttpClient();
-$client-&gt;basicAuth('user', 'pass');
-$client-&gt;request(&quot;GET&quot;, &quot;http://api.url.com&quot;);
-$res = $client-&gt;toJson();
-
-pre($res);
+<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;basicAuth('user', 'pass')-&gt;responseJson();
 </code></pre>
 <h3 id="bearer-authentication">Bearer authentication</h3>
-<p>For authentications using the bearer token, you can use the <code>bearerToken()</code> method to provide the authentication token.</p>
-<pre><code class="language-php">$client = new HttpClient();
-$http_client-&gt;bearerToken(&quot;2edac0d91305c9207d36eda3cbf2c0d7&quot;);
-$client-&gt;request(&quot;GET&quot;, &quot;http://api.url.com&quot;);
-$res = $client-&gt;toJson();
-
-pre($res);
+<p>For authentications using the bearer token, you can use the <code>bearerAuth()</code> method to provide the authentication token.</p>
+<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth('2edac0d91305c9207d36eda3cbf2c0d7')-&gt;responseJson();
 </code></pre>
 <h2 id="securing-your-api">Securing your API</h2>
-<p>You can secure your API URL using <code>basic</code> or <code>digest</code> authentication. First, instantiate the <code>HttpAuth</code> class:</p>
-<pre><code class="language-php">use Solital\Http\Auth\HttpAuth;
+<p>When we work with REST API, we need to protect our routes from unauthorized users.</p>
+<h3 id="with-jwt-token">With JWT token</h3>
+<p>The most common way to secure an API is through a JWT token. To perform this type of protection, use the <code>protectRoute()</code> method of the <code>JWT</code> class.</p>
+<pre><code class="language-php">use Solital\Core\Http\Client\JWT;
 
-$auth = new HttpAuth();
+Course::get('/api/get', function () {
+
+    JWT::protectRoute(&quot;your-secret&quot;);
+
+});
+</code></pre>
+<p>To authenticate, you can generate a token using the <code>encode</code> method of the <code>JWT</code> class and send this token using the <code>bearerToken()</code> method.</p>
+<pre><code class="language-php">use Solital\Core\Http\Client\JWT;
+
+$secret = &quot;your-secret&quot;;
+
+$payload = [
+    &quot;sub&quot; =&gt; &quot;1234567890&quot;,
+    &quot;name&quot; =&gt; &quot;Brenno&quot;,
+    &quot;role&quot; =&gt; &quot;admin&quot;
+];
+
+$token = JWT::encode($payload, $secret);
+
+HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth($token)-&gt;responseJson();
 </code></pre>
 <h3 id="with-basic-auth">With Basic Auth</h3>
-<p>To secure your API using <code>basic</code> authentication, use the <code>basic()</code> method providing the username and password to authenticate.</p>
-<pre><code class="language-php">$auth = new HttpAuth();
-$auth-&gt;basic('username', '123');
-</code></pre>
-<p>If you want, you can change the value of <code>realm</code> in the second parameter.</p>
-<pre><code class="language-php">$auth = new HttpAuth();
-$auth-&gt;basic('username', '123', 'my_realm');
+<p>To secure your API using <code>basic</code> authentication, use <code>Guardian</code> class with <code>protectBasicAuth()</code> method providing the username and password to authenticate.</p>
+<pre><code class="language-php">use Solital\Core\Security\Guardian;
+
+Guardian::protectBasicAuth('admin', 'admin');
 </code></pre>
 <h3 id="with-digest-auth">With Digest Auth</h3>
-<p>To use <code>digest</code> to protect your API, use the <code>digest()</code> method. In this method, you must use an array to inform the username and password. You can define multiple users for this authentication type.</p>
-<pre><code class="language-php">$auth = new HttpAuth();
-$auth-&gt;digest(['username_1' =&gt; 'password_1', 'username_2' =&gt; 'password_2', ...]);
+<p>To use <code>digest</code> to protect your API, use the <code>protectDigestAuth()</code> method. In this method, you must use an array to inform the username and password. You can define multiple users for this authentication type.</p>
+<pre><code class="language-php">use Solital\Core\Security\Guardian;
+
+Guardian::protectDigestAuth(['admin' =&gt; 'admin', 'user2' =&gt; 'pass2']);
 </code></pre>
-<p>If you want, you can change the value of <code>realm</code> in the second parameter.</p>
-<pre><code class="language-php">$auth = new HttpAuth();
-$auth-&gt;digest(['username_1' =&gt; 'password_1'], 'my_second_realm');
+<h3 id="unauthorize-an-authenticated-user">Unauthorize an authenticated user</h3>
+<p>If you want to deauthorize a user already authenticating (using basic or digest), you can use the <code>unauthorizeAuth</code> method.</p>
+<pre><code class="language-php">use Solital\Core\Security\Guardian;
+
+Guardian::unauthorizeAuth();
+</code></pre>
+<h2 id="asynchronous-requests">Asynchronous requests</h2>
+<p>If you need to make multiple requests, you can use the <code>sendAsyncRequest()</code> method. This method makes use of PHP's <code>curl_multi_init</code> function. In routes, you will use the <code>async()</code> method to mark routes as asynchronous requests.</p>
+<pre><code class="language-php">$response = HttpClient::sendAsyncRequest(function () {
+
+    HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;async();
+    HttpClient::post('http://127.0.0.1:8080/api/post', ['email' =&gt; 'solital@email.com'])-&gt;async();
+
+})-&gt;responseObject();
+
+print_r($response);
+</code></pre>
+<h2 id="upload-and-download">Upload and download</h2>
+<p>You can upload or download a file using the <code>CurlHandle</code> class.</p>
+<pre><code class="language-php"># Upload
+$url = 'http://127.0.0.1:8080/api/file';
+
+CurlHandle::upload($url, 'data test', 'test.txt');
+
+# Download
+$url = 'https://images.pexels.com/photos/...';
+
+CurlHandle::downloader($url, 'photo.jpg');
 </code></pre>
                 
 
@@ -537,7 +600,7 @@ $auth-&gt;digest(['username_1' =&gt; 'password_1'], 'my_second_realm');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-02-23 22:53:46.989957+00:00
+              Docs Build Date UTC : 2024-03-16 17:26:04.168749+00:00
               -->
 
           </section>
