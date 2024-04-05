@@ -148,7 +148,7 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
     Components
   </a>
 
@@ -166,6 +166,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Controllers and Models
       </a>
     
+      <a href="./" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      </a>
+    
       <a href="../dependency-container/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Dependency Container
       </a>
@@ -176,6 +180,10 @@
     
       <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
+      </a>
+    
+      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
       </a>
     
       <a href="../schedule/" class="dashboard-nav-dropdown-item text-black">
@@ -192,7 +200,7 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
     Resources
   </a>
 
@@ -202,8 +210,8 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
-      <a href="./" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
     
       <a href="../file-system/" class="dashboard-nav-dropdown-item text-black">
@@ -218,32 +226,28 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Logger
       </a>
     
-      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
-      </a>
-    
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
-      </a>
-    
-      <a href="../validation-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
-      </a>
-    
       <a href="../messages/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Messages
+      </a>
+    
+      <a href="../number/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Number
       </a>
     
       <a href="../queue/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
-      </a>
-    
       <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      </a>
+    
+      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      </a>
+    
+      <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
       </a>
     
       <a href="../mask/" class="dashboard-nav-dropdown-item text-black">
@@ -351,93 +355,172 @@
                 <ul class="ml-5 mb-5">
                   
                     <li id="bullet-item">
-                      <a href="#changing-the-timezone" class="menu-main-item">Changing the timezone</a>
+                      <a href="#returning-in-different-formats" class="menu-main-item">Returning in different formats</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#format-date" class="menu-main-item">Format date</a>
+                      <a href="#adding-and-removing-date-and-time" class="menu-main-item">Adding and removing date and time</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#days" class="menu-children-item">Days</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#months" class="menu-children-item">Months</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#years" class="menu-children-item">Years</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#hours" class="menu-children-item">Hours</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#minutes" class="menu-children-item">Minutes</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#add-months-to-a-date" class="menu-main-item">Add months to a date</a>
+                      <a href="#returning-specific-times" class="menu-main-item">Returning specific times</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#add-days-to-a-date" class="menu-main-item">Add days to a date</a>
+                      <a href="#date-on-different-days" class="menu-main-item">Date on different days</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#add-time-to-another-time" class="menu-main-item">Add time to another time</a>
+                      <a href="#check-days-of-the-week" class="menu-main-item">Check days of the week</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#check-if-the-date-is-weekend" class="menu-main-item">Check if the date is weekend</a>
+                      <a href="#returning-datetimeimmutable-instance" class="menu-main-item">Returning DateTimeImmutable instance</a>
                     </li>
                   
                   
                 </ul>
 
                 
-                <p>It is possible to manipulate dates and times using the <code>Convertime</code> class. To begin, run the instance: </p>
-<pre><code class="language-php">use Solital\Core\Validation\Convertime;
+                <p><strong>If you are looking for the old <span style="font-weight: bold !important;">Convertime</span> class, use <a href="../convertime/">this link</a></strong></p>
+<p>Dates are an important part of any system. To manipulate dates in Solital, you can use the <code>Temporal</code> component. The <code>Temporal</code> component uses the <code>DateTimeImmutable</code> class.</p>
+<pre><code class="language-php">use Solital\Core\Resource\Temporal\Temporal;
 
-$convertime = new Convertime();
+$date_time = Temporal::now();
 </code></pre>
-<h2 id="changing-the-timezone">Changing the timezone</h2>
-<p>In the class constructor, you can define the timezone. By default, the default 
-timezone is set to <code>America/Sao_Paulo</code>.</p>
-<pre><code class="language-php">$convertime = new Convertime(&quot;America/Fortaleza&quot;);
+<p>The <code>now()</code> method takes the current date and time.</p>
+<h2 id="returning-in-different-formats">Returning in different formats</h2>
+<p>You can return a date using one of the following methods:</p>
+<pre><code class="language-php">$date_time-&gt;toAtom();
+$date_time-&gt;toCookie();
+$date_time-&gt;toISO8601Expanded();
+$date_time-&gt;toRFC1036();
+$date_time-&gt;toRFC1123();
+$date_time-&gt;toRFC2822();
+$date_time-&gt;toRFC3339();
+$date_time-&gt;toRFC3339Extended();
+$date_time-&gt;toRFC7231();
+$date_time-&gt;toRFC822();
+$date_time-&gt;toRFC850();
+$date_time-&gt;toRSS();
+$date_time-&gt;toW3C();
+$date_time-&gt;toUnixTimestamp();
+$date_time-&gt;toFormat('Y-m-d');
 </code></pre>
-<p>You can change the timezone also in the <code>bootstrap.yaml</code> file:</p>
-<pre><code class="language-yaml">default_timezone: America/Fortaleza
+<h2 id="adding-and-removing-date-and-time">Adding and removing date and time</h2>
+<p>Temporal has methods for adding and removing days, months and years to a date, and also adding and removing hours and minutes to a time.</p>
+<h3 id="days">Days</h3>
+<p><strong>Add days to a date</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;addDays(3)-&gt;toFormat('Y-m-d');
+var_dump($result);
 </code></pre>
-<h2 id="format-date">Format date</h2>
-<p>To format a date, enter the date you want to convert and the format to be converted.</p>
-<pre><code class="language-php">$convertime = new Convertime();
-$res = $convertime-&gt;formatDate('04/01/1999', 'Y-m-d');
+<p><strong>Remove days from a date</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;subDays(3)-&gt;toFormat('Y-m-d');
+var_dump($result);
+</code></pre>
+<h3 id="months">Months</h3>
+<p><strong>Add months to a date</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;addMonths(3)-&gt;toFormat('Y-m-d');
+var_dump($result);
+</code></pre>
+<p><strong>Remove months from a date</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;subMonths(3)-&gt;toFormat('Y-m-d');
+var_dump($result);
+</code></pre>
+<h3 id="years">Years</h3>
+<p><strong>Add years to a date</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;addYears(3)-&gt;toFormat('Y-m-d');
+var_dump($result);
+</code></pre>
+<p><strong>Remove years from a date</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;subYears(3)-&gt;toFormat('Y-m-d');
+var_dump($result);
+</code></pre>
+<h3 id="hours">Hours</h3>
+<p><strong>Add hours to a time</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;addHours(3)-&gt;toFormat('H:i:s');
+var_dump($result);
+</code></pre>
+<p><strong>Remove hours from a time</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;subHours(3)-&gt;toFormat('H:i:s');
+var_dump($result);
+</code></pre>
+<h3 id="minutes">Minutes</h3>
+<p><strong>Add minutes to a time</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;addMinutes(3)-&gt;toFormat('H:i:s');
+var_dump($result);
+</code></pre>
+<p><strong>Remove minutes from a time</strong></p>
+<pre><code class="language-php">$result = Temporal::now()-&gt;subMinutes(3)-&gt;toFormat('H:i:s');
+var_dump($result);
+</code></pre>
+<h2 id="returning-specific-times">Returning specific times</h2>
+<p>The Temporal component has methods to return specific times from a date/time, such as years, days, name of the month, and others.</p>
+<p><strong>Date</strong></p>
+<pre><code class="language-php">Temporal::now()-&gt;getDay();
+Temporal::now()-&gt;getYear();
+Temporal::now()-&gt;getMonthInt();
+Temporal::now()-&gt;getMonthName();
+Temporal::now()-&gt;getMonthShortName();
+</code></pre>
+<p><strong>Time</strong></p>
+<pre><code class="language-php">Temporal::now()-&gt;getHour();
+Temporal::now()-&gt;getMinute();
+Temporal::now()-&gt;getSecond();
+</code></pre>
+<h2 id="date-on-different-days">Date on different days</h2>
+<p>If you want to manipulate a date other than the current date, you can use the <code>createDatetime()</code> method. This method, you can create a custom date and time.</p>
+<pre><code class="language-php">echo Temporal::createDatetime('2024-04-04 08:20:10')-&gt;toRFC1123();
+</code></pre>
+<p>If you need to get the date of the previous day, the current day or the next day, there are three methods to do this job.</p>
+<pre><code class="language-php">Temporal::today()-&gt;toRFC1036();
+Temporal::yesterday()-&gt;toRFC1036();
+Temporal::tomorrow()-&gt;toRFC1036();
+</code></pre>
+<h2 id="check-days-of-the-week">Check days of the week</h2>
+<p>Temporal also has methods to check whether the current date is a specific day of the week. All methods below return <code>true</code> or <code>false</code>.</p>
+<pre><code class="language-php">Temporal::now()-&gt;isMonday();
+Temporal::now()-&gt;isTuesday();
+Temporal::now()-&gt;isWednesday();
+Temporal::now()-&gt;isThursday();
+Temporal::now()-&gt;isFriday();
+Temporal::now()-&gt;isSaturday();
+Temporal::now()-&gt;isSunday();
+Temporal::now()-&gt;isWeekend();
+</code></pre>
+<h2 id="returning-datetimeimmutable-instance">Returning DateTimeImmutable instance</h2>
+<p>To return an instance of type <code>DateTimeImmutable</code>, use the <code>getDateTimeImmutableInstance</code> method.</p>
+<pre><code class="language-php">$temporal = Temporal::createDatetime('2024-04-04');
+$immutable_datetime = $temporal-&gt;addMonths(3);
+$modify_datetime = $temporal-&gt;toFormat('Y-m-d');
 
-/* Return 1999-01-04 */
-pre($res);
-</code></pre>
-<h2 id="add-months-to-a-date">Add months to a date</h2>
-<p>In some cases, you may need to add months to a specific date. To do this, use the <code>addMonth</code> class. 
-This class is similar to the <code>formatDate</code> class, with the difference that you must enter 
-in the last parameter the number of months that will be added to the date.</p>
-<p>This class already has conversion for days with 28, 29, 30 or 31 days. </p>
-<pre><code class="language-php">$convertime = new Convertime();
-$res = $convertime-&gt;addMonth('1999-01-04', 'd/m/Y', 1);
-
-/* Return 1999-02-04 */
-pre($res);
-</code></pre>
-<h2 id="add-days-to-a-date">Add days to a date</h2>
-<p>To add days to a date, the <code>addDays</code> method works in a similar way to the<code>addMonth</code> method.  </p>
-<pre><code class="language-php">$convertime = new Convertime();
-$res = $convertime-&gt;addDays('1999-01-04', 'd/m/Y', 3);
-
-/* Return 1999-01-07 */
-pre($res);
-</code></pre>
-<h2 id="add-time-to-another-time">Add time to another time</h2>
-<p>It is possible to add a specific time to another time. For example: add 3 more hours at 13:00.</p>
-<pre><code class="language-php">$convertime = new Convertime();
-$res = $convertime-&gt;addHour('13:00', '03:00');
-
-/* Return 16:00 */
-pre($res);
-</code></pre>
-<h2 id="check-if-the-date-is-weekend">Check if the date is weekend</h2>
-<p>To check whether a certain date will be on a weekend, use the <code>isWeekend()</code> method.</p>
-<pre><code class="language-php">$convertime = new Convertime();
-$res = $convertime-&gt;isWeekend('2021-07-18');
-
-/* Return bool */
-pre($res);
+var_dump($immutable_datetime-&gt;getImmutableDateTime()-&gt;format('Y-m-d')); // 2024-04-04
+var_dump($modify_datetime); // 2024-07-04
 </code></pre>
                 
 
@@ -449,10 +532,10 @@ pre($res);
                 <section aria-label="breadcrumb" class="mt-4">
                   <ol class="breadcrumb">
                     
-                      <li class="breadcrumb-item"><a href="../browser-storage/">&#8592; Browser Storage</a></li>
+                      <li class="breadcrumb-item"><a href="../controller-model/">&#8592; Controllers and Models</a></li>
                     
                     
-                      <li class="breadcrumb-item"><a href="../file-system/">File System &#8594;</a></li>
+                      <li class="breadcrumb-item"><a href="../dependency-container/">Dependency Container &#8594;</a></li>
                     
                   </ol>
                 </section>
@@ -471,7 +554,7 @@ pre($res);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-03-16 17:26:04.137506+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.044312+00:00
               -->
 
           </section>

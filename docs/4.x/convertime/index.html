@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browser Storage - Solital Framework 4.x</title>
+  <title>Convertime - Solital Framework 4.x</title>
   <link rel="shortcut icon" href="../img/favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -200,13 +200,13 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
     Resources
   </a>
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="./" class="dashboard-nav-dropdown-item text-black">
+      <a href="../browser-storage/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
@@ -346,7 +346,7 @@
           <section class="container section">
             <div class="row">
               <div class="col-md-12 col-sm-12 w-100">
-                <h1 class="mt-4 font-weight-normal title-page">Browser Storage</h1>
+                <h1 class="mt-4 font-weight-normal title-page">Convertime</h1>
               </div>
 
               <div class="col-md-12 col-sm-12 mt-3">
@@ -355,64 +355,99 @@
                 <ul class="ml-5 mb-5">
                   
                     <li id="bullet-item">
-                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                      <a href="#changing-the-timezone" class="menu-main-item">Changing the timezone</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#usage" class="menu-main-item">Usage</a>
+                      <a href="#format-date" class="menu-main-item">Format date</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#add-months-to-a-date" class="menu-main-item">Add months to a date</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#add-days-to-a-date" class="menu-main-item">Add days to a date</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#add-time-to-another-time" class="menu-main-item">Add time to another time</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#check-if-the-date-is-weekend" class="menu-main-item">Check if the date is weekend</a>
                     </li>
                   
                   
                 </ul>
 
                 
-                <h2 id="introduction">Introduction</h2>
-<p>In some cases, it may be necessary to manipulate javascript's <code>localstorage</code> and <code>sessionstorage</code> using PHP. You can do this using the <code>BrowserStorage</code> class.</p>
-<h2 id="usage">Usage</h2>
-<p><strong>Set item</strong></p>
-<p>To store information locally or using a session, you can use one of the methods below:</p>
-<pre><code class="language-php">// localStorage.setItem('$key', $value);
-BrowserStorage::local()-&gt;setItem($key, $value);
+                <p><strong>This class is deprecated and will be removed soon. Please use the <a href="../date-and-time/">Temporal</a> component</strong></p>
+<p>It is possible to manipulate dates and times using the <code>Convertime</code> class. To begin, run the instance: </p>
+<pre><code class="language-php">use Solital\Core\Validation\Convertime;
 
-//sessionStorage.setItem('$key', $value);
-BrowserStorage::session()-&gt;setItem($key, $value);
+$convertime = new Convertime();
 </code></pre>
-<p><strong>Get item</strong></p>
-<p>To retrieve the information, use the <code>getItem()</code> method.</p>
-<pre><code class="language-php">BrowserStorage::local()-&gt;getItem($key);
-BrowserStorage::session()-&gt;getItem($key);
+<h2 id="changing-the-timezone">Changing the timezone</h2>
+<p>In the class constructor, you can define the timezone. By default, the default 
+timezone is set to <code>America/Sao_Paulo</code>.</p>
+<pre><code class="language-php">$convertime = new Convertime(&quot;America/Fortaleza&quot;);
 </code></pre>
-<p><strong>Remove item</strong></p>
-<p>To remove an item, use the <code>removeItem()</code> method.</p>
-<pre><code class="language-php">BrowserStorage::local()-&gt;removeItem($key);
-BrowserStorage::session()-&gt;removeItem($key);
+<p>You can change the timezone also in the <code>bootstrap.yaml</code> file:</p>
+<pre><code class="language-yaml">default_timezone: America/Fortaleza
 </code></pre>
-<p><strong>Clear storage</strong></p>
-<p>To clear all storage, use the <code>clear()</code> or <code>clearAll()</code> method.</p>
-<pre><code class="language-php">BrowserStorage::local()-&gt;clear();
-BrowserStorage::session()-&gt;clear();
+<h2 id="format-date">Format date</h2>
+<p>To format a date, enter the date you want to convert and the format to be converted.</p>
+<pre><code class="language-php">$convertime = new Convertime();
+$res = $convertime-&gt;formatDate('04/01/1999', 'Y-m-d');
 
-// Clears local and session storage
-BrowserStorage::clearAll();
+/* Return 1999-01-04 */
+pre($res);
+</code></pre>
+<h2 id="add-months-to-a-date">Add months to a date</h2>
+<p>In some cases, you may need to add months to a specific date. To do this, use the <code>addMonth</code> class. 
+This class is similar to the <code>formatDate</code> class, with the difference that you must enter 
+in the last parameter the number of months that will be added to the date.</p>
+<p>This class already has conversion for days with 28, 29, 30 or 31 days. </p>
+<pre><code class="language-php">$convertime = new Convertime();
+$res = $convertime-&gt;addMonth('1999-01-04', 'd/m/Y', 1);
+
+/* Return 1999-02-04 */
+pre($res);
+</code></pre>
+<h2 id="add-days-to-a-date">Add days to a date</h2>
+<p>To add days to a date, the <code>addDays</code> method works in a similar way to the<code>addMonth</code> method.  </p>
+<pre><code class="language-php">$convertime = new Convertime();
+$res = $convertime-&gt;addDays('1999-01-04', 'd/m/Y', 3);
+
+/* Return 1999-01-07 */
+pre($res);
+</code></pre>
+<h2 id="add-time-to-another-time">Add time to another time</h2>
+<p>It is possible to add a specific time to another time. For example: add 3 more hours at 13:00.</p>
+<pre><code class="language-php">$convertime = new Convertime();
+$res = $convertime-&gt;addHour('13:00', '03:00');
+
+/* Return 16:00 */
+pre($res);
+</code></pre>
+<h2 id="check-if-the-date-is-weekend">Check if the date is weekend</h2>
+<p>To check whether a certain date will be on a weekend, use the <code>isWeekend()</code> method.</p>
+<pre><code class="language-php">$convertime = new Convertime();
+$res = $convertime-&gt;isWeekend('2021-07-18');
+
+/* Return bool */
+pre($res);
 </code></pre>
                 
 
                 <hr />
 
-                
-                <h3>What to see next?</h3>
-
-                <section aria-label="breadcrumb" class="mt-4">
-                  <ol class="breadcrumb">
-                    
-                      <li class="breadcrumb-item"><a href="../wolf-template/">&#8592; Wolf Template</a></li>
-                    
-                    
-                      <li class="breadcrumb-item"><a href="../collection/">Collection &#8594;</a></li>
-                    
-                  </ol>
-                </section>
                 
 
               </div>
@@ -428,7 +463,7 @@ BrowserStorage::clearAll();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.013040+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.028688+00:00
               -->
 
           </section>

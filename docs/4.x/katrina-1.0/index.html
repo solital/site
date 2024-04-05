@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Katrina1 - Solital Framework 4.x</title>
+  <title>Katrina 1.0 - Solital Framework 4.x</title>
   <link rel="shortcut icon" href="../img/favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -166,6 +166,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Controllers and Models
       </a>
     
+      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      </a>
+    
       <a href="../dependency-container/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Dependency Container
       </a>
@@ -176,6 +180,10 @@
     
       <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
+      </a>
+    
+      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
       </a>
     
       <a href="../schedule/" class="dashboard-nav-dropdown-item text-black">
@@ -202,8 +210,8 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
-      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
     
       <a href="../file-system/" class="dashboard-nav-dropdown-item text-black">
@@ -218,32 +226,28 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Logger
       </a>
     
-      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
-      </a>
-    
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
-      </a>
-    
-      <a href="../validation-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
-      </a>
-    
       <a href="../messages/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Messages
+      </a>
+    
+      <a href="../number/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Number
       </a>
     
       <a href="../queue/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
-      </a>
-    
       <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      </a>
+    
+      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      </a>
+    
+      <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
       </a>
     
       <a href="../mask/" class="dashboard-nav-dropdown-item text-black">
@@ -342,7 +346,7 @@
           <section class="container section">
             <div class="row">
               <div class="col-md-12 col-sm-12 w-100">
-                <h1 class="mt-4 font-weight-normal title-page">Katrina1</h1>
+                <h1 class="mt-4 font-weight-normal title-page">Katrina 1.0</h1>
               </div>
 
               <div class="col-md-12 col-sm-12 mt-3">
@@ -650,7 +654,8 @@ class User
 <p>You can inform which fields you want to return. "a" is your main table while "b" is your table that has the foreign key.</p>
 <pre><code class="language-php">public function get()
 {
-    return $this-&gt;instance()-&gt;innerJoin(&quot;address&quot;, [&quot;idForeignAddress&quot;, &quot;idAddress&quot;], &quot;order_status=true&quot;, &quot;a.idPerson, a.name, b.street&quot;, &quot;address&quot;, &quot;idAddress&quot;)-&gt;build(&quot;ALL&quot;);
+    return $this-&gt;instance()-&gt;innerJoin(&quot;address&quot;, [&quot;idForeignAddress&quot;, &quot;idAddress&quot;], &quot;order_status=true&quot;, &quot;a.idPerson, a.name, 
+    b.street&quot;, &quot;address&quot;, &quot;idAddress&quot;)-&gt;build(&quot;ALL&quot;);
 }
 </code></pre>
 <h3 id="custom-select">Custom SELECT</h3>
@@ -1012,7 +1017,8 @@ echo $arrows;
 <p>If you have a very complex SELECT statement, you can use the <code>customPagination</code> method. This method already has a <code>LIMIT</code> by default, in addition to being able to change the name of the arrows.</p>
 <pre><code class="language-php">public function get()
 {
-    $res = $this-&gt;instance()-&gt;customPagination(&quot;SELECT created_at, order_status, idSession, SUM(idOrder) AS idOrder FROM `tb_order` GROUP BY created_at, order_status, idSession&quot;, 3, &quot;First&quot;, &quot;Last&quot;);
+    $res = $this-&gt;instance()-&gt;customPagination(&quot;SELECT created_at, order_status, idSession, SUM(idOrder) AS idOrder FROM `tb_order` 
+    GROUP BY created_at, order_status, idSession&quot;, 3, &quot;First&quot;, &quot;Last&quot;);
 
     return $res;
 }
@@ -1194,7 +1200,7 @@ echo $arrows;
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-03-16 17:26:04.184372+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.075552+00:00
               -->
 
           </section>

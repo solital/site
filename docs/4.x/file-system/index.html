@@ -166,6 +166,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Controllers and Models
       </a>
     
+      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      </a>
+    
       <a href="../dependency-container/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Dependency Container
       </a>
@@ -176,6 +180,10 @@
     
       <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
+      </a>
+    
+      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
       </a>
     
       <a href="../schedule/" class="dashboard-nav-dropdown-item text-black">
@@ -202,8 +210,8 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
-      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
     
       <a href="./" class="dashboard-nav-dropdown-item text-black">
@@ -218,32 +226,28 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Logger
       </a>
     
-      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
-      </a>
-    
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
-      </a>
-    
-      <a href="../validation-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
-      </a>
-    
       <a href="../messages/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Messages
+      </a>
+    
+      <a href="../number/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Number
       </a>
     
       <a href="../queue/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
-      </a>
-    
       <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      </a>
+    
+      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      </a>
+    
+      <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
       </a>
     
       <a href="../mask/" class="dashboard-nav-dropdown-item text-black">
@@ -409,6 +413,9 @@
 <pre><code class="language-php">use Solital\Core\FileSystem\HandleFiles;
 
 $handle = new HandleFiles();
+
+// Or use container
+$handle = container('handler-file');
 </code></pre>
 <h2 id="list-files-within-a-folder">List files within a folder</h2>
 <p><strong>list multiple files</strong></p>
@@ -521,7 +528,7 @@ pre($res);
                 <section aria-label="breadcrumb" class="mt-4">
                   <ol class="breadcrumb">
                     
-                      <li class="breadcrumb-item"><a href="../date-and-time/">&#8592; Date and time</a></li>
+                      <li class="breadcrumb-item"><a href="../collection/">&#8592; Collection</a></li>
                     
                     
                       <li class="breadcrumb-item"><a href="../json/">JSON &#8594;</a></li>
@@ -543,7 +550,7 @@ pre($res);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-03-16 17:26:04.153129+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.059931+00:00
               -->
 
           </section>

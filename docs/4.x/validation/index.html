@@ -5,7 +5,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTTP Client - Solital Framework 4.x</title>
+  <title>Validation - Solital Framework 4.x</title>
   <link rel="shortcut icon" href="../img/favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,7 +148,7 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
     Components
   </a>
 
@@ -178,7 +178,7 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Event Loop
       </a>
     
-      <a href="./" class="dashboard-nav-dropdown-item text-black">
+      <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
       </a>
     
@@ -200,7 +200,7 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
     Resources
   </a>
 
@@ -246,7 +246,7 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
       </a>
     
-      <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
+      <a href="./" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
       </a>
     
@@ -346,7 +346,7 @@
           <section class="container section">
             <div class="row">
               <div class="col-md-12 col-sm-12 w-100">
-                <h1 class="mt-4 font-weight-normal title-page">HTTP Client</h1>
+                <h1 class="mt-4 font-weight-normal title-page">Validation</h1>
               </div>
 
               <div class="col-md-12 col-sm-12 mt-3">
@@ -360,218 +360,409 @@
                   
                   
                     <li id="bullet-item">
-                      <a href="#basic-use" class="menu-main-item">Basic use</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#supported-methods" class="menu-main-item">Supported methods</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#return-types" class="menu-main-item">Return types</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#sending-data" class="menu-main-item">Sending data</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#custom-headers" class="menu-main-item">Custom Headers</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#disabling-ssl-verification" class="menu-main-item">Disabling SSL verification</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#authentication" class="menu-main-item">Authentication</a>
+                      <a href="#getting-started" class="menu-main-item">Getting Started</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#basic-authentication" class="menu-children-item">Basic authentication</a>
+                      <a href="#rules" class="menu-children-item">Rules</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#bearer-authentication" class="menu-children-item">Bearer authentication</a>
+                      <a href="#filters" class="menu-children-item">Filters</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#securing-your-api" class="menu-main-item">Securing your API</a>
+                      <a href="#creating-validation-classes" class="menu-main-item">Creating validation classes</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#with-jwt-token" class="menu-children-item">With JWT token</a>
+                      <a href="#structure" class="menu-children-item">Structure</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#with-basic-auth" class="menu-children-item">With Basic Auth</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#with-digest-auth" class="menu-children-item">With Digest Auth</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#unauthorize-an-authenticated-user" class="menu-children-item">Unauthorize an authenticated user</a>
+                      <a href="#using-the-validator" class="menu-children-item">Using the validator</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#asynchronous-requests" class="menu-main-item">Asynchronous requests</a>
+                      <a href="#available-validators" class="menu-main-item">Available Validators</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#upload-and-download" class="menu-main-item">Upload and download</a>
+                      <a href="#available-filters" class="menu-main-item">Available Filters</a>
                     </li>
                   
                   
                 </ul>
 
                 
-                <h2 id="introduction">Introduction</h2>
-<p>Solital has a component to manipulate the HTTP client, useful for consuming API and making HTTP requests.</p>
-<h2 id="basic-use">Basic use</h2>
-<p>To make basic use of the component, you will need use <code>HttpClient</code> class. Then, call the function <code>get</code>, <code>post</code> or other, and the url as a parameter.</p>
-<pre><code class="language-php">use Solital\Core\Http\Client\HttpClient;
+                <p><strong>If you are looking for the old <span style="font-weight: bold !important;">Valid</span> class, use <a href="../validation-component/">this link</a></strong></p>
+<h2 id="introduction">Introduction</h2>
+<p>Solital has ways to validate data from $_POST and $_FILES requests. This way, you can validate emails, names, passwords, among others, in addition to applying filters to this data.</p>
+<p>Solital uses the <code>validate</code> method. This method makes use of the wixel/gump component.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="rules">Rules</h3>
+<p>Rules are applied to data coming from $_POST and $_FILES requests. Firstly, you need to have created a controller inside the <code>app/Components/Controller/</code> folder. After that, you must use the <code>input()</code> helper together with the <code>validate()</code> method.</p>
+<pre><code class="language-php">class StoreController
+{
+    public function index()
+    {
+        $data_rules = [
+            'username' =&gt; 'required|alpha_numeric|max_len,100|min_len,6',
+            'password' =&gt; 'required|max_len,100|min_len,6',
+            'email'    =&gt; 'required|valid_email'
+        ];
 
-$response = HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;responseJson();
-
-pre($response);
+        $values = input()-&gt;validate($data_rules);
+        var_dump($values);
+    }
+}
 </code></pre>
-<h2 id="supported-methods">Supported methods</h2>
-<p>HttpClient supports the methods below.</p>
-<pre><code class="language-php">HttpClient::get()
-HttpClient::post()
-HttpClient::put()
-HttpClient::delete()
-HttpClient::patch()
-HttpClient::options()
+<p>In the previous example, if the request data is validated according to the defined rules, it will be returned in the variable <code>$values</code>.</p>
+<p>However, if one of the data does not comply with the rules, an array with index <code>validation_errors</code> will be returned containing the errors.</p>
+<h3 id="filters">Filters</h3>
+<p>To apply filters to your data, use the second parameter of the <code>validate</code> method.</p>
+<pre><code class="language-php">class StoreController
+{
+    public function index()
+    {
+        $data_rules = [
+            'username' =&gt; 'required|alpha_numeric|max_len,100|min_len,6',
+            'password' =&gt; 'required|max_len,100|min_len,6',
+            'email'    =&gt; 'required|valid_email'
+        ];
+
+        $data_filter = [
+            'username' =&gt; 'upper_case|sanitize_string',
+            'password' =&gt; 'trim',
+            'email'    =&gt; 'trim|sanitize_email'
+        ];
+
+        $values = input()-&gt;validate($data_rules, $data_filter);
+        var_dump($values);
+    }
+}
 </code></pre>
-<h2 id="return-types">Return types</h2>
-<p>You can return the answer in json, array or object. The methods below show an example.</p>
-<pre><code class="language-php">/** Return json */
-$client-&gt;responseJson();
-
-/** Return array */
-$client-&gt;responseArray();
-
-/** Return object */
-$client-&gt;responseObject();
+<h2 id="creating-validation-classes">Creating validation classes</h2>
+<p>To have better control of the validations you perform, you can create your own class that will store all your rules, filters and error messages.</p>
+<p>To create a validator, you must run the following command:</p>
+<pre><code class="language-bash">php vinci create:validator MyValidator
 </code></pre>
-<p>If you want to debug the request, use the <code>enableVerboseOutput()</code> method.</p>
-<pre><code class="language-php">$response = HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;enableVerboseOutput()-&gt;responseJson();
+<p>All validators will be stored in the <code>app/Components/Validator/</code> folder.</p>
+<h3 id="structure">Structure</h3>
+<p>All validators you create will implement the <code>RequestValidatorInterface</code> interface. The validator you create will have the following structure:</p>
+<pre><code class="language-php">&lt;?php
 
-pre($response);
+namespace Solital\Components\Validator;
+
+use Solital\Core\Http\RequestValidatorInterface;
+
+class MyValidation implements RequestValidatorInterface
+{
+    #[\Override]
+    public function rules(): array
+    {
+        return [];
+    }
+
+    #[\Override]
+    public function filters(): array
+    {
+        return [];
+    }
+
+    #[\Override]
+    public function messages(): array
+    {
+        return [];
+    }
+}
 </code></pre>
-<h2 id="sending-data">Sending data</h2>
-<p>If you are using a POST or PUT request, for example, and need to send data to the HTTP header, you can pass an array with the values on second parameter.</p>
-<pre><code class="language-php">$data = ['email' =&gt; 'solital@email.com'];
-
-$response = HttpClient::post('http://127.0.0.1:8080/api/post', $data)-&gt;responseJson();
-$response = HttpClient::put('http://127.0.0.1:8080/api/put', $data)-&gt;responseJson();
+<p>The <code>rules()</code> and <code>filters()</code> methods will be used for rules and filters. The <code>messages()</code> method will have custom error messages as shown in the example below.</p>
+<pre><code class="language-php">#[\Override]
+public function messages(): array
+{
+    return [
+        'username' =&gt; ['required' =&gt; 'Fill the Username field please, its required.'],
+        'password' =&gt; ['required' =&gt; 'Please enter a password. This field is empty.'],
+        'email'    =&gt; ['valid_email' =&gt; 'Please enter a valid e-mail.']
+    ];
+}
 </code></pre>
-<h2 id="custom-headers">Custom Headers</h2>
-<p>By default, HttpClient has the following headers:</p>
-<ul>
-<li>Content-Type: application/json</li>
-<li>Accept: application/json</li>
-</ul>
-<p>To add other headers to the request, use <code>setHeaders</code> method.</p>
-<pre><code class="language-php">$headers = [
-    'Content-Type: application/pdf'
-];
+<h3 id="using-the-validator">Using the validator</h3>
+<p>To use the validator you created, you must pass the validator name in the <code>validate()</code> method.</p>
+<pre><code class="language-php">use Solital\Components\Validator\MyValidation;
 
-HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;setHeaders($headers)-&gt;responseJson();
+class StoreController
+{
+    public function index()
+    {
+        $values = input()-&gt;validate(MyValidation::class);
+        var_dump($values);
+    }
+}
 </code></pre>
-<h2 id="disabling-ssl-verification">Disabling SSL verification</h2>
-<p>HttpClient, by default, use SSL verification. To disable verification, use the <code>disableSSL()</code> method.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;disableSSL()-&gt;responseJson();
-</code></pre>
-<h2 id="authentication">Authentication</h2>
-<h3 id="basic-authentication">Basic authentication</h3>
-<p>If you are handling an API with authentication in basic, you can use the <code>basicAuth()</code> method to do the authentication. The first parameter will be the username, while the second parameter will be the password.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;basicAuth('user', 'pass')-&gt;responseJson();
-</code></pre>
-<h3 id="bearer-authentication">Bearer authentication</h3>
-<p>For authentications using the bearer token, you can use the <code>bearerAuth()</code> method to provide the authentication token.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth('2edac0d91305c9207d36eda3cbf2c0d7')-&gt;responseJson();
-</code></pre>
-<h2 id="securing-your-api">Securing your API</h2>
-<p>When we work with REST API, we need to protect our routes from unauthorized users.</p>
-<h3 id="with-jwt-token">With JWT token</h3>
-<p>The most common way to secure an API is through a JWT token. To perform this type of protection, use the <code>protectRoute()</code> method of the <code>JWT</code> class.</p>
-<pre><code class="language-php">use Solital\Core\Http\Client\JWT;
-
-Course::get('/api/get', function () {
-
-    JWT::protectRoute(&quot;your-secret&quot;);
-
-});
-</code></pre>
-<p>To authenticate, you can generate a token using the <code>encode</code> method of the <code>JWT</code> class and send this token using the <code>bearerToken()</code> method.</p>
-<pre><code class="language-php">use Solital\Core\Http\Client\JWT;
-
-$secret = &quot;your-secret&quot;;
-
-$payload = [
-    &quot;sub&quot; =&gt; &quot;1234567890&quot;,
-    &quot;name&quot; =&gt; &quot;Brenno&quot;,
-    &quot;role&quot; =&gt; &quot;admin&quot;
-];
-
-$token = JWT::encode($payload, $secret);
-
-HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth($token)-&gt;responseJson();
-</code></pre>
-<h3 id="with-basic-auth">With Basic Auth</h3>
-<p>To secure your API using <code>basic</code> authentication, use <code>Guardian</code> class with <code>protectBasicAuth()</code> method providing the username and password to authenticate.</p>
-<pre><code class="language-php">use Solital\Core\Security\Guardian;
-
-Guardian::protectBasicAuth('admin', 'admin');
-</code></pre>
-<h3 id="with-digest-auth">With Digest Auth</h3>
-<p>To use <code>digest</code> to protect your API, use the <code>protectDigestAuth()</code> method. In this method, you must use an array to inform the username and password. You can define multiple users for this authentication type.</p>
-<pre><code class="language-php">use Solital\Core\Security\Guardian;
-
-Guardian::protectDigestAuth(['admin' =&gt; 'admin', 'user2' =&gt; 'pass2']);
-</code></pre>
-<h3 id="unauthorize-an-authenticated-user">Unauthorize an authenticated user</h3>
-<p>If you want to deauthorize a user already authenticating (using basic or digest), you can use the <code>unauthorizeAuth</code> method.</p>
-<pre><code class="language-php">use Solital\Core\Security\Guardian;
-
-Guardian::unauthorizeAuth();
-</code></pre>
-<h2 id="asynchronous-requests">Asynchronous requests</h2>
-<p>If you need to make multiple requests, you can use the <code>sendAsyncRequest()</code> method. This method makes use of PHP's <code>curl_multi_init</code> function. In routes, you will use the <code>async()</code> method to mark routes as asynchronous requests.</p>
-<pre><code class="language-php">$response = HttpClient::sendAsyncRequest(function () {
-
-    HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;async();
-    HttpClient::post('http://127.0.0.1:8080/api/post', ['email' =&gt; 'solital@email.com'])-&gt;async();
-
-})-&gt;responseObject();
-
-print_r($response);
-</code></pre>
-<h2 id="upload-and-download">Upload and download</h2>
-<p>You can upload or download a file using the <code>CurlHandle</code> class.</p>
-<pre><code class="language-php"># Upload
-$url = 'http://127.0.0.1:8080/api/file';
-
-CurlHandle::upload($url, 'data test', 'test.txt');
-
-# Download
-$url = 'https://images.pexels.com/photos/...';
-
-CurlHandle::downloader($url, 'photo.jpg');
-</code></pre>
+<h2 id="available-validators">Available Validators</h2>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>required</strong></td>
+<td>Ensures the specified key value exists and is not empty (not null, not empty string, not empty array).</td>
+</tr>
+<tr>
+<td><strong>contains</strong>,one;two;use array format if one of the values contains semicolons</td>
+<td>Verify that a value is contained within the pre-defined value set.</td>
+</tr>
+<tr>
+<td><strong>contains_list</strong>,value1;value2</td>
+<td>Verify that a value is contained within the pre-defined value set. Error message will NOT show the list of possible values.</td>
+</tr>
+<tr>
+<td><strong>doesnt_contain_list</strong>,value1;value2</td>
+<td>Verify that a value is contained within the pre-defined value set. Error message will NOT show the list of possible values.</td>
+</tr>
+<tr>
+<td><strong>boolean</strong>,strict</td>
+<td>Determine if the provided value is a valid boolean. Returns true for: yes/no, on/off, 1/0, true/false. In strict mode (optional) only true/false will be valid which you can combine with boolean filter.</td>
+</tr>
+<tr>
+<td><strong>valid_email</strong></td>
+<td>Determine if the provided email has valid format.</td>
+</tr>
+<tr>
+<td><strong>max_len</strong>,240</td>
+<td>Determine if the provided value length is less or equal to a specific value.</td>
+</tr>
+<tr>
+<td><strong>min_len</strong>,4</td>
+<td>Determine if the provided value length is more or equal to a specific value.</td>
+</tr>
+<tr>
+<td><strong>exact_len</strong>,5</td>
+<td>Determine if the provided value length matches a specific value.</td>
+</tr>
+<tr>
+<td><strong>between_len</strong>,3;11</td>
+<td>Determine if the provided value length is between min and max values.</td>
+</tr>
+<tr>
+<td><strong>alpha</strong></td>
+<td>Determine if the provided value contains only alpha characters.</td>
+</tr>
+<tr>
+<td><strong>alpha_numeric</strong></td>
+<td>Determine if the provided value contains only alpha-numeric characters.</td>
+</tr>
+<tr>
+<td><strong>alpha_dash</strong></td>
+<td>Determine if the provided value contains only alpha characters with dashed and underscores.</td>
+</tr>
+<tr>
+<td><strong>alpha_numeric_dash</strong></td>
+<td>Determine if the provided value contains only alpha numeric characters with dashed and underscores.</td>
+</tr>
+<tr>
+<td><strong>alpha_numeric_space</strong></td>
+<td>Determine if the provided value contains only alpha numeric characters with spaces.</td>
+</tr>
+<tr>
+<td><strong>alpha_space</strong></td>
+<td>Determine if the provided value contains only alpha characters with spaces.</td>
+</tr>
+<tr>
+<td><strong>numeric</strong></td>
+<td>Determine if the provided value is a valid number or numeric string.</td>
+</tr>
+<tr>
+<td><strong>integer</strong></td>
+<td>Determine if the provided value is a valid integer.</td>
+</tr>
+<tr>
+<td><strong>float</strong></td>
+<td>Determine if the provided value is a valid float.</td>
+</tr>
+<tr>
+<td><strong>valid_url</strong></td>
+<td>Determine if the provided value is a valid URL.</td>
+</tr>
+<tr>
+<td><strong>url_exists</strong></td>
+<td>Determine if a URL exists &amp; is accessible.</td>
+</tr>
+<tr>
+<td><strong>valid_ip</strong></td>
+<td>Determine if the provided value is a valid IP address.</td>
+</tr>
+<tr>
+<td><strong>valid_ipv4</strong></td>
+<td>Determine if the provided value is a valid IPv4 address.</td>
+</tr>
+<tr>
+<td><strong>valid_ipv6</strong></td>
+<td>Determine if the provided value is a valid IPv6 address.</td>
+</tr>
+<tr>
+<td><strong>valid_cc</strong></td>
+<td>Determine if the input is a valid credit card number.</td>
+</tr>
+<tr>
+<td><strong>valid_name</strong></td>
+<td>Determine if the input is a valid human name.</td>
+</tr>
+<tr>
+<td><strong>street_address</strong></td>
+<td>Determine if the provided input is likely to be a street address using weak detection.</td>
+</tr>
+<tr>
+<td><strong>iban</strong></td>
+<td>Determine if the provided value is a valid IBAN.</td>
+</tr>
+<tr>
+<td><strong>date</strong>,d/m/Y</td>
+<td>Determine if the provided input is a valid date (ISO 8601) or specify a custom format (optional).</td>
+</tr>
+<tr>
+<td><strong>min_age</strong>,18</td>
+<td>Determine if the provided input meets age requirement (ISO 8601). Input should be a date (Y-m-d).</td>
+</tr>
+<tr>
+<td><strong>max_numeric</strong>,50</td>
+<td>Determine if the provided numeric value is lower or equal to a specific value.</td>
+</tr>
+<tr>
+<td><strong>min_numeric</strong>,1</td>
+<td>Determine if the provided numeric value is higher or equal to a specific value.</td>
+</tr>
+<tr>
+<td><strong>starts</strong>,Z</td>
+<td>Determine if the provided value starts with param.</td>
+</tr>
+<tr>
+<td><strong>required_file</strong></td>
+<td>Determine if the file was successfully uploaded.</td>
+</tr>
+<tr>
+<td><strong>extension</strong>,png;jpg;gif</td>
+<td>Check the uploaded file for extension. Doesn't check mime-type yet.</td>
+</tr>
+<tr>
+<td><strong>equalsfield</strong>,other_field_name</td>
+<td>Determine if the provided field value equals current field value.</td>
+</tr>
+<tr>
+<td><strong>guidv4</strong></td>
+<td>Determine if the provided field value is a valid GUID (v4)</td>
+</tr>
+<tr>
+<td><strong>phone_number</strong></td>
+<td>Determine if the provided value is a valid phone number.</td>
+</tr>
+<tr>
+<td><strong>regex</strong>,/test-[0-9]{3}/</td>
+<td>Custom regex validator.</td>
+</tr>
+<tr>
+<td><strong>valid_json_string</strong></td>
+<td>Determine if the provided value is a valid JSON string.</td>
+</tr>
+<tr>
+<td><strong>valid_array_size_greater</strong>,1</td>
+<td>Check if an input is an array and if the size is more or equal to a specific value.</td>
+</tr>
+<tr>
+<td><strong>valid_array_size_lesser</strong>,1</td>
+<td>Check if an input is an array and if the size is less or equal to a specific value.</td>
+</tr>
+<tr>
+<td><strong>valid_array_size_equal</strong>,1</td>
+<td>Check if an input is an array and if the size is equal to a specific value.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="available-filters">Available Filters</h2>
+<p>Filter rules can also be any PHP native function (e.g.: trim).</p>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>noise_words</strong></td>
+<td>Replace noise words in a string (http://tax.cchgroup.com/help/Avoiding_noise_words_in_your_search.htm).</td>
+</tr>
+<tr>
+<td><strong>rmpunctuation</strong></td>
+<td>Remove all known punctuation from a string.</td>
+</tr>
+<tr>
+<td><strong>urlencode</strong></td>
+<td>Sanitize the string by urlencoding characters.</td>
+</tr>
+<tr>
+<td><strong>htmlencode</strong></td>
+<td>Sanitize the string by converting HTML characters to their HTML entities.</td>
+</tr>
+<tr>
+<td><strong>sanitize_email</strong></td>
+<td>Sanitize the string by removing illegal characters from emails.</td>
+</tr>
+<tr>
+<td><strong>sanitize_numbers</strong></td>
+<td>Sanitize the string by removing illegal characters from numbers.</td>
+</tr>
+<tr>
+<td><strong>sanitize_floats</strong></td>
+<td>Sanitize the string by removing illegal characters from float numbers.</td>
+</tr>
+<tr>
+<td><strong>sanitize_string</strong></td>
+<td>Sanitize the string by removing any script tags.</td>
+</tr>
+<tr>
+<td><strong>boolean</strong></td>
+<td>Converts ['1', 1, 'true', true, 'yes', 'on'] to true, anything else is false ('on' is useful for form checkboxes).</td>
+</tr>
+<tr>
+<td><strong>basic_tags</strong></td>
+<td>Filter out all HTML tags except the defined basic tags.</td>
+</tr>
+<tr>
+<td><strong>whole_number</strong></td>
+<td>Convert the provided numeric value to a whole number.</td>
+</tr>
+<tr>
+<td><strong>ms_word_characters</strong></td>
+<td>Convert MS Word special characters to web safe characters. ([“ ”] =&gt; ", [‘ ’] =&gt; ', [–] =&gt; -, […] =&gt; ...)</td>
+</tr>
+<tr>
+<td><strong>lower_case</strong></td>
+<td>Converts to lowercase.</td>
+</tr>
+<tr>
+<td><strong>upper_case</strong></td>
+<td>Converts to uppercase.</td>
+</tr>
+<tr>
+<td><strong>slug</strong></td>
+<td>Converts value to url-web-slugs.</td>
+</tr>
+<tr>
+<td><strong>trim</strong></td>
+<td>Remove spaces from the beginning and end of strings (PHP).</td>
+</tr>
+</tbody>
+</table>
                 
 
                 <hr />
@@ -582,10 +773,10 @@ CurlHandle::downloader($url, 'photo.jpg');
                 <section aria-label="breadcrumb" class="mt-4">
                   <ol class="breadcrumb">
                     
-                      <li class="breadcrumb-item"><a href="../event-loop/">&#8592; Event Loop</a></li>
+                      <li class="breadcrumb-item"><a href="../session-and-cookie/">&#8592; Session and Cookie</a></li>
                     
                     
-                      <li class="breadcrumb-item"><a href="../mailer-component/">Mailer &#8594;</a></li>
+                      <li class="breadcrumb-item"><a href="../mask/">Mask &#8594;</a></li>
                     
                   </ol>
                 </section>
@@ -604,7 +795,7 @@ CurlHandle::downloader($url, 'photo.jpg');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.059931+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.138012+00:00
               -->
 
           </section>

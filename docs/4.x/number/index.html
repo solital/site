@@ -5,7 +5,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browser Storage - Solital Framework 4.x</title>
+  <title>Number - Solital Framework 4.x</title>
   <link rel="shortcut icon" href="../img/favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,7 +206,7 @@
 
   <div class="dashboard-nav-dropdown-menu">
     
-      <a href="./" class="dashboard-nav-dropdown-item text-black">
+      <a href="../browser-storage/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
@@ -230,7 +230,7 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Messages
       </a>
     
-      <a href="../number/" class="dashboard-nav-dropdown-item text-black">
+      <a href="./" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Number
       </a>
     
@@ -346,7 +346,7 @@
           <section class="container section">
             <div class="row">
               <div class="col-md-12 col-sm-12 w-100">
-                <h1 class="mt-4 font-weight-normal title-page">Browser Storage</h1>
+                <h1 class="mt-4 font-weight-normal title-page">Number</h1>
               </div>
 
               <div class="col-md-12 col-sm-12 mt-3">
@@ -354,47 +354,29 @@
 
                 <ul class="ml-5 mb-5">
                   
-                    <li id="bullet-item">
-                      <a href="#introduction" class="menu-main-item">Introduction</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#usage" class="menu-main-item">Usage</a>
-                    </li>
-                  
-                  
                 </ul>
 
                 
-                <h2 id="introduction">Introduction</h2>
-<p>In some cases, it may be necessary to manipulate javascript's <code>localstorage</code> and <code>sessionstorage</code> using PHP. You can do this using the <code>BrowserStorage</code> class.</p>
-<h2 id="usage">Usage</h2>
-<p><strong>Set item</strong></p>
-<p>To store information locally or using a session, you can use one of the methods below:</p>
-<pre><code class="language-php">// localStorage.setItem('$key', $value);
-BrowserStorage::local()-&gt;setItem($key, $value);
+                <p>Solital has the <code>Number</code> class to manipulate numbers. You can use one of the methods below:</p>
+<pre><code class="language-php">use Solital\Core\Resource\Number;
 
-//sessionStorage.setItem('$key', $value);
-BrowserStorage::session()-&gt;setItem($key, $value);
-</code></pre>
-<p><strong>Get item</strong></p>
-<p>To retrieve the information, use the <code>getItem()</code> method.</p>
-<pre><code class="language-php">BrowserStorage::local()-&gt;getItem($key);
-BrowserStorage::session()-&gt;getItem($key);
-</code></pre>
-<p><strong>Remove item</strong></p>
-<p>To remove an item, use the <code>removeItem()</code> method.</p>
-<pre><code class="language-php">BrowserStorage::local()-&gt;removeItem($key);
-BrowserStorage::session()-&gt;removeItem($key);
-</code></pre>
-<p><strong>Clear storage</strong></p>
-<p>To clear all storage, use the <code>clear()</code> or <code>clearAll()</code> method.</p>
-<pre><code class="language-php">BrowserStorage::local()-&gt;clear();
-BrowserStorage::session()-&gt;clear();
+// Reduce a number
+Number::reduce(1.2335566);
 
-// Clears local and session storage
-BrowserStorage::clearAll();
+// Format a number to currency
+Number::currency(12345678.90, 'BRL');
+
+// Format a numer to percentage
+Number::percent(0.123);
+
+// Spellout rule-based format
+Number::spell(12345678);
+
+//Format a value
+Number::format(12345678.9);
+
+// lamp a given number between two other numbers
+Number::clamp(-2, 1, 100);
 </code></pre>
                 
 
@@ -406,10 +388,10 @@ BrowserStorage::clearAll();
                 <section aria-label="breadcrumb" class="mt-4">
                   <ol class="breadcrumb">
                     
-                      <li class="breadcrumb-item"><a href="../wolf-template/">&#8592; Wolf Template</a></li>
+                      <li class="breadcrumb-item"><a href="../messages/">&#8592; Messages</a></li>
                     
                     
-                      <li class="breadcrumb-item"><a href="../collection/">Collection &#8594;</a></li>
+                      <li class="breadcrumb-item"><a href="../queue/">Queue &#8594;</a></li>
                     
                   </ol>
                 </section>
@@ -428,7 +410,7 @@ BrowserStorage::clearAll();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.013040+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.106770+00:00
               -->
 
           </section>

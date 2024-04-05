@@ -166,6 +166,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Controllers and Models
       </a>
     
+      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      </a>
+    
       <a href="../dependency-container/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Dependency Container
       </a>
@@ -176,6 +180,10 @@
     
       <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
+      </a>
+    
+      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
       </a>
     
       <a href="../schedule/" class="dashboard-nav-dropdown-item text-black">
@@ -202,8 +210,8 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
-      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
     
       <a href="../file-system/" class="dashboard-nav-dropdown-item text-black">
@@ -218,32 +226,28 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Logger
       </a>
     
-      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
-      </a>
-    
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
-      </a>
-    
-      <a href="../validation-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
-      </a>
-    
       <a href="../messages/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Messages
+      </a>
+    
+      <a href="../number/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Number
       </a>
     
       <a href="../queue/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
-      </a>
-    
       <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      </a>
+    
+      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      </a>
+    
+      <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
       </a>
     
       <a href="../mask/" class="dashboard-nav-dropdown-item text-black">
@@ -804,46 +808,46 @@ request()-&gt;setRewriteUrl('/my-rewrite-url');
 <h3 id="bootmanager-loading-routes-dynamically">Bootmanager: loading routes dynamically</h3>
 <p>Sometimes it can be necessary to keep urls stored in the database, file or similar. In this example, we want the url <code>/my-cat-is-beatiful</code> to load the route <code>/article/view/1</code> which the router knows, because it's defined in the <code>routes.php</code> file.</p>
 <p>To interfere with the router, we create a class that implements the <code>RouterBootManagerInterface</code> interface. This class will be loaded before any other rules in <code>routes.php</code> and allow us to "change" the current route, if any of our criteria are fulfilled (like coming from the url <code>/my-cat-is-beatiful</code>).</p>
-<pre><code class="language-php">use Solital\Core\Http\Request;
+<p>To create a bootmanager, run the command:</p>
+<pre><code class="language-bash">php vinci create:boot CustomRouterRules
+</code></pre>
+<p>All bootmanagers you create will be stored in the <code>app/BootManager/</code> folder.</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Solital\BootManager;
+
+use Solital\Core\Http\Request;
 use Solital\Core\Course\RouterBootManagerInterface;
 use Solital\Core\Course\Router;
 
 class CustomRouterRules implements RouterBootManagerInterface 
 {
-
     /**
      * Called when router is booting and before the routes is loaded.
      *
-     * @param \Solital\Core\Course\Router $router
-     * @param \Solital\Core\Http\Request $request
+     * @param Router $router
+     * @param Request $request
      */
-    public function boot(\Solital\Core\Course\Router $router, \Solital\Core\Http\Request $request): void
+    public function boot(Router $router, Request $request): void
     {
-
         $rewriteRules = [
             '/my-cat-is-beatiful' =&gt; '/article/view/1',
             '/horses-are-great'   =&gt; '/article/view/2',
         ];
 
         foreach ($rewriteRules as $url =&gt; $rule) {
-
             // If the current url matches the rewrite url, we use our custom route
 
             if ($request-&gt;getUri()-&gt;getPath() === $url) {
                 $request-&gt;setRewriteUrl($rule);
             }
         }
-
     }
-
 }
 </code></pre>
 <p>The above should be pretty self-explanatory and can easily be changed to loop through urls store in the database, file or cache.</p>
 <p>What happens is that if the current route matches the route defined in the index of our <code>$rewriteRules</code> array, we set the route to the array value instead.</p>
 <p>By doing this the route will now load the url <code>/article/view/1</code> instead of <code>/my-cat-is-beatiful</code>.</p>
-<p>The last thing we need to do, is to add our custom boot-manager to the <code>routes.php</code> file. You can create as many bootmanagers as you like and easily add them in your <code>routes.php</code> file.</p>
-<pre><code class="language-php">Course::addBootManager(new CustomRouterRules());
-</code></pre>
 <h3 id="adding-routes-manually">Adding routes manually</h3>
 <p>The <code>Course</code> class referenced in the previous example, is just a simple helper class that knows how to communicate with the <code>Router</code> class.
 If you are up for a challenge, want the full control or simply just want to create your own <code>Router</code> helper class, this example is for you.</p>
@@ -887,7 +891,6 @@ class Router extends Course {
         parent::start();
 
     }
-
 }
 </code></pre>
 <hr />
@@ -918,7 +921,6 @@ Course::group(['middleware' =&gt; \Demo\Middlewares\Site::class, 'exceptionHandl
     /**
      * Restful resource (see IRestController interface for available methods)
      */
-
     Course::resource('/rest', ControllerRessource::class);
 
     /**
@@ -933,9 +935,7 @@ Course::group(['middleware' =&gt; \Demo\Middlewares\Site::class, 'exceptionHandl
      *
      * etc.
      */
-
     Course::controller('/animals', ControllerAnimals::class);
-
 });
 
 Course::get('/page/404', 'ControllerPage@notFound', ['as' =&gt; 'page.notfound']);
@@ -973,7 +973,7 @@ Course::get('/page/404', 'ControllerPage@notFound', ['as' =&gt; 'page.notfound']
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-03-16 17:26:04.199992+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.106770+00:00
               -->
 
           </section>

@@ -166,6 +166,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Controllers and Models
       </a>
     
+      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      </a>
+    
       <a href="../dependency-container/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Dependency Container
       </a>
@@ -176,6 +180,10 @@
     
       <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
+      </a>
+    
+      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
       </a>
     
       <a href="../schedule/" class="dashboard-nav-dropdown-item text-black">
@@ -202,8 +210,8 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
-      <a href="../date-and-time/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Date and time
+      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
     
       <a href="../file-system/" class="dashboard-nav-dropdown-item text-black">
@@ -218,32 +226,28 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Logger
       </a>
     
-      <a href="../mailer-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Mailer
-      </a>
-    
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
-      </a>
-    
-      <a href="../validation-component/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
-      </a>
-    
       <a href="../messages/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Messages
+      </a>
+    
+      <a href="../number/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Number
       </a>
     
       <a href="../queue/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
-      </a>
-    
       <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      </a>
+    
+      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      </a>
+    
+      <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Validation
       </a>
     
       <a href="../mask/" class="dashboard-nav-dropdown-item text-black">
@@ -429,6 +433,10 @@
                     </li>
                   
                     <li id="bullet-childern-item">
+                      <a href="#uuids" class="menu-children-item">UUIDs</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
                       <a href="#timestamps" class="menu-children-item">Timestamps</a>
                     </li>
                   
@@ -467,9 +475,16 @@
                       <a href="#pagination" class="menu-main-item">Pagination</a>
                     </li>
                   
+                    <li id="bullet-childern-item">
+                      <a href="#wolf-template" class="menu-children-item">Wolf Template</a>
+                    </li>
                   
-                    <li id="bullet-item">
-                      <a href="#custom-pagination" class="menu-main-item">Custom Pagination</a>
+                    <li id="bullet-childern-item">
+                      <a href="#custom-pagination" class="menu-children-item">Custom Pagination</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#customizing-arrows-css" class="menu-children-item">Customizing arrows CSS</a>
                     </li>
                   
                   
@@ -493,7 +508,7 @@
                 
                 <h2 id="version">Version</h2>
 <p>Katrina ORM is currently at version <strong>2.x</strong>. To read documentation for previous versions choose one of the links below.</p>
-<p><a href="../katrina1/">1.x</a></p>
+<p><a href="../katrina-1.0/">1.x</a></p>
 <h2 id="getting-started">Getting Started</h2>
 <p>Katrina ORM is a component that brings the object-oriented application development paradigm closer to the relational database paradigm. It helps to carry out common routines, such as the famous CRUD (create, read, edit and delete), in addition to having a data paging system.</p>
 <p>Katrina ORM uses the Active Record standard to manipulate the data in the database.</p>
@@ -551,12 +566,11 @@ use Katrina\Katrina;
 
 class User extends Katrina
 {
-
 }
 </code></pre>
 <h2 id="changing-default-fields">Changing default fields</h2>
 <p>By default, your class table name is the class name itself, and the primary key name is <code>id</code>.</p>
-<p>You can change these settings using the <code>$table</code> and <code>$id</code> variables.</p>
+<p>You can change these settings using the <code>$table</code> and <code>$id</code> properties.</p>
 <pre><code class="language-php">&lt;?php
 
 namespace Solital\Components\Model;
@@ -573,19 +587,17 @@ class User extends Katrina
      *  @var null|string 
      */
     protected ?string $id = &quot;id_user&quot;;
-
-    /**
-     *  @var null|bool
-     */
-    protected bool $timestamp = false; 
 }
 </code></pre>
 <h2 id="select">SELECT</h2>
 <p>To list all fields in the table, use <code>all()</code> as shown in the previous example.</p>
 <pre><code class="language-php">User::all();
 </code></pre>
+<p><strong>FIND</strong></p>
 <p>To list a single value, use <code>find()</code> method;</p>
 <pre><code class="language-php">User::find(2);
+
+Users::findFirst(); // Returns the first value in the table
 </code></pre>
 <p>Or, use the <code>select</code> method:</p>
 <pre><code class="language-php">/** 
@@ -603,6 +615,10 @@ User::select()-&gt;where('id', 2)-&gt;getUnique();
  */
 User::select(&quot;name&quot;)-&gt;get();
 </code></pre>
+<p>If you need to raise an exception if no value is returned, use the <code>findwithException</code> method.</p>
+<pre><code class="language-php">User::findwithException(2);
+</code></pre>
+<p><strong>LATEST</strong></p>
 <p>You can return the latest values from the database in descending order using the <code>latest</code> method:</p>
 <pre><code class="language-php">User::latest()-&gt;get();
 </code></pre>
@@ -718,7 +734,7 @@ User::customQuery(&quot;SELECT * FROM users&quot;, true);
 <h3 id="select-inside-select">SELECT inside SELECT</h3>
 <p>Some SQL queries need to have multiple SELECTs, and sometimes those SELECTs are inside other SELECTs. If you need such a query, follow the example:</p>
 <pre><code class="language-php">$sql = User::select(null, &quot;nome&quot;)-&gt;where(&quot;nome&quot;, &quot;brenno&quot;)-&gt;rawQuery();
-$result =  User::select(null, &quot;nome, idade&quot;)-&gt;where(&quot;nome&quot;, Functions::subquery($sql))-&gt;get();
+$result = User::select(null, &quot;nome, idade&quot;)-&gt;where(&quot;nome&quot;, Functions::subquery($sql))-&gt;get();
 
 var_dump($result);
 </code></pre>
@@ -856,6 +872,40 @@ $user-&gt;save();
     -&gt;serial('id_user')-&gt;primary()
     # ...
 </code></pre>
+<h3 id="uuids">UUIDs</h3>
+<p>On certain occasions it is necessary to generate a unique identifier for each record. These identifiers are called UUID (universally unique identifiers).</p>
+<p>To create a field in a table that will receive a UUID, use the <code>uuid()</code> method. This method will generate a field of binary type.</p>
+<pre><code class="language-php">User::createTable(&quot;your_table_name&quot;)
+    -&gt;uuid('id')-&gt;primary()
+    # ...
+</code></pre>
+<p>When creating a field in the table that will receive a UUID and be defined as the primary key, you must enable increment in the class.</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Solital\Components\Model;
+use Katrina\Katrina;
+
+class User extends Katrina
+{
+    protected ?bool $uuid_increment = true;
+}
+</code></pre>
+<p>If you use the <code>insert()</code> method instead of the standard Active Record to save the data in the table, you must pass the UUID manually. To do this, use the <code>uuidToBin()</code> method.</p>
+<pre><code class="language-php">use Katrina\Functions\Functions;
+
+User::insert([
+    'id' =&gt; Functions::uuidToBin(),
+    'name' =&gt; 'Harvey Specter',
+    'age' =&gt; 40,
+    'email' =&gt; 'harvey@pearsonspecterlitt.com'
+]);
+</code></pre>
+<p>When using the <code>uuidToBin</code> method, the UUID is converted to binary. When returning data and converting back to UUID, use the <code>binToUuid()</code> method.</p>
+<pre><code class="language-php">foreach(Users::all() as $user) {
+    echo Functions::binToUuid($user-&gt;id) . PHP_EOL;
+}
+</code></pre>
+<p>Remember that Katrina ORM uses <a href="https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-4">UUID in version 4</a>.</p>
 <h3 id="timestamps">Timestamps</h3>
 <p>If you want to change the name of the <code>created_at</code> and <code>updated_at</code> columns, use the properties below:</p>
 <pre><code class="language-php">&lt;?php
@@ -871,9 +921,7 @@ class User extends Katrina
 </code></pre>
 <p>You can also rename columns when creating a table in the database using the <code>createdUpdatedAt</code> method.</p>
 <pre><code class="language-php">// ...
-
 -&gt;createdUpdatedAt('created_date', 'updated_date')
-
 // ...
 </code></pre>
 <h3 id="list-tables">List tables</h3>
@@ -959,8 +1007,7 @@ $values-&gt;getArrows()
 <p>To use the WHERE clause, use the fourth parameter as shown below.</p>
 <pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3, null, &quot;status=true&quot;);
 </code></pre>
-<p><strong>Transactions</strong></p>
-<p><strong>Wolf Template</strong></p>
+<h3 id="wolf-template">Wolf Template</h3>
 <p>Data pagination is widely used in project templates. You can integrate pagination into Wolf Template as follows:</p>
 <pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3);
 
@@ -1051,12 +1098,12 @@ return view('home', [
 </table>
 
 <p><span class="katrina-pag">First</span> 2 <span class="katrina-pag">3 Last</span></p>
-<h2 id="custom-pagination">Custom Pagination</h2>
+<h3 id="custom-pagination">Custom Pagination</h3>
 <p>The <code>pagination()</code> method uses a basic SELECT statement. If you need to use a much more complex SELECT, consider using the <code>customPagination()</code> method.</p>
 <pre><code class="language-php">$values = (new User)-&gt;customPagination(&quot;SELECT created_at, order_status, idSession, SUM(idOrder) AS idOrder FROM `tb_order` 
 GROUP BY created_at, order_status, idSession&quot;, 3);
 </code></pre>
-<p><strong>Customizing arrows CSS</strong></p>
+<h3 id="customizing-arrows-css">Customizing arrows CSS</h3>
 <p>You can customize the look of the arrows through the classes <code>pagination_first_item</code>, <code>pagination_atual_item</code>, <code>pagination_others_itens</code> and <code>pagination_last_item</code>.</p>
 <p>Below is a customization to serve as an example:</p>
 <pre><code class="language-html">.pagination_atual_item {
@@ -1266,7 +1313,7 @@ User::connection('pgsql')::select()-&gt;get();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-03-16 17:26:04.168749+00:00
+              Docs Build Date UTC : 2024-04-05 12:02:21.075552+00:00
               -->
 
           </section>
