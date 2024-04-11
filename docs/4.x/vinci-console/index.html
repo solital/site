@@ -379,7 +379,35 @@
                   
                   
                     <li id="bullet-item">
-                      <a href="#displaying-messages" class="menu-main-item">Displaying messages</a>
+                      <a href="#data-output-to-the-console" class="menu-main-item">Data output to the console</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#skip-lines" class="menu-children-item">Skip lines</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#stop-script-execution" class="menu-children-item">Stop script execution</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#customize-message-color" class="menu-children-item">Customize message color</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#displaying-banners" class="menu-children-item">Displaying banners</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#debug-messages" class="menu-children-item">Debug messages</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#clearing-console-messages" class="menu-children-item">Clearing console messages</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#checking-closure-time" class="menu-children-item">Checking closure time</a>
                     </li>
                   
                   
@@ -688,25 +716,96 @@ $input_output-&gt;confirmDialog('What you want?', 'Y', 'N', false)-&gt;confirm(f
 <p>The available colors are: <code>green</code>, <code>yellow</code> and <code>blue</code>.</p>
 <pre><code class="language-php">$input_output = new InputOutput('green'); // green - yellow - blue
 </code></pre>
-<h2 id="displaying-messages">Displaying messages</h2>
-<p>To display a message on the command line, use the <code>MessageTrait</code> trait. First, you will define a message using one of the methods below:</p>
-<pre><code class="language-php">use Solital\Core\Console\MessageTrait;
+<h2 id="data-output-to-the-console">Data output to the console</h2>
+<p>To display data in the console, use the <code>ConsoleOutput</code> class. Below are some of the main methods you can use to display messages in a personalized way.</p>
+<pre><code class="language-php">use Solital\Core\Console\Output\ConsoleOutput;
 
-$this-&gt;success()    // Display a success message
-$this-&gt;info()       // Display an information message
-$this-&gt;warning()    // Displays a warning message
-$this-&gt;error()      // Displays an error message
-$this-&gt;line()       // Display a standard message
+ConsoleOutput::success($message, $space);    // Display a success message
+ConsoleOutput::info($message, $space);       // Display an information message
+ConsoleOutput::warning($message, $space);    // Displays a warning message
+ConsoleOutput::error($message, $space);      // Displays an error message
+ConsoleOutput::line($message, $space);       // Display a standard message
 </code></pre>
+<ul>
+<li><strong>$message</strong>: in the first parameter, you will define the message that will be displayed in the console.</li>
+<li><strong>$space (optional)</strong>: if <code>true</code>, adds a margin to the left of the message.</li>
+</ul>
 <p>After that, to display the message on the command line, use the <code>print()</code> method:</p>
-<pre><code class="language-php">$this-&gt;success(&quot;My message&quot;)-&gt;print();
+<pre><code class="language-php">ConsoleOutput::success(&quot;My message&quot;)-&gt;print();
 </code></pre>
-<p>There are still other methods to complement your message. The <code>break()</code> method skips a line, while the <code>exit()</code> method stops code execution.</p>
+<h3 id="skip-lines">Skip lines</h3>
+<p>If you need to skip some lines in the console, you can use the <code>break()</code> method. This method accepts the value <code>true</code> and also <code>int</code> values.</p>
 <pre><code class="language-php">// Skip a line
-$this-&gt;success(&quot;My message&quot;)-&gt;print()-&gt;break()-&gt;exit();
+ConsoleOutput::success(&quot;My message&quot;)-&gt;print()-&gt;break();
 
 // Skip two lines
-$this-&gt;success(&quot;My message&quot;)-&gt;print()-&gt;break(true)-&gt;exit();
+ConsoleOutput::success(&quot;My message&quot;)-&gt;print()-&gt;break(true);
+
+// Skip three lines. Use an INT value
+ConsoleOutput::success(&quot;My message&quot;)-&gt;print()-&gt;break(3);
+</code></pre>
+<h3 id="stop-script-execution">Stop script execution</h3>
+<p>To stop script execution when displaying a message on the console, use the <code>exit()</code> method.</p>
+<pre><code class="language-php">ConsoleOutput::success(&quot;My message&quot;)-&gt;print()-&gt;exit();
+</code></pre>
+<p>This method uses the native PHP function <code>exit()</code>. You can also add a message to this function.</p>
+<pre><code class="language-php">ConsoleOutput::success(&quot;My message&quot;)-&gt;print()-&gt;exit(&quot;My exit message&quot;);
+</code></pre>
+<h3 id="customize-message-color">Customize message color</h3>
+<p>If you want to add a custom color to your message, you must use the <code>message</code> method. You must make use of the Enum <code>ColorsEnum</code>. This enum has forground and background colors.</p>
+<p>However, if you want to use any type of color, then you must use the color number instead of the Enum.</p>
+<pre><code class="language-php">use Solital\Core\Console\Output\ColorsEnum;
+
+// With ColorsEnum
+ConsoleOutput::message(&quot;My message&quot;, ColorsEnum::LIGHT_BLUE)-&gt;print();
+
+// With custom color
+ConsoleOutput::message(&quot;My message&quot;, 49)-&gt;print();
+</code></pre>
+<p>To display all foreground and background colors that do not exist in <code>ColorsEnum</code>, you can use the methods below.</p>
+<pre><code class="language-php">echo ConsoleOutput::getForegroundColors() . PHP_EOL;
+echo ConsoleOutput::getBackgroundColors();
+</code></pre>
+<h3 id="displaying-banners">Displaying banners</h3>
+<p>Banners are large messages intended to display important information. Use the <code>banner()</code> method.</p>
+<pre><code class="language-php">ConsoleOutput::banner(&quot;My message&quot;, ColorsEnum::BG_BLUE)-&gt;print();
+</code></pre>
+<p>If you need to increase or decrease the banner size, change the third parameter.</p>
+<pre><code class="language-php">ConsoleOutput::banner(&quot;My message&quot;, ColorsEnum::BG_BLUE, 40)-&gt;print();
+</code></pre>
+<p><strong>NOTE:</strong> If you use <code>ColorsEnum</code>, use values that start with <code>BG_</code>.</p>
+<h3 id="debug-messages">Debug messages</h3>
+<p>There is a different type of display message used for debugging using the <code>debugMessage()</code> method.</p>
+<pre><code class="language-php">ConsoleOutput::debugMessage(&quot;My message&quot;, $title, $color)-&gt;print();
+</code></pre>
+<ul>
+<li><strong>$title (optional)</strong>: The title that will be displayed indicating the debug value.</li>
+<li><strong>$color (optional)</strong>: color using <code>ColorsEnum</code> or an integer number.</li>
+</ul>
+<p><strong>NOTE:</strong> If you use <code>ColorsEnum</code>, use values that start with <code>BG_</code>.</p>
+<h3 id="clearing-console-messages">Clearing console messages</h3>
+<p>To clear a message from the console, you can use the <code>clear()</code> method, informing, if necessary, the time it will take (in seconds) for the message to be cleared.</p>
+<pre><code class="language-php">ConsoleOutput::success(&quot;My message&quot;)-&gt;print();
+
+// Without time
+ConsoleOutput::clear(); 
+
+// With time
+ConsoleOutput::clear(2);
+</code></pre>
+<h3 id="checking-closure-time">Checking closure time</h3>
+<p>If you want to display the execution time of a method or function in the console, you can use the <code>status()</code> method. This method displays whether a method or function was executed correctly or whether there was an error through a Boolean return. If the return is not Boolean, a simple message is displayed.</p>
+<p>You must add in the first parameter the name of the task that the method or function is doing. For example, if you are saving a user to the database, you can add <code>creating_user</code>. The second parameter will be the closure.</p>
+<p>To display the status, you must use the <code>printStatus()</code> method.</p>
+<pre><code class="language-php">ConsoleOutput::status('creating_user', function () {
+    return true;
+})-&gt;printStatus();
+</code></pre>
+<p>In the previous example, the return is <code>true</code>. Therefore, an <code>OK</code> will be displayed in the console. If the return is <code>false</code>, an <code>ERROR</code> will be displayed.</p>
+<p>To customize these messages, you must add values to the parameters of the <code>printStatus()</code> method. You can also disable the script time display.</p>
+<pre><code class="language-php">ConsoleOutput::status('creating_user', function () {
+    return true;
+})-&gt;printStatus('accept', 'not accept', false);
 </code></pre>
 <h2 id="progress-bar">Progress Bar</h2>
 <p>Progressbar has customizable names, colors, datatypes, error handling, and more.</p>
@@ -902,7 +1001,7 @@ Table::formattedRowData($values, 50, true);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.138012+00:00
+              Docs Build Date UTC : 2024-04-11 17:43:55.398569+00:00
               -->
 
           </section>
