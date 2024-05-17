@@ -371,8 +371,9 @@
                       <a href="#installation" class="menu-children-item">Installation</a>
                     </li>
                   
-                    <li id="bullet-childern-item">
-                      <a href="#settings" class="menu-children-item">Settings</a>
+                  
+                    <li id="bullet-item">
+                      <a href="#settings" class="menu-main-item">Settings</a>
                     </li>
                   
                     <li id="bullet-childern-item">
@@ -391,15 +392,15 @@
                   
                   
                     <li id="bullet-item">
-                      <a href="#select" class="menu-main-item">SELECT</a>
+                      <a href="#listing-values-from-a-table" class="menu-main-item">Listing values from a table</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#using-inner-join" class="menu-children-item">Using INNER JOIN</a>
+                      <a href="#select-query" class="menu-children-item">SELECT query</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#custom-select" class="menu-children-item">Custom SELECT</a>
+                      <a href="#inner-join-query" class="menu-children-item">INNER JOIN query</a>
                     </li>
                   
                     <li id="bullet-childern-item">
@@ -408,19 +409,29 @@
                   
                   
                     <li id="bullet-item">
+                      <a href="#creating-and-updating-data" class="menu-main-item">Creating and updating data</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#insert-query" class="menu-children-item">INSERT query</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#update-query" class="menu-children-item">UPDATE query</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#deleting-data" class="menu-main-item">Deleting data</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
                       <a href="#functions" class="menu-main-item">Functions</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#insert" class="menu-children-item">INSERT</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#update" class="menu-children-item">UPDATE</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#delete" class="menu-children-item">Delete</a>
+                      <a href="#custom-functions" class="menu-children-item">Custom functions</a>
                     </li>
                   
                   
@@ -449,6 +460,10 @@
                     </li>
                   
                     <li id="bullet-childern-item">
+                      <a href="#drop-table" class="menu-children-item">Drop table</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
                       <a href="#alter-table" class="menu-children-item">Alter table</a>
                     </li>
                   
@@ -473,6 +488,14 @@
                   
                     <li id="bullet-item">
                       <a href="#pagination" class="menu-main-item">Pagination</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#pagination-with-other-table-inner-join" class="menu-children-item">Pagination with other table (INNER JOIN)</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#where-clause" class="menu-children-item">WHERE clause</a>
                     </li>
                   
                     <li id="bullet-childern-item">
@@ -521,7 +544,7 @@
 <p>Katrina ORM is already installed by default in Solital. But if you are going to install in another project, use the command below to download via Composer.</p>
 <pre><code>composer require solital/katrina
 </code></pre>
-<h3 id="settings">Settings</h3>
+<h2 id="settings">Settings</h2>
 <p>In Solital:</p>
 <pre><code class="language-bash"># DATABASE CONFIG
 DB_DRIVE=your_drive
@@ -589,7 +612,8 @@ class User extends Katrina
     protected ?string $id = &quot;id_user&quot;;
 }
 </code></pre>
-<h2 id="select">SELECT</h2>
+<h2 id="listing-values-from-a-table">Listing values from a table</h2>
+<h3 id="select-query">SELECT query</h3>
 <p>To list all fields in the table, use <code>all()</code> as shown in the previous example.</p>
 <pre><code class="language-php">User::all();
 </code></pre>
@@ -626,7 +650,8 @@ User::select(&quot;name&quot;)-&gt;get();
 <pre><code class="language-php">User::latest('users')-&gt;get();
 </code></pre>
 <p><strong>WHERE</strong></p>
-<p>If you need the <code>WHERE</code> clause, use <code>where()</code> method.</p>
+<p>The <code>WHERE</code> clause is used to filter records.</p>
+<p>It is used to extract only those records that fulfill a specified condition.</p>
 <pre><code class="language-php">/** 
  * Katrina will look for a record that has `foo` in the table.
 */
@@ -642,49 +667,43 @@ User::select()-&gt;where(&quot;age&quot;, 10, &quot;&gt;&quot;)-&gt;get();
 */
 User::select()-&gt;where(&quot;age&quot;, 10, &quot;&lt;&quot;)-&gt;get();
 </code></pre>
-<p><strong>AND/OR</strong></p>
-<p>If there are more conditions for the <code>where</code> method, you can make use of the <code>and/or</code> methods:</p>
-<pre><code class="language-php">/** 
- * With AND clause
-*/
-User::select()-&gt;where(&quot;brand&quot;, 'visa')-&gt;and(&quot;cvv&quot;, '502')-&gt;get();
-
-/**
- * With OR clause
- */
-User::select()-&gt;where(&quot;brand&quot;, 'visa')-&gt;or(&quot;cvv&quot;, '502')-&gt;get();
-</code></pre>
-<p><strong>Multiple WHERE</strong></p>
 <p>To save time and avoid using the <code>and</code> method, you can pass an array as a parameter in the <code>where</code> method with multiple conditions.</p>
 <pre><code class="language-php">User::select()-&gt;where([
-  'brand', 'visa',
-  'cvv', '502'
+  'name', 'foo',
+  'age', 10
 ])-&gt;get();
 </code></pre>
-<p><strong>LIKE and BETWEEN</strong></p>
-<p>You can combine the <code>where</code> method with other search methods such as <code>like</code> and <code>between</code>.</p>
-<pre><code class="language-php">/** 
- * With LIKE clause
-*/
-User::select()-&gt;where(&quot;name&quot;)-&gt;like(&quot;%foo%&quot;)-&gt;get();
-
-/** 
- * With BETWEEN clause
-*/
-User::select()-&gt;where(&quot;age&quot;)-&gt;between(10, 22)-&gt;get();
+<p><strong>AND</strong></p>
+<p>The <code>AND</code> operator displays a record if all the conditions separated by <code>AND</code> are <code>TRUE</code>.</p>
+<pre><code class="language-php">User::select()-&gt;where(&quot;brand&quot;, 'visa')-&gt;and(&quot;cvv&quot;, '502')-&gt;get();
+</code></pre>
+<p><strong>OR</strong></p>
+<p>The <code>OR</code> operator displays a record if any of the conditions separated by <code>OR</code> is <code>TRUE</code>.</p>
+<pre><code class="language-php">User::select()-&gt;where(&quot;brand&quot;, 'visa')-&gt;or(&quot;cvv&quot;, '502')-&gt;get();
+</code></pre>
+<p><strong>LIKE</strong></p>
+<p>Used in a <code>WHERE</code> clause to search for a specified pattern in a column.</p>
+<pre><code class="language-php">User::select()-&gt;where(&quot;name&quot;)-&gt;like(&quot;%foo%&quot;)-&gt;get();
+</code></pre>
+<p><strong>BETWEEN</strong></p>
+<p>Selects values within a given range. The values can be numbers, text, or dates.</p>
+<pre><code class="language-php">User::select()-&gt;where(&quot;age&quot;)-&gt;between(10, 22)-&gt;get();
 </code></pre>
 <p><strong>LIMIT</strong></p>
+<p>Used to specify the number of records to return.</p>
 <pre><code class="language-php">User::select()-&gt;limit(0, 3)-&gt;get();
 </code></pre>
 <p><strong>ORDER BY</strong></p>
+<p>Used to sort the result-set in ascending or descending order.</p>
 <pre><code class="language-php">User::select()-&gt;order(&quot;name&quot;)-&gt;get();
 </code></pre>
 <p>By default, the result will always return ascending. To return values descending, use <code>false</code> in the second parameter.</p>
 <pre><code class="language-php">User::select()-&gt;order(&quot;name&quot;, false)-&gt;get();
 </code></pre>
 <p><strong>GROUP BY</strong></p>
+<p>The <code>GROUP BY</code> statement groups rows that have the same values into summary rows, like "find the number of customers in each country".</p>
 <p>The <code>group by</code> SQL command requires the use of a function. Use the <code>group()</code> method together with the <code>Functions</code> class (see <a href="#functions">here</a>).</p>
-<pre><code class="language-php">User::select(null, &quot;name, &quot; . Functions::count('*', 'qtd'))-&gt;group(&quot;name&quot;)-&gt;get();
+<pre><code class="language-php">User::select(&quot;name, &quot; . Functions::count('*', 'qtd'))-&gt;group(&quot;name&quot;)-&gt;get();
 </code></pre>
 <p><strong>COUNT</strong></p>
 <p>The <code>count</code> method returns the total number of values in a table.</p>
@@ -697,7 +716,7 @@ User::count(&quot;email&quot;);
 // `Email` column with WHERE clause
 User::count(&quot;email&quot;, &quot;email='solital@gmail.com'&quot;);
 </code></pre>
-<h3 id="using-inner-join">Using INNER JOIN</h3>
+<h3 id="inner-join-query">INNER JOIN query</h3>
 <p>The <code>innerJoin()</code> method returns the values of two tables that have a foreign key.</p>
 <p>The first parameter represents the table containing the foreign key. The second parameter represents the <code>id</code> of the foreign key.</p>
 <pre><code class="language-php">User::select()
@@ -719,86 +738,16 @@ User::count(&quot;email&quot;, &quot;email='solital@gmail.com'&quot;);
     -&gt;where(&quot;table1.phone&quot;, 123123123)
     -&gt;get();
 </code></pre>
-<h3 id="custom-select">Custom SELECT</h3>
-<p>You can create a custom SELECT statement. To do this, use the function <code>customQuery</code>.</p>
-<pre><code class="language-php">/** 
- * Fetch Only
- */
-User::customQuery(&quot;SELECT * FROM users&quot;);
-
-/** 
- * Fetch All
- */
-User::customQuery(&quot;SELECT * FROM users&quot;, true);
-</code></pre>
 <h3 id="select-inside-select">SELECT inside SELECT</h3>
 <p>Some SQL queries need to have multiple SELECTs, and sometimes those SELECTs are inside other SELECTs. If you need such a query, follow the example:</p>
-<pre><code class="language-php">$sql = User::select(null, &quot;nome&quot;)-&gt;where(&quot;nome&quot;, &quot;brenno&quot;)-&gt;rawQuery();
-$result = User::select(null, &quot;nome, idade&quot;)-&gt;where(&quot;nome&quot;, Functions::subquery($sql))-&gt;get();
+<pre><code class="language-php">$sql = User::select(&quot;name&quot;)-&gt;where(&quot;name&quot;, &quot;solital&quot;)-&gt;rawQuery();
+$result = User::select(&quot;name, age&quot;)-&gt;where(&quot;name&quot;, Functions::subquery($sql))-&gt;get();
 
 var_dump($result);
 </code></pre>
 <p>The <code>rawQuery()</code> function will return an SQL string (you can use a <code>var_dump()</code> to parse the returned string). Then, to use that SQL string inside another query, use the <code>subquery()</code> function.</p>
-<h2 id="functions">Functions</h2>
-<p>Katrina 2 supports SQL functions. You can use a function in an SQL query using the <code>Function</code> Method:</p>
-<pre><code class="language-php">use Katrina\Functions\Functions;
-
-User::select(null, &quot;name, &quot; . Functions::count('*', 'qtd'))-&gt;group(&quot;name&quot;)-&gt;get();
-</code></pre>
-<p>Below is a list of all the functions present in Katrina ORM:</p>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Aggregate Functions</th>
-      <th scope="col">Date Functions</th>
-      <th scope="col">Math Functions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><span class="cmd-vinci">avg($value)</span></td>
-      <td><span class="cmd-vinci">now()</span></td>
-      <td><span class="cmd-vinci">abs($value)</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">count($expression = "*", $as = "")</span></td>
-      <td><span class="cmd-vinci">curdate()</span></td>
-      <td><span class="cmd-vinci">sum($value)</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">max($value)</span></td>
-      <td><span class="cmd-vinci">date($value)</span></td>
-      <td><span class="cmd-vinci">truncate($number, $decimal_places)</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">-</span></td>
-      <td><span class="cmd-vinci">hour($value)</span></td>
-      <td><span class="cmd-vinci">-</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">-</span></td>
-      <td><span class="cmd-vinci">month($value)</span></td>
-      <td><span class="cmd-vinci">-</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">-</span></td>
-      <td><span class="cmd-vinci">datediff($first_date, $second_date)</span></td>
-      <td><span class="cmd-vinci">-</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">-</span></td>
-      <td><span class="cmd-vinci">day($date = null)</span></td>
-      <td><span class="cmd-vinci">-</span></td>
-    </tr>
-    <tr>
-      <td><span class="cmd-vinci">-</span></td>
-      <td><span class="cmd-vinci">currentTimestamp()</span></td>
-      <td><span class="cmd-vinci">-</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="insert">INSERT</h3>
+<h2 id="creating-and-updating-data">Creating and updating data</h2>
+<h3 id="insert-query">INSERT query</h3>
 <p>Katrina uses the ActiveRecord standard to insert and update database data. However, if you don't want to use the ActiveRecord pattern, you can use the <code>insert()</code> and <code>update()</code> methods.</p>
 <p><strong>With ActiveRecord</strong></p>
 <p>To insert data in the table, you must use the column name as a value. If your table has <code>name</code>, <code>age</code> and <code>email</code> columns, then the values should be used following that same sequence.</p>
@@ -826,7 +775,7 @@ $user-&gt;save();
 
 var_dump($res);
 </code></pre>
-<h3 id="update">UPDATE</h3>
+<h3 id="update-query">UPDATE query</h3>
 <p><strong>With ActiveRecord</strong></p>
 <p>The process for updating a record in the table is very similar to inserting a record. However, you need to specify the <code>id</code> of your table:</p>
 <pre><code class="language-php">$user = new User();
@@ -844,12 +793,98 @@ $user-&gt;save();
     'email' =&gt; 'harvey@specterlitt.com'
 ])-&gt;where('id', 1)-&gt;saveUpdate();
 </code></pre>
-<h3 id="delete">Delete</h3>
+<h2 id="deleting-data">Deleting data</h2>
 <p>To delete a record from the table, use the <code>delete()</code> method.</p>
 <pre><code class="language-php">User::delete('id', 2);
 </code></pre>
 <p>If you want to delete a row that has a foreign key in another table, the <code>$safe_mode</code> parameter must be changed to <code>false</code>:</p>
 <pre><code class="language-php">User::delete('id', 2, false);
+</code></pre>
+<h2 id="functions">Functions</h2>
+<p>Katrina 2 supports SQL functions. You can use a function in an SQL query using the <code>Function</code> Method:</p>
+<pre><code class="language-php">use Katrina\Functions\Functions;
+
+User::select(&quot;name, &quot; . Functions::count('*', 'qtd'))-&gt;group(&quot;name&quot;)-&gt;get();
+</code></pre>
+<p>When using a function, you can rename the table name when viewing the data using the <code>$as</code> parameter.</p>
+<pre><code class="language-php">Functions::count(as: 'qtd');
+Functions::concat(as: 'result');
+Functions::trim(as: 'string');
+
+//...
+</code></pre>
+<p>Below is a list of all the functions present in Katrina ORM:</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Aggregate Functions</th>
+      <th scope="col">Date Functions</th>
+      <th scope="col">Math Functions</th>
+      <th scope="col">String Functions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="cmd-vinci">avg()</span></td>
+      <td><span class="cmd-vinci">now()</span></td>
+      <td><span class="cmd-vinci">abs()</span></td>
+      <td><span class="cmd-vinci">concat()</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">count()</span></td>
+      <td><span class="cmd-vinci">curdate()</span></td>
+      <td><span class="cmd-vinci">round()</span></td>
+      <td><span class="cmd-vinci">ltrim()</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">max()</span></td>
+      <td><span class="cmd-vinci">date()</span></td>
+      <td><span class="cmd-vinci">truncate()</span></td>
+      <td><span class="cmd-vinci">rtrim()</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">min()</span></td>
+      <td><span class="cmd-vinci">hour()</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">trim()</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">sum()</span></td>
+      <td><span class="cmd-vinci">day()</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">groupConcat()</span></td>
+      <td><span class="cmd-vinci">month()</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">year()</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">datediff()</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">currentTimestamp()</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+      <td><span class="cmd-vinci">-</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="custom-functions">Custom functions</h3>
+<p>If the function you want does not exist or has not yet been implemented in the Katrina ORM, you can use the <code>custom()</code> method.</p>
+<p>In the first parameter, you must enter the name of the SQL function. In the second parameter, the value of this function. And in the third parameter, you can rename the table when returning the data.</p>
+<pre><code class="language-php">Functions::custom('sum', '*', 'result');
 </code></pre>
 <h2 id="manipulating-tables">Manipulating tables</h2>
 <h3 id="create-a-new-table">Create a new table</h3>
@@ -929,64 +964,74 @@ class User extends Katrina
 <pre><code class="language-php">User::listTables();
 </code></pre>
 <h3 id="list-columns">List columns</h3>
-<p>To list the columns of a table, use the <code>describeTable()</code> method passing as a parameter the name of your table.</p>
-<pre><code class="language-php">User::describeTable('your_table');
+<p>To list the columns of a table, use the <code>describeTable()</code> method.</p>
+<pre><code class="language-php">User::describeTable();
+</code></pre>
+<h3 id="drop-table">Drop table</h3>
+<p>If it is necessary to drop the table, use the <code>dropTable()</code> method.</p>
+<pre><code class="language-php">User::dropTable();
 </code></pre>
 <h3 id="alter-table">Alter table</h3>
 <p>The <code>alter()</code> method performs the procedures of adding, changing and deleting a field from the database table.</p>
 <p><strong>Add new field</strong></p>
 <p>Use <code>add()</code> method together with the data type to add a new field.</p>
-<pre><code class="language-php">(new User)-&gt;alter(&quot;your_table&quot;)-&gt;varchar(&quot;username&quot;, 20)-&gt;add();
+<pre><code class="language-php">User::alter()-&gt;varchar(&quot;username&quot;, 20)-&gt;add();
 </code></pre>
 <p><strong>Drop column</strong></p>
 <p>Use the <code>drop()</code> method to delete a column from the table.</p>
-<pre><code class="language-php">(new User)-&gt;alter(&quot;your_table&quot;)-&gt;drop(&quot;username&quot;);
+<pre><code class="language-php">User::alter()-&gt;drop(&quot;username&quot;);
 </code></pre>
 <p><strong>Modify column</strong></p>
 <p>Use the modify SQL with the <code>modify()</code> method.</p>
-<pre><code class="language-php">(new User)-&gt;alter(&quot;your_table&quot;)-&gt;varchar(&quot;name&quot;, 100)-&gt;modify();
+<pre><code class="language-php">User::alter()-&gt;varchar(&quot;name&quot;, 100)-&gt;modify();
 </code></pre>
 <p><strong>Rename table</strong></p>
 <p>Use the <code>rename()</code> method to rename a database table.</p>
-<pre><code class="language-php">(new User)-&gt;alter(&quot;your_table_name&quot;)-&gt;rename(&quot;new_table_name&quot;);
+<pre><code class="language-php">User::alter()-&gt;rename(&quot;new_table_name&quot;);
 </code></pre>
 <h3 id="adding-foreign-key">Adding foreign key</h3>
 <p>To add a foreign key to an already created table, use the <code>constraint()</code> method to add a constraint; <code>foreign()</code> to inform the column and <code>references()</code> to refer to the table.</p>
-<pre><code class="language-php">(new User)-&gt;alter(&quot;your_table&quot;)-&gt;constraint(&quot;dev_cons_fk&quot;)-&gt;foreign(&quot;type&quot;)-&gt;references(&quot;dev&quot;, &quot;iddev&quot;);
+<pre><code class="language-php">User::alter()-&gt;constraint(&quot;dev_cons_fk&quot;)-&gt;foreign(&quot;type&quot;)-&gt;references(&quot;dev&quot;, &quot;iddev&quot;);
 </code></pre>
 <h3 id="truncate-table">Truncate table</h3>
 <p>To use the sql truncate command, use the <code>truncate()</code> method.</p>
-<pre><code class="language-php">(new User)-&gt;truncate(&quot;your_table&quot;);
+<pre><code class="language-php">User::truncate();
 </code></pre>
 <p>By default, the database checks the table's foreign key and locks the truncate command. To disable foreign key verification, enter <code>true</code> as a parameter.</p>
-<pre><code class="language-php">(new User)-&gt;truncate(&quot;your_table&quot;, true);
+<pre><code class="language-php">User::truncate(true);
 </code></pre>
 <h2 id="procedure">Procedure</h2>
 <p>To call a database procedure, use the <code>call()</code> method.</p>
-<pre><code class="language-php">(new User)-&gt;call('procedure_name');
+<pre><code class="language-php">User::call('procedure_name');
 </code></pre>
 <p>To use procedure parameters, pass the values in array format.</p>
-<pre><code class="language-php">(new User)-&gt;call('procedure_name' , ['param_1, param_2, param_3']);
+<pre><code class="language-php">User::call('procedure_name' , ['param_1, param_2, param_3']);
 </code></pre>
 <h2 id="transactions">Transactions</h2>
 <p>Transactions are typically implemented by "saving-up" your batch of changes to be applied all at once; this has the nice side effect of drastically improving the efficiency of those updates. In other words, transactions can make your scripts faster and potentially more robust (you still need to use them correctly to reap that benefit).</p>
-<pre><code class="language-php">try {
-  $pdo = Connection::getInstance();
-  $pdo-&gt;beginTransaction();
+<pre><code class="language-php">public static function transaction()
+{
+  try {
+    $pdo = Connection::getInstance();
+    $pdo-&gt;beginTransaction();
 
-  // code...
+    // code...
 
-  $pdo-&gt;commit();
-
-} catch (\PDOException $e) {
-  $pdo-&gt;rollback();
-
-  echo $e-&gt;getMessage();
+    $pdo-&gt;commit();
+  } catch (\PDOException $e) {
+    $pdo-&gt;rollback();
+    echo $e-&gt;getMessage();
+  }
 }
+
+// Using transactions
+
+User::transaction();
 </code></pre>
 <h2 id="pagination">Pagination</h2>
 <p>The <code>pagination()</code> method creates a system for paging results. To initialize, the first parameter must be the table you want to use to start paging. The second parameter will list the amount of values that will be returned from the table as shown in the example below.</p>
-<pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3);
+<pre><code class="language-php">$users = new User();
+$values = $users-&gt;pagination('your_table', 3);
 </code></pre>
 <p>To retrieve the table values from the database, you can use the <code>getRows()</code> method. And to use pagination, use the <code>getArrows()</code> method.</p>
 <pre><code class="language-php">/** Returns table data */
@@ -996,14 +1041,15 @@ $values-&gt;getRows();
 $values-&gt;getArrows()
 </code></pre>
 <p>To use pagination with relationship in another table, in the third parameter pass an array containing the name of the table that has a relationship with the current table, the column name of the current table that has the foreign key and the column name of the primary key of the another table.</p>
-<pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3, ['foreign_table', 'column_foreign_key', 'column_primary_key']);
+<pre><code class="language-php">$users = new User();
+$values = $users-&gt;pagination('your_table', 3, ['foreign_table', 'column_foreign_key', 'column_primary_key']);
 </code></pre>
-<p><strong>INNER JOIN</strong></p>
+<h3 id="pagination-with-other-table-inner-join">Pagination with other table (INNER JOIN)</h3>
 <p>If you want to use pagination with a table that has a foreign key, pass an array in the third parameter.</p>
 <p>In the first index, insert the name of the table that is linked to the current table, in the second index the name of the column that contains the foreign key and in the third index the column name of the primary key of the table that references the current table</p>
 <pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3, ['foreign_table', 'column_foreign_key', 'column_primary_key'], &quot;status=true&quot;);
 </code></pre>
-<p><strong>WHERE clause</strong></p>
+<h3 id="where-clause">WHERE clause</h3>
 <p>To use the WHERE clause, use the fourth parameter as shown below.</p>
 <pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3, null, &quot;status=true&quot;);
 </code></pre>
@@ -1151,6 +1197,7 @@ cache_database: true
 <li>Memcached</li>
 <li>Memcache</li>
 <li>APCu</li>
+<li>Yac</li>
 </ul>
 <p>In your Model, you will need to enable caching. To do this, add the following property:</p>
 <pre><code class="language-php">&lt;?php
@@ -1203,33 +1250,33 @@ User::connection('pgsql')::select()-&gt;get();
   </thead>
   <tbody>
     <tr>
-      <td><span class="cmd-vinci">varchar("column_name", size)</span></td>
-      <td><span class="cmd-vinci">tinyint("column_name", size)</span></td>
-      <td><span class="cmd-vinci">date("column_name")</span></td>
+      <td><span class="cmd-vinci">varchar()</span></td>
+      <td><span class="cmd-vinci">tinyint()</span></td>
+      <td><span class="cmd-vinci">date()</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">char("column_name", size)</span></td>
-      <td><span class="cmd-vinci">smallint("column_name", size)</span></td>
-      <td><span class="cmd-vinci">year("column_name")</span></td>
+      <td><span class="cmd-vinci">char()</span></td>
+      <td><span class="cmd-vinci">smallint()</span></td>
+      <td><span class="cmd-vinci">year()</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">tinytext("column_name", size)</span></td>
-      <td><span class="cmd-vinci">mediumint("column_name", size)</span></td>
-      <td><span class="cmd-vinci">time("column_name")</span></td>
+      <td><span class="cmd-vinci">tinytext()</span></td>
+      <td><span class="cmd-vinci">mediumint()</span></td>
+      <td><span class="cmd-vinci">time()</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">mediumtext("column_name", size)</span></td>
-      <td><span class="cmd-vinci">bigint("column_name", size)</span></td>
-      <td><span class="cmd-vinci">datetime("column_name")</span></td>
+      <td><span class="cmd-vinci">mediumtext()</span></td>
+      <td><span class="cmd-vinci">bigint()</span></td>
+      <td><span class="cmd-vinci">datetime()</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">longtext("column_name", size)</span></td>
-      <td><span class="cmd-vinci">int("column_name", size)</span></td>
-      <td><span class="cmd-vinci">timestamp("column_name")</span></td>
+      <td><span class="cmd-vinci">longtext()</span></td>
+      <td><span class="cmd-vinci">int()</span></td>
+      <td><span class="cmd-vinci">timestamp()</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">text("column_name")</span></td>
-      <td><span class="cmd-vinci">decimal("column_name", value1, value2)</span></td>
+      <td><span class="cmd-vinci">text()</span></td>
+      <td><span class="cmd-vinci">decimal()</span></td>
       <td><span class="cmd-vinci">-</span></td>
     </tr>
   </tbody>
@@ -1244,8 +1291,8 @@ User::connection('pgsql')::select()-&gt;get();
   </thead>
   <tbody>
     <tr>
-      <td><span class="cmd-vinci">boolean("column_name")</span></td>
-      <td><span class="cmd-vinci">default("default_value")</span></td>
+      <td><span class="cmd-vinci">boolean()</span></td>
+      <td><span class="cmd-vinci">default()</span></td>
     </tr>
     <tr>
       <td><span class="cmd-vinci">unique()</span></td>
@@ -1268,7 +1315,7 @@ User::connection('pgsql')::select()-&gt;get();
       <td><span class="cmd-vinci">-</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">after("column_name")</span></td>
+      <td><span class="cmd-vinci">after()</span></td>
       <td><span class="cmd-vinci">-</span></td>
     </tr>
     <tr>
@@ -1276,7 +1323,7 @@ User::connection('pgsql')::select()-&gt;get();
       <td><span class="cmd-vinci">-</span></td>
     </tr>
     <tr>
-      <td><span class="cmd-vinci">serial("id_table") (POSTGRESQL)</span></td>
+      <td><span class="cmd-vinci">serial() (POSTGRESQL)</span></td>
       <td><span class="cmd-vinci">-</span></td>
     </tr>
   </tbody>
@@ -1313,7 +1360,7 @@ User::connection('pgsql')::select()-&gt;get();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.075552+00:00
+              Docs Build Date UTC : 2024-05-17 10:10:26.018094+00:00
               -->
 
           </section>
