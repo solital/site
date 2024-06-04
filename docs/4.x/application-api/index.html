@@ -270,6 +270,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authenticate
       </a>
     
+      <a href="../authorization/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authorization
+      </a>
+    
       <a href="../cryptography/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cryptography
       </a>
@@ -370,6 +374,11 @@
                   
                   
                     <li id="bullet-item">
+                      <a href="#access-app-folder" class="menu-main-item">Access app folder</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
                       <a href="#autoload-php-files" class="menu-main-item">Autoload PHP files</a>
                     </li>
                   
@@ -389,38 +398,80 @@
                 
                 <p>Solital has a class called <code>Application</code>. This class, which is in the <code>Kernel</code> folder, manages the entire framework, from the instances to start the framework to communication with the database.</p>
 <p>Most of the methods in this class are for internal use by the framework. However, you can make use of some methods in this class.</p>
+<p>You can use the <code>Application</code> class or the helpers of that class.</p>
 <h2 id="yaml-files">YAML files</h2>
-<p>To retrieve variables from a YAML file, use the <code>yamlParse</code> method.</p>
-<pre><code class="language-php">Application::yamlParse('file.yaml');
+<p>Returns variables by YAML file.</p>
+<pre><code class="language-php">// With class
+Application::yamlParse('file.yaml');
+
+// With helper
+app_get_yaml('file.yaml');
+</code></pre>
+<p>Add a value to a YAML file</p>
+<pre><code class="language-php">// With class
+Application::addYamlValue('file.yaml', 'key', 'value');
+
+// With helper
+app_add_yaml('file.yaml', 'key', 'value');
 </code></pre>
 <h2 id="dependency-container">Dependency Container</h2>
-<p>To use the container defined in <code>ServiceContainer</code> class, use <code>provider</code> method.</p>
-<pre><code class="language-php">Application::provider('container_name');
+<p>Get container ID defined in <code>ServiceContainer</code> class.</p>
+<pre><code class="language-php">// With class
+Application::provider('container_name');
+
+// With helper
+container('container_name');
 </code></pre>
 <h2 id="access-root-folder">Access root folder</h2>
-<p>If you want to access a folder in the project root, use the <code>getRoot</code> method, and <code>getRootApp</code> to access a folder in <code>app/</code>.</p>
-<pre><code class="language-php">Application::getRoot('/folder_name');
+<p>Return directory on root folder</p>
+<pre><code class="language-php">// With class
+Application::getRoot('/folder_name');
 
+// With helper
+app_get_root('/folder_name');
+</code></pre>
+<h2 id="access-app-folder">Access <code>app</code> folder</h2>
+<p>Return directory in <code>app/</code> folder</p>
+<pre><code class="language-php">// With class
 Application::getRootApp('/folder_name_in_app');
+
+// With helper
+app_get_app('/folder_name_in_app');
 </code></pre>
 <p>The <code>getRootApp</code> method will create a folder inside the <code>app/</code> folder if the folder you want to access doesn't exist. To disable the creation of this folder, use <code>false</code> in the second parameter.</p>
-<pre><code class="language-php">Application::getRootApp('/folder_name_in_app', false);
+<pre><code class="language-php">// With class
+Application::getRootApp('/folder_name_in_app', false);
+
+// With helper
+app_get_app('/folder_name_in_app', false);
 </code></pre>
 <h2 id="autoload-php-files">Autoload PHP files</h2>
 <p>Recursively loads all php files in all subdirectories of the given path.</p>
-<pre><code class="language-php">Application::autoload('folder/');
-
+<pre><code class="language-php">// With class
+Application::autoload('folder/');
 Application::classLoaderInDirectory('folder/');
+
+// With helper
+app_autoload('folder/');
+app_classloader('folder/');
 </code></pre>
 <h2 id="is-cli">Is CLI</h2>
 <p>Checks whether PHP is running in CLI mode or not.</p>
-<pre><code class="language-php">Application::isCli();
+<pre><code class="language-php">// With class
+Application::isCli();
+
+// With helper
+app_is_cli();
 </code></pre>
 <h2 id="database">Database</h2>
-<p>To use the database connection, you can use the <code>connectionDatabase</code> method. This method makes use of the variables defined in the <code>.env</code> file or, if you use a test database, in the <code>database.yaml</code>.</p>
-<pre><code class="language-php">Application::connectionDatabase();
-</code></pre>
+<p>Get Solital's database connection. This method makes use of the variables defined in the <code>.env</code> file or, if you use a test database, in the <code>database.yaml</code>.</p>
 <p>This method also makes use of Solital's cache, if you are using it.</p>
+<pre><code class="language-php">// With class
+Application::connectionDatabase();
+
+// With helper
+app_get_database_connection();
+</code></pre>
                 
 
                 <hr />
@@ -453,7 +504,7 @@ Application::classLoaderInDirectory('folder/');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.013040+00:00
+              Docs Build Date UTC : 2024-06-04 12:04:53.117574+00:00
               -->
 
           </section>

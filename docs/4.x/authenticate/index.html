@@ -270,6 +270,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authenticate
       </a>
     
+      <a href="../authorization/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authorization
+      </a>
+    
       <a href="../cryptography/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cryptography
       </a>
@@ -403,9 +407,18 @@
 <h3 id="setting">Setting</h3>
 <p>For this, it is necessary to first define the name of the table in the <code>login</code> method. In the <code>columns</code> method, the database username and password. Then, in the <code>values</code> method, the input values of the form. Finally, the <code>register</code> method will perform the login as shown below.</p>
 <pre><code class="language-php">$res = Auth::login('auth_users')
-            -&gt;columns('username', 'password')
-            -&gt;values('inputEmail', 'inputPassword')
-            -&gt;register();
+    -&gt;columns('username', 'password')
+    -&gt;values('inputEmail', 'inputPassword')
+    -&gt;register();
+</code></pre>
+<p>You can also use the Model name in the <code>login()</code> method. This way, the <code>Auth</code> component will get the name of the table that is in the <code>$table</code> property.</p>
+<p>Solital uses the default Model <code>AuthModel</code>. However, you can create a model and use it in the <code>login()</code> method.</p>
+<pre><code class="language-php">use Solital\Core\Kernel\Model\AuthModel;
+
+$res = Auth::login(AuthModel::class)
+    -&gt;columns('username', 'password')
+    -&gt;values('inputEmail', 'inputPassword')
+    -&gt;register();
 </code></pre>
 <p>The <code>$res</code> variable will return <code>true</code> if authentication is true and will redirect the user to the route defined in the <code>auth_dashboard_url</code> variable. But if it is <code>false</code>, you can add a reply message after the above code if authentication fails.</p>
 <pre><code class="language-php">if ($res == false) {
@@ -418,11 +431,11 @@
 <p>In the <code>value</code> of the form input, use <code>true</code>.</p>
 <pre><code class="language-php">&lt;input type=&quot;checkbox&quot; name=&quot;inputRemember&quot; value=&quot;true&quot;&gt;
 
-$res = Auth::login('auth_users')
-            -&gt;columns('username', 'password')
-            -&gt;values('inputEmail', 'inputPassword')
-            -&gt;remember('inputRemember')
-            -&gt;register();
+$res = Auth::login(AuthModel::class)
+    -&gt;columns('username', 'password')
+    -&gt;values('inputEmail', 'inputPassword')
+    -&gt;remember('inputRemember')
+    -&gt;register();
 </code></pre>
 <p>Below is an example method of authentication.</p>
 <pre><code class="language-php">&lt;input type=&quot;email&quot; name=&quot;inputEmail&quot;&gt;
@@ -443,7 +456,7 @@ class UserController extends Controller
      */
     public function authPost(): void
     {
-        $res = Auth::login('auth_users')
+        $res = Auth::login(AuthModel::class)
             -&gt;columns('username', 'password')
             -&gt;values('inputEmail', 'inputPassword')
             -&gt;remember('inputRemember')
@@ -465,14 +478,14 @@ Course::get('/my-second-dashboard', 'SiteController@SecondDashboard')-&gt;name('
 
 # In Controller with `url()` helper
 
-$res = Auth::login('auth_users')
+$res = Auth::login(AuthModel::class)
     -&gt;columns('username', 'password')
     -&gt;values('inputEmail', 'inputPassword')
     -&gt;register(url('second.dashboard'));
 
 # Or without `url()` helper
 
-$res = Auth::login('auth_users')
+$res = Auth::login(AuthModel::class)
     -&gt;columns('username', 'password')
     -&gt;values('inputEmail', 'inputPassword')
     -&gt;register('/my-second-dashboard');
@@ -550,7 +563,7 @@ pre($decoded);
                       <li class="breadcrumb-item"><a href="../mask/">&#8592; Mask</a></li>
                     
                     
-                      <li class="breadcrumb-item"><a href="../cryptography/">Cryptography &#8594;</a></li>
+                      <li class="breadcrumb-item"><a href="../authorization/">Authorization &#8594;</a></li>
                     
                   </ol>
                 </section>
@@ -569,7 +582,7 @@ pre($decoded);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.013040+00:00
+              Docs Build Date UTC : 2024-06-04 12:04:53.117574+00:00
               -->
 
           </section>

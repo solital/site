@@ -270,6 +270,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authenticate
       </a>
     
+      <a href="../authorization/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authorization
+      </a>
+    
       <a href="../cryptography/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cryptography
       </a>
@@ -358,6 +362,23 @@
                       <a href="#how-to-use" class="menu-main-item">How to use</a>
                     </li>
                   
+                    <li id="bullet-childern-item">
+                      <a href="#using-in-controllers" class="menu-children-item">Using in Controllers</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#returning-messages" class="menu-children-item">Returning messages</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#customizing-messages" class="menu-main-item">Customizing messages</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#checking-if-a-message-exists" class="menu-children-item">Checking if a message exists</a>
+                    </li>
+                  
                   
                     <li id="bullet-item">
                       <a href="#using-in-wolf-template" class="menu-main-item">Using in Wolf Template</a>
@@ -367,26 +388,54 @@
                 </ul>
 
                 
-                <p>Message is a component for displaying alerts in views rendered with Wolf Template. With it, it is possible to display a message of success, error or any other type of message. By default, this class is already instantiated in the <code>Controller</code> class.</p>
+                <p>Message is a component for displaying flash alerts in views rendered with Wolf Template. With it, it is possible to display a message of success, error or any other type of message. By default, this class is already instantiated in the <code>Controller</code> class.</p>
 <p><strong>NOTE:</strong> if you do not extend the <code>Controller</code> class, you will need to instantiate the <code>Message</code> class.</p>
 <pre><code class="language-php">use Solital\Core\Resource\Message;
 
 $message = new Message();
 </code></pre>
 <h2 id="how-to-use">How to use</h2>
-<p>You can create a message using the <code>new()</code> method in controller, or using the <code>messages()</code> helper:</p>
-<pre><code class="language-php">/** With method */
-$this-&gt;message-&gt;new('msg.test', 'Just a test message displayed in the view!');
-
-/** With helper */
-message('msg.test', 'Just a test message displayed in the view!');
+<p>You can create a normal message using the <code>messages()</code> helper. First, you must add an index to your message in the first parameter. This index serves to identify your message. In the second parameter, you will add your message.</p>
+<p>This will create a clean message without customizations (see more in <a href="#customizing-messages">Customizing messages</a>).</p>
+<pre><code class="language-php">message('msg.test', 'Just a test message displayed in the view!');
 </code></pre>
-<p>To retrieve this message, use the <code>get</code> method. </p>
-<pre><code class="language-php">/** With method */
+<h3 id="using-in-controllers">Using in Controllers</h3>
+<p>If you are on a Controller. You have the option of not using the previous helper, as the <code>Message</code> class is already instantiated by default. To do this, use <code>new()</code> method.</p>
+<pre><code class="language-php">$this-&gt;message-&gt;new('msg.test', 'Just a test message displayed in the view!');
+</code></pre>
+<h3 id="returning-messages">Returning messages</h3>
+<p>To retrieve this message, use the <code>get()</code> method. </p>
+<pre><code class="language-php">/** With method in Controller */
 echo $this-&gt;message-&gt;get('msg.test');
 
 /** With helper */
-echo message('msg.test');
+echo message()-&gt;get('msg.test');
+</code></pre>
+<h2 id="customizing-messages">Customizing messages</h2>
+<p>As mentioned at the beginning, the Message class has customized message options: info, success, warning and error.</p>
+<pre><code class="language-php">message()-&gt;info('msg.info.test', 'Info message test');
+message()-&gt;success('msg.success.test', 'Success message test');
+message()-&gt;warning('msg.warning.test', 'Warning message test');
+message()-&gt;error('msg.error.test', 'Error message test');
+</code></pre>
+<p>Using one of the previous methods, you will get messages similar to these:</p>
+<pre><code class="language-html">&lt;div class=&quot;alert-info&quot;&gt;Info message test&lt;/div&gt;
+&lt;div class=&quot;alert-success&quot;&gt;Success message test&lt;/div&gt;
+&lt;div class=&quot;alert-warning&quot;&gt;Warning message test&lt;/div&gt;
+&lt;div class=&quot;alert-error&quot;&gt;Error message test&lt;/div&gt;
+</code></pre>
+<h3 id="checking-if-a-message-exists">Checking if a message exists</h3>
+<p>If you want to know if a message exists, you can use the <code>has()</code> method.</p>
+<pre><code class="language-php">message()-&gt;has('msg.test');
+</code></pre>
+<p>This way you will check if a simple message exists. However, if you want to know if a custom message exists, you can use the following constants:</p>
+<pre><code class="language-php">message()-&gt;has('msg.info.test', Message::INFO);
+message()-&gt;has('msg.success.test', Message::SUCCESS);
+message()-&gt;has('msg.warning.test', Message::WARNING);
+message()-&gt;has('msg.error.test', Message::ERROR);
+</code></pre>
+<p>Alternatively, if you want to know if there are only error messages, you can use the <code>hasErrors()</code> method.</p>
+<pre><code class="language-php">message()-&gt;hasErrors();
 </code></pre>
 <h2 id="using-in-wolf-template">Using in Wolf Template</h2>
 <p>To make use of this component in Wolf, the method of creating the message is exactly the same. The code represents a practical and recommended method of retrieving the message. </p>
@@ -412,7 +461,7 @@ class UserController extends Controller
     public function home(): void
     {
         return view('home', [
-            'msg' =&gt; $this-&gt;message-&gt;get('msg.test') // or use &quot;message('msg.test')&quot;
+            'msg' =&gt; message()-&gt;get('msg.test') // or use: $this-&gt;message-&gt;get('msg.test')
         ]);
     }
 
@@ -421,9 +470,9 @@ class UserController extends Controller
      */
     public function generate(): void
     {
-        $this-&gt;message-&gt;new('msg.test', 'Just a test message displayed in the view!');
+        message('msg.test', 'Just a test message displayed in the view!');
 
-        // message('msg.test', 'Just a test message displayed in the view!');
+        // Or use: $this-&gt;message-&gt;new('msg.test', 'Just a test message displayed in the view!');
     }
 
 </code></pre>
@@ -468,7 +517,7 @@ class UserController extends Controller
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.091174+00:00
+              Docs Build Date UTC : 2024-06-04 12:04:53.195682+00:00
               -->
 
           </section>

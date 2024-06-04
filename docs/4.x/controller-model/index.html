@@ -270,6 +270,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authenticate
       </a>
     
+      <a href="../authorization/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authorization
+      </a>
+    
       <a href="../cryptography/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cryptography
       </a>
@@ -371,6 +375,19 @@
                   
                     <li id="bullet-item">
                       <a href="#creating-a-resource" class="menu-main-item">Creating a resource</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#helpers-for-controllers" class="menu-main-item">Helpers for controllers</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#password" class="menu-children-item">Password</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#request" class="menu-children-item">Request</a>
                     </li>
                   
                   
@@ -480,6 +497,54 @@ class ResourceController
 <p>You can use this resource on a specific route with the <code>resource()</code> method.</p>
 <pre><code class="language-php">Course::resource('/resource', ResourceController::class);
 </code></pre>
+<h2 id="helpers-for-controllers">Helpers for controllers</h2>
+<p>Solital has some helpers for you to use in your controllers. The helpers below have methods that should only be used in controllers.</p>
+<h3 id="password">Password</h3>
+<p>You can use password helpers, or use the <code>passHash</code> and <code>passVerify</code> methods.</p>
+<p><strong>Password hash</strong></p>
+<pre><code class="language-php">pass_hash($password, int $cost = 10)
+
+# With method on Controller
+$this-&gt;passHash($password, $info = false)
+</code></pre>
+<p><strong>Password verify</strong></p>
+<pre><code class="language-php">pass_verify($password, string $hash)
+
+# With method on Controller
+$this-&gt;passVerify($password, $hash)
+</code></pre>
+<h3 id="request">Request</h3>
+<p>You have the option to limit the number of requests in a controller, and also check if a value has already been sent previously. </p>
+<p><strong>Request limit</strong></p>
+<pre><code class="language-php">request_limit(string $key, int $limit = 5, int $seconds = 60)
+
+# With method on Controller
+$this-&gt;requestLimit(string $key, int $limit = 5, int $seconds = 60)
+</code></pre>
+<p><strong>Request repeat</strong></p>
+<pre><code class="language-php">request_repeat(string $key, string $value)
+
+# With method on Controller
+$this-&gt;requestRepeat(string $key, string $value)
+</code></pre>
+<p><strong>Redirect to another router</strong></p>
+<pre><code class="language-php">to_route(string $url, ?int $code = null)
+
+# Or, use a method on Controller
+$this-&gt;redirect(string $url, ?int $code = null)
+</code></pre>
+<p><strong>Remove params from URL</strong></p>
+<pre><code class="language-php">remove_param()
+
+# With method on Controller
+$this-&gt;removeParamsUrl()
+</code></pre>
+<p><strong>Get input-parameters</strong></p>
+<pre><code class="language-php">input(string $index = null, string $defaultValue = null, ...$methods)
+
+# With method on Controller
+$this-&gt;getRequestParams(string $index = null, string $defaultValue = null, ...$methods)
+</code></pre>
                 
 
                 <hr />
@@ -512,7 +577,7 @@ class ResourceController
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-05 12:02:21.028688+00:00
+              Docs Build Date UTC : 2024-06-04 12:04:53.133166+00:00
               -->
 
           </section>

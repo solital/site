@@ -270,6 +270,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authenticate
       </a>
     
+      <a href="../authorization/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Authorization
+      </a>
+    
       <a href="../cryptography/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cryptography
       </a>
@@ -377,6 +381,18 @@
                       <a href="#input-and-output-commands" class="menu-main-item">Input and output commands</a>
                     </li>
                   
+                    <li id="bullet-childern-item">
+                      <a href="#confirmation-box" class="menu-children-item">Confirmation box</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#customizing-colors" class="menu-children-item">Customizing colors</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#reading-passwords" class="menu-children-item">Reading passwords</a>
+                    </li>
+                  
                   
                     <li id="bullet-item">
                       <a href="#data-output-to-the-console" class="menu-main-item">Data output to the console</a>
@@ -408,6 +424,11 @@
                   
                     <li id="bullet-childern-item">
                       <a href="#checking-closure-time" class="menu-children-item">Checking closure time</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#calling-a-command-within-another" class="menu-main-item">Calling a command within another</a>
                     </li>
                   
                   
@@ -461,6 +482,12 @@
       <td>Create Login and 'Forgot Password' structures</td>
       <td>-</td>
       <td>--login / --forgot / --remove</td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">clear-history</span></td>
+      <td>Clear a command history</td>
+      <td>-</td>
+      <td>-</td>
     </tr>
     <tr>
       <td><span class="cmd-vinci">create:cmd</span></td>
@@ -525,6 +552,12 @@
     <tr>
       <td><span class="cmd-vinci">generate:files</span></td>
       <td>Imports Solital Framework's default configuration files</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><span class="cmd-vinci">history</span></td>
+      <td>Get all command history</td>
       <td>-</td>
       <td>-</td>
     </tr>
@@ -698,23 +731,35 @@ $input_output-&gt;dialog('Enter a string: ')-&gt;action(function ($message) {
     echo $message . PHP_EOL;
 });
 </code></pre>
-<p>The <code>dialog()</code> method will display a message to the user, while the <code>action()</code> method retrieves the value entered on the command line. The <code>action()</code> method takes an anonymous function as a parameter.</p>
-<p><strong>Confirmation box</strong></p>
+<p>The <code>dialog()</code> method will display a message to the user to inform a input value, while the <code>action()</code> method retrieves the value entered on the command line.</p>
+<p>The <code>action()</code> method performs an action using the previously entered value. This method uses an anonymous function with the variable <code>$message</code> as a parameter.</p>
+<h3 id="confirmation-box">Confirmation box</h3>
 <p>You can also use a "yes/no" confirmation, or any other value.</p>
 <pre><code class="language-php">use Solital\Core\Console\InputOutput;
 
 $input_output = new InputOutput();
-$input_output-&gt;confirmDialog('What you want?', 'Y', 'N', false)-&gt;confirm(function () {
+$input_output-&gt;confirmDialog('What you want?', 'Y', 'N', false);
+$input_output-&gt;confirm(function () {
     echo &quot;accepted&quot; . PHP_EOL;
 })-&gt;refuse(function () {
     echo &quot;denied&quot; . PHP_EOL;
 });
 </code></pre>
 <p>In the first parameter of the <code>confirmDialog</code> method, you will define the question. The second parameter will be the value of the answer if it is positive, if not, the third parameter will receive the value of the answer if it is negative. The fourth parameter will define if the answer is know sensitive, if not, set it to <code>false</code>.</p>
-<p><strong>Customizing colors</strong></p>
-<p>To customize the colors of the message that is displayed from the CLI, you can pass the color name in the constructor of the <code>InputOutput</code> class.</p>
-<p>The available colors are: <code>green</code>, <code>yellow</code> and <code>blue</code>.</p>
-<pre><code class="language-php">$input_output = new InputOutput('green'); // green - yellow - blue
+<p>This method must be used together with two other methods: <code>confirm()</code> and <code>refuse()</code>.</p>
+<h3 id="customizing-colors">Customizing colors</h3>
+<p>To customize the colors of the message that is displayed from the CLI, you must use the <code>color()</code> method. To use the available colors, you must use the <code>ColorsEnum</code> enum.</p>
+<pre><code class="language-php">use Solital\Core\Console\Output\ColorsEnum;
+
+$input_output = new InputOutput();
+$inout_output-&gt;color(ColorsEnum::GREEN);
+</code></pre>
+<h3 id="reading-passwords">Reading passwords</h3>
+<p>By default, the previous methods display input to the user. However, in the case of passwords, you must use the <code>password()</code> method.</p>
+<p>You can take the entered password and use it in another part of your code.</p>
+<pre><code class="language-php">$input_output = new InputOutput();
+$password = $input_output-&gt;password(&quot;Enter the password&quot;);
+echo $password;
 </code></pre>
 <h2 id="data-output-to-the-console">Data output to the console</h2>
 <p>To display data in the console, use the <code>ConsoleOutput</code> class. Below are some of the main methods you can use to display messages in a personalized way.</p>
@@ -807,6 +852,97 @@ ConsoleOutput::clear(2);
     return true;
 })-&gt;printStatus('accept', 'not accept', false);
 </code></pre>
+<h2 id="calling-a-command-within-another">Calling a command within another</h2>
+<p>If you have a command, and want to call another command within the same class, you can use the <code>call()</code> method.</p>
+<p>For example, you have an <code>InsertCommand</code> class:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Solital\Console\Command;
+
+use Solital\Core\Console\Command;
+use Solital\Core\Console\Interface\CommandInterface;
+
+class InsertCommand extends Command implements CommandInterface
+{
+    /**
+     * @var string
+     */
+    protected string $command = &quot;cmd:insert&quot;;
+
+    /**
+     * @var array
+     */
+    protected array $arguments = [];
+
+    /**
+     * @var array
+     */
+      protected array $options = [];
+
+    /**
+     * @var string
+     */
+    protected string $description = &quot;&quot;;
+
+    /**
+     * @param object $arguments
+     * @param object $options
+     * 
+     * @return mixed
+     */
+    #[\Override]
+    public function handle(object $arguments, object $options): mixed
+    {
+        echo &quot;Insert a value&quot;;
+        return $this;
+    }
+}
+</code></pre>
+<p>And you also have an <code>UpdateCommand</code> class. You can execute the command from the previous class within this new class.</p>
+<pre><code class="language-php">&lt;?php
+
+namespace Solital\Console\Command;
+
+use Solital\Core\Console\Command;
+use Solital\Core\Console\Interface\CommandInterface;
+
+class UpdateCommand extends Command implements CommandInterface
+{
+    /**
+     * @var string
+     */
+    protected string $command = &quot;cmd:update&quot;;
+
+    /**
+     * @var array
+     */
+    protected array $arguments = [];
+
+    /**
+     * @var array
+     */
+    protected array $options = [];
+
+    /**
+     * @var string
+     */
+    protected string $description = &quot;&quot;;
+
+    /**
+     * @param object $arguments
+     * @param object $options
+     * 
+     * @return mixed
+     */
+    #[\Override]
+    public function handle(object $arguments, object $options): mixed
+    {
+        Command::call('cmd:insert');
+        return $this;
+    }
+}
+</code></pre>
+<p><strong>NOTE:</strong> You cannot call the same command on the same classe.</p>
 <h2 id="progress-bar">Progress Bar</h2>
 <p>Progressbar has customizable names, colors, datatypes, error handling, and more.</p>
 <p><strong>Usage</strong></p>
@@ -1001,7 +1137,7 @@ Table::formattedRowData($values, 50, true);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-04-11 17:43:55.398569+00:00
+              Docs Build Date UTC : 2024-06-04 12:04:53.242516+00:00
               -->
 
           </section>
