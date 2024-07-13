@@ -479,6 +479,16 @@
 <pre><code class="language-php">message(string $key, string $msg = &quot;&quot;)
 </code></pre>
 <ul>
+<li>Cryptograph an value using <code>Hash</code> class without having to instantiate it</li>
+</ul>
+<pre><code class="language-php">encrypt(string $value, string $time = '+1 hour')
+</code></pre>
+<ul>
+<li>Decryptograph an value using <code>Hash</code> class without having to instantiate it</li>
+</ul>
+<pre><code class="language-php">decrypt(string $key)
+</code></pre>
+<ul>
 <li>Handles PHP sessions. </li>
 </ul>
 <p>To get a value from an existing session, leave the <code>$value</code> parameter empty. To create a new session, inform the session key in the first parameter, and the session value in the second parameter. See more in <a href="../session-and-cookie/">Session and Cookies</a>.</p>
@@ -706,7 +716,7 @@ session(string $key, mixed $value = null, mixed $defaultValue = null, bool $dele
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.164412+00:00
+              Docs Build Date UTC : 2024-07-13 23:08:44.275360+00:00
               -->
 
           </section>

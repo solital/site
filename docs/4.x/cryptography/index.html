@@ -379,7 +379,12 @@
                   
                   
                     <li id="bullet-item">
-                      <a href="#sodium-encryption" class="menu-main-item">Sodium encryption</a>
+                      <a href="#changing-the-encryption-type" class="menu-main-item">Changing the encryption type</a>
+                    </li>
+                  
+                  
+                    <li id="bullet-item">
+                      <a href="#sodium-encryption-core-44" class="menu-main-item">Sodium encryption (Core &lt;= 4.4)</a>
                     </li>
                   
                     <li id="bullet-childern-item">
@@ -428,7 +433,13 @@ $res = Hash::decrypt('word_to_decrypt')-&gt;isValid();
 
 pre($res);
 </code></pre>
-<h2 id="sodium-encryption">Sodium encryption</h2>
+<h2 id="changing-the-encryption-type">Changing the encryption type</h2>
+<p>Solital uses OpenSSL and Sodium to perform value encryption. To change the encryption, change the <code>crypt</code> value in the <code>bootstrap.yaml</code> file.</p>
+<pre><code class="language-yaml">crypt: sodium
+</code></pre>
+<h2 id="sodium-encryption-core-44">Sodium encryption (Core &lt;= 4.4)</h2>
+<p><strong>IMPORTANT: The documentation below is deprecated and is only for users using Solital Core in version 4.4 or lower. Starting with version 4.5, Solital uses the <code>crypt</code> configuration in the <code>bootstrap.yaml</code> file</strong></p>
+<p><strong>The functions below will be removed in a future version 5.0</strong></p>
 <p>Solital supports Sodium encryption. To enable, make sure that libsodium is installed in your development environment. You can use the <code>Hash::checkSodium()</code> method to check if libsodium is installed.</p>
 <h3 id="generating-a-sodium-key">Generating a sodium key</h3>
 <p>First, you need to generate a sodium key. This key is automatically renewed with each new request, so it can be stored in a database, in the session or in another type of storage.</p>
@@ -482,7 +493,7 @@ pre($decoded);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.148788+00:00
+              Docs Build Date UTC : 2024-07-13 23:08:44.244117+00:00
               -->
 
           </section>
