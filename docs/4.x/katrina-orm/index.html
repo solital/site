@@ -12,13 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
-  <link rel="stylesheet" href="../css/styles/atom-one-dark.css">
+  <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   
@@ -26,8 +27,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/highlight.pack.js"></script>
+  <script src="../js/highlight.min.js"></script>
   <script src="../js/scripts.js"></script>
+  <script src="../js/php.min.js"></script>
+  <script src="../js/php-template.min.js"></script>
+  <script src="../js/bash.min.js"></script>
+  <script src="../js/yaml.min.js"></script>
   <script>hljs.highlightAll();</script>
 
   
@@ -535,7 +540,8 @@
                 
                 <h2 id="version">Version</h2>
 <p>Katrina ORM is currently at version <strong>2.x</strong>. To read documentation for previous versions choose one of the links below.</p>
-<p><a href="../katrina-1.0/">1.x</a></p>
+<p><a class="btn btn-outline-primary" target="_blank" href="https://solital.github.io/site/docs/4.x/katrina-1.0/">1.x</a></p>
+
 <h2 id="getting-started">Getting Started</h2>
 <p>Katrina ORM is a component that brings the object-oriented application development paradigm closer to the relational database paradigm. It helps to carry out common routines, such as the famous CRUD (create, read, edit and delete), in addition to having a data paging system.</p>
 <p>Katrina ORM uses the Active Record standard to manipulate the data in the database.</p>
@@ -1046,23 +1052,33 @@ $values-&gt;getArrows()
 </code></pre>
 <p>To use pagination with relationship in another table, in the third parameter pass an array containing the name of the table that has a relationship with the current table, the column name of the current table that has the foreign key and the column name of the primary key of the another table.</p>
 <pre><code class="language-php">$users = new User();
-$values = $users-&gt;pagination('your_table', 3, ['foreign_table', 'column_foreign_key', 'column_primary_key']);
+$values = $users-&gt;pagination(
+  &quot;your_table&quot;, 3, 
+  [&quot;foreign_table&quot;, &quot;column_foreign_key&quot;, &quot;column_primary_key&quot;]
+);
 </code></pre>
 <h3 id="pagination-with-other-table-inner-join">Pagination with other table (INNER JOIN)</h3>
 <p>If you want to use pagination with a table that has a foreign key, pass an array in the third parameter.</p>
 <p>In the first index, insert the name of the table that is linked to the current table, in the second index the name of the column that contains the foreign key and in the third index the column name of the primary key of the table that references the current table</p>
-<pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3, ['foreign_table', 'column_foreign_key', 'column_primary_key'], &quot;status=true&quot;);
+<pre><code class="language-php">$users = new User();
+$values = $users-&gt;pagination(
+  &quot;your_table&quot;, 3, 
+  [&quot;foreign_table&quot;, &quot;column_foreign_key&quot;, &quot;column_primary_key&quot;], 
+  &quot;status=true&quot;
+);
 </code></pre>
 <h3 id="where-clause">WHERE clause</h3>
 <p>To use the WHERE clause, use the fourth parameter as shown below.</p>
-<pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3, null, &quot;status=true&quot;);
+<pre><code class="language-php">$users = new User();
+$values = $users-&gt;pagination(&quot;your_table&quot;, 3, null, &quot;status=true&quot;);
 </code></pre>
 <h3 id="wolf-template">Wolf Template</h3>
 <p>Data pagination is widely used in project templates. You can integrate pagination into Wolf Template as follows:</p>
-<pre><code class="language-php">$values = (new User)-&gt;pagination('your_table', 3);
+<pre><code class="language-php">$users = new User();
+$values = $users-&gt;pagination(&quot;your_table&quot;, 3);
 
-return view('home', [
-    'values' =&gt; $values
+return view(&quot;home&quot;, [
+    &quot;values&quot; =&gt; $values
 ]);
 </code></pre>
 <p>In your template, retrieve the data like this:</p>
@@ -1150,8 +1166,11 @@ return view('home', [
 <p><span class="katrina-pag">First</span> 2 <span class="katrina-pag">3 Last</span></p>
 <h3 id="custom-pagination">Custom Pagination</h3>
 <p>The <code>pagination()</code> method uses a basic SELECT statement. If you need to use a much more complex SELECT, consider using the <code>customPagination()</code> method.</p>
-<pre><code class="language-php">$values = (new User)-&gt;customPagination(&quot;SELECT created_at, order_status, idSession, SUM(idOrder) AS idOrder FROM `tb_order` 
-GROUP BY created_at, order_status, idSession&quot;, 3);
+<pre><code class="language-php">$user = new User();
+$values = $user-&gt;customPagination(
+  &quot;SELECT created_at, order_status, idSession, SUM(idOrder) AS idOrder FROM `tb_order` 
+  GROUP BY created_at, order_status, idSession&quot;, 3
+);
 </code></pre>
 <h3 id="customizing-arrows-css">Customizing arrows CSS</h3>
 <p>You can customize the look of the arrows through the classes <code>pagination_first_item</code>, <code>pagination_atual_item</code>, <code>pagination_others_itens</code> and <code>pagination_last_item</code>.</p>
@@ -1364,7 +1383,7 @@ User::connection('pgsql')::select()-&gt;get();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.180033+00:00
+              Docs Build Date UTC : 2024-08-09 17:14:29.064846+00:00
               -->
 
           </section>

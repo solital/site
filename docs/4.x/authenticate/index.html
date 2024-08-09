@@ -12,13 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
-  <link rel="stylesheet" href="../css/styles/atom-one-dark.css">
+  <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   
@@ -26,8 +27,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/highlight.pack.js"></script>
+  <script src="../js/highlight.min.js"></script>
   <script src="../js/scripts.js"></script>
+  <script src="../js/php.min.js"></script>
+  <script src="../js/php-template.min.js"></script>
+  <script src="../js/bash.min.js"></script>
+  <script src="../js/yaml.min.js"></script>
   <script>hljs.highlightAll();</script>
 
   
@@ -393,6 +398,18 @@
                       <a href="#authentication-using-sodium-encryption" class="menu-main-item">Authentication using Sodium encryption</a>
                     </li>
                   
+                    <li id="bullet-childern-item">
+                      <a href="#generating-a-sodium-key" class="menu-children-item">Generating a sodium key</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#encrypting-the-password" class="menu-children-item">Encrypting the password</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#verifying-the-password-with-sodium" class="menu-children-item">Verifying the password with Sodium</a>
+                    </li>
+                  
                   
                 </ul>
 
@@ -522,14 +539,18 @@ Auth::logoff('solital@egmail.com', '/redirect-to-another-router');
 <p>This command will create a <code>LoginController</code> class, <code>AuthMiddleware</code> middleware, templates for authentication, dashboard and predefined routes. Plus a standard user in the database.</p>
 <p>If you want to remove this structure, use <code>php vinci auth:skeleton --login --remove</code>.</p>
 <h2 id="authentication-using-sodium-encryption">Authentication using Sodium encryption</h2>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">The methods below are deprecated and will be removed in a future version 5.0</h6>
+</div>
+
 <p>You can create an authentication using Sodium encryption.</p>
-<p><strong>Generating a sodium key</strong></p>
+<h3 id="generating-a-sodium-key">Generating a sodium key</h3>
 <p>First, you need to generate a sodium key. This key is automatically renewed with each new request, so it can be stored in a database, in the session or in another type of storage.</p>
 <pre><code class="language-php">use Solital\Core\Security\Hash;
 
 $key = Hash::getSodiumKey();
 </code></pre>
-<p><strong>Encrypting the password</strong></p>
+<h3 id="encrypting-the-password">Encrypting the password</h3>
 <p>Use <code>Auth::sodium()</code> to encrypt your password. Remember to use it in conjunction with the generated key.</p>
 <pre><code class="language-php">use Solital\Core\Auth\Auth;
 use Solital\Core\Security\Hash;
@@ -539,7 +560,7 @@ $encoded = Auth::sodium('password', $key);
 
 pre($encoded);
 </code></pre>
-<p><strong>Verifying the password with Sodium</strong></p>
+<h3 id="verifying-the-password-with-sodium">Verifying the password with Sodium</h3>
 <p>To verify the password generated using the <code>Auth::sodium()</code> method, use <code>Auth::sodiumVerify()</code> together with the generated key, password and hash.</p>
 <pre><code class="language-php">use Solital\Core\Auth\Auth;
 use Solital\Core\Security\Hash;
@@ -582,7 +603,7 @@ pre($decoded);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.117574+00:00
+              Docs Build Date UTC : 2024-08-09 17:14:29.002336+00:00
               -->
 
           </section>

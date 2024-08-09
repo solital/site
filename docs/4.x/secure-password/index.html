@@ -12,13 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
-  <link rel="stylesheet" href="../css/styles/atom-one-dark.css">
+  <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   
@@ -26,8 +27,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/highlight.pack.js"></script>
+  <script src="../js/highlight.min.js"></script>
   <script src="../js/scripts.js"></script>
+  <script src="../js/php.min.js"></script>
+  <script src="../js/php-template.min.js"></script>
+  <script src="../js/bash.min.js"></script>
+  <script src="../js/yaml.min.js"></script>
   <script>hljs.highlightAll();</script>
 
   
@@ -417,7 +422,10 @@
 <h3 id="changing-the-value-of-pepper">Changing the value of “pepper”</h3>
 <p>As mentioned in the introduction, the <code>SecurePassword</code> package uses a “pepper” value. To change the value of this pepper, you can edit the value of the <code>peeper</code> key in the <code>auth.yaml</code> file. However, it is recommended to use the <code>APP_HASH</code> variable. If this variable does not exist in your project, run the command <code>php vinci generate:hash</code>.</p>
 <p>If this variable is present in the <code>.env</code> file, then you can delete the <code>peeper</code> in the <code>auth.yaml</code> file.</p>
-<p><strong>NOTE: Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting. If you are using Solital Core &gt;= 4.2, the <code>pepper</code> variable will not be present in the <code>auth.yaml</code> file. Instead, Solital will use the value of the <code>APP_HASH</code> variable.</strong></p>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting. If you are using Solital Core >= 4.2, the `pepper` variable will not be present in the `auth.yaml` file. Instead, Solital will use the value of the `APP_HASH` variable.</h6>
+</div>
+
 <h3 id="changing-peeper-encryption">Changing Peeper encryption</h3>
 <p>By default, peeper is encrypted using OpenSSL. You can switch to Sodium encryption by changing the value of the <code>crypt_type</code> variable in the <code>auth.yaml</code> file.</p>
 <pre><code class="language-yaml">crypt_type: sodium
@@ -454,7 +462,7 @@
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.226925+00:00
+              Docs Build Date UTC : 2024-08-09 17:14:29.111682+00:00
               -->
 
           </section>

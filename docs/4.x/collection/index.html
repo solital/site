@@ -12,13 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
-  <link rel="stylesheet" href="../css/styles/atom-one-dark.css">
+  <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   
@@ -26,8 +27,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/highlight.pack.js"></script>
+  <script src="../js/highlight.min.js"></script>
   <script src="../js/scripts.js"></script>
+  <script src="../js/php.min.js"></script>
+  <script src="../js/php-template.min.js"></script>
+  <script src="../js/bash.min.js"></script>
+  <script src="../js/yaml.min.js"></script>
   <script>hljs.highlightAll();</script>
 
   
@@ -969,7 +974,10 @@ $filtered-&gt;all();
 </code></pre>
 <h2 id="except_multiple"><code>except_multiple()</code></h2>
 <p>The except_multiple method returns all items in the data array except for those with the specified keys:</p>
-<pre><code class="language-php">collection([['product_id' =&gt; 1, 'price' =&gt; 100, 'discount' =&gt; false],['product_id' =&gt; 2, 'price' =&gt; 500, 'discount' =&gt; true]]);
+<pre><code class="language-php">collection([
+    ['product_id' =&gt; 1, 'price' =&gt; 100, 'discount' =&gt; false],
+    ['product_id' =&gt; 2, 'price' =&gt; 500, 'discount' =&gt; true]
+]);
 $filtered = $make_data-&gt;except_multiple(['price', 'discount']);
 $filtered-&gt;all();
 </code></pre>
@@ -1914,7 +1922,7 @@ $zipped-&gt;all();
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.133166+00:00
+              Docs Build Date UTC : 2024-08-09 17:14:29.002336+00:00
               -->
 
           </section>

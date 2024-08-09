@@ -12,13 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
-  <link rel="stylesheet" href="../css/styles/atom-one-dark.css">
+  <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   
@@ -26,8 +27,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/highlight.pack.js"></script>
+  <script src="../js/highlight.min.js"></script>
   <script src="../js/scripts.js"></script>
+  <script src="../js/php.min.js"></script>
+  <script src="../js/php-template.min.js"></script>
+  <script src="../js/bash.min.js"></script>
+  <script src="../js/yaml.min.js"></script>
   <script>hljs.highlightAll();</script>
 
   
@@ -397,7 +402,10 @@
 <ul>
 <li>Key used for encryption and passwords. Use the <code>php vinci generate:hash</code> command to generate a key.</li>
 </ul>
-<p><strong>WARNING: When creating a new project, an encrypted key is already generated. Changing the generated key can break your project</strong></p>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">WARNING: When creating a new project, an encrypted key is already generated. Changing the generated key can break your project</h6>
+</div>
+
 <pre><code class="language-bash">APP_HASH=
 </code></pre>
 <ul>
@@ -428,7 +436,10 @@ MAIL_PORT=
 <ul>
 <li>Variables used in encryption. It is recommended that you add new values to these variables.</li>
 </ul>
-<p><strong>NOTE: If you are using the <code>APP_HASH</code> variable, then it is not necessary to use the variables below</strong></p>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">If you are using the `APP_HASH` variable, then it is not necessary to use the variables below</h6>
+</div>
+
 <pre><code class="language-bash">FIRST_SECRET=first_secret
 SECOND_SECRET=second_secret
 </code></pre>
@@ -468,7 +479,7 @@ SECOND_SECRET=second_secret
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-06-04 12:04:53.164412+00:00
+              Docs Build Date UTC : 2024-08-09 17:14:29.033577+00:00
               -->
 
           </section>
