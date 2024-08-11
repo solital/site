@@ -438,7 +438,8 @@ class UserMiddleware implements BaseMiddlewareInterface
 </code></pre>
 <h2 id="adding-middleware">Adding Middleware</h2>
 <p>If you only have one route that needs to add middleware, use the <code>addMiddleware</code> method.</p>
-<pre><code class="language-php">Course::match(['get', 'post'], '/user/login', 'UserMiddleware@login')-&gt;addMiddleware('\Solital\Middleware\UserMiddleware:guest');
+<pre><code class="language-php">Course::match(['get', 'post'], '/user/login', 'UserMiddleware@login')
+    -&gt;addMiddleware('\Solital\Middleware\UserMiddleware:guest');
 </code></pre>
 <h2 id="restrict-access-to-ip">Restrict access to IP</h2>
 <p>You can white and/or blacklist access to IP's using the build in <code>IpRestrictAccess</code> middleware.</p>
@@ -496,7 +497,7 @@ class IpRestrictMiddleware extends IpRestrictAccess implements BaseMiddlewareInt
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-08-09 17:14:29.080440+00:00
+              Docs Build Date UTC : 2024-08-11 15:53:10.883486+00:00
               -->
 
           </section>

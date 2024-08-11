@@ -772,8 +772,9 @@ class CustomExceptionHandler implements ExceptionHandlerInterface
         /* Other error */
         if($error instanceof MyCustomException) {
             $request-&gt;setRewriteRoute(
-                // Add new route based on current url (minus query-string) and add custom parameters.
-                (new RouteUrl(url(null, null, []), 'PageController@error'))-&gt;setParameters(['exception' =&gt; $error])
+                /* Add new route based on current url (minus query-string) and add custom parameters. */
+                (new RouteUrl(url(null, null, []), 'PageController@error'))
+                    -&gt;setParameters(['exception' =&gt; $error])
             );
             return; 
         }
@@ -791,13 +792,21 @@ class CustomExceptionHandler implements ExceptionHandlerInterface
 <h3 id="prevent-merge-of-parent-exception-handlers">Prevent merge of parent exception-handlers</h3>
 <p>By default the router will merge exception-handlers to any handlers provided by parent groups, and will be executed in the order of newest to oldest.</p>
 <p>If you want your groups exception handler to be executed independently, you can add the <code>mergeExceptionHandlers</code> attribute and set it to <code>false</code>.</p>
-<pre><code class="language-php">Course::group(['prefix' =&gt; '/', 'exceptionHandler' =&gt; FirstExceptionHandler::class, 'mergeExceptionHandlers' =&gt; false], function() {
+<pre><code class="language-php">Course::group([
+    'prefix' =&gt; '/', 
+    'exceptionHandler' =&gt; FirstExceptionHandler::class, 
+    'mergeExceptionHandlers' =&gt; false
+], function() {
 
     Course::group(['prefix' =&gt; '/admin', 'exceptionHandler' =&gt; SecondExceptionHandler::class], function() {
         // Both SecondExceptionHandler and FirstExceptionHandler will trigger (in that order).
     });
 
-    Course::group(['prefix' =&gt; '/user', 'exceptionHandler' =&gt; SecondExceptionHandler::class, 'mergeExceptionHandlers' =&gt; false], function() {
+    Course::group([
+        'prefix' =&gt; '/user', 
+        'exceptionHandler' =&gt; SecondExceptionHandler::class, 
+        'mergeExceptionHandlers' =&gt; false
+    ], function() {
         // Only SecondExceptionHandler will trigger.
     });
 });
@@ -902,7 +911,6 @@ class Router extends Course {
     }
 }
 </code></pre>
-<hr />
 <h2 id="form-method-spoofing">Form Method Spoofing</h2>
 <p>HTML forms do not support <code>PUT</code>,<code>PATCH</code> or <code>DELETE</code> actions. Therefore, when defining the <code>PUT</code>,<code>PATCH</code> or <code>DELETE</code> routes that are called from an HTML form, you will need to use the <code>spoofing</code> helper to add a hidden <code>_method</code> field to the form. The value sent with the <code>_method</code> field will be used as the HTTP request method:</p>
 <pre><code class="language-php">&lt;form method=&quot;post&quot; action=&quot;{{ url() }}&quot;&gt;
@@ -923,7 +931,10 @@ use Solital\Core\Course\Course;
 /* Adding custom csrfVerifier here */
 Course::csrfVerifier(new \Demo\Middlewares\CsrfVerifier());
 
-Course::group(['middleware' =&gt; \Demo\Middlewares\Site::class, 'exceptionHandler' =&gt; \Demo\Handlers\CustomExceptionHandler::class], function() {
+Course::group([
+    'middleware' =&gt; \Demo\Middlewares\Site::class, 
+    'exceptionHandler' =&gt; \Demo\Handlers\CustomExceptionHandler::class
+], function() {
 
     Course::get('/answers/{id}', 'ControllerAnswers@show', ['where' =&gt; ['id' =&gt; '[0-9]+']]);
 
@@ -982,7 +993,7 @@ Course::get('/page/404', 'ControllerPage@notFound', ['as' =&gt; 'page.notfound']
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-08-09 17:14:29.096062+00:00
+              Docs Build Date UTC : 2024-08-11 15:53:10.883486+00:00
               -->
 
           </section>
