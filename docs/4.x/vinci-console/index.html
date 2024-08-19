@@ -658,13 +658,11 @@
 
 namespace Solital\Console\Command;
 
-use Solital\Core\Console\{Command, MessageTrait};
+use Solital\Core\Console\Command;
 use Solital\Core\Console\Interface\CommandInterface;
 
 class UserCommand extends Command implements CommandInterface
 {
-    use MessageTrait;
-
     /**
      * @var string
      */
@@ -708,6 +706,7 @@ class UserCommand extends Command implements CommandInterface
 <p>Arguments can be retrieved using the <code>$arguments</code> variable:</p>
 <pre><code class="language-bash">php vinci user:cmd myArgument
 </code></pre>
+<p>In the class:</p>
 <pre><code class="language-php">protected array $arguments = ['name'];
 </code></pre>
 <p>If you pass more arguments than are specified in your command's class, a warning will be displayed.</p>
@@ -1154,7 +1153,7 @@ Table::formattedRowData($values, 50, true);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-08-09 17:14:29.127304+00:00
+              Docs Build Date UTC : 2024-08-19 10:40:33.799037+00:00
               -->
 
           </section>
