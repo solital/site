@@ -215,6 +215,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
+      <a href="../cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cookie
+      </a>
+    
       <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
@@ -243,12 +247,12 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      <a href="../session/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session
       </a>
     
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
       </a>
     
       <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
@@ -386,6 +390,15 @@
                     </li>
                   
                   
+                    <li id="bullet-item">
+                      <a href="#password-policy" class="menu-main-item">Password Policy</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#customizing-error-messages" class="menu-children-item">Customizing error messages</a>
+                    </li>
+                  
+                  
                 </ul>
 
                 
@@ -423,12 +436,64 @@
 <p>As mentioned in the introduction, the <code>SecurePassword</code> package uses a “pepper” value. To change the value of this pepper, you can edit the value of the <code>peeper</code> key in the <code>auth.yaml</code> file. However, it is recommended to use the <code>APP_HASH</code> variable. If this variable does not exist in your project, run the command <code>php vinci generate:hash</code>.</p>
 <p>If this variable is present in the <code>.env</code> file, then you can delete the <code>peeper</code> in the <code>auth.yaml</code> file.</p>
 <div class="alert alert-info mt-4" role="alert">
-    <h6 class="fw-semibold">Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting. If you are using Solital Core >= 4.2, the `pepper` variable will not be present in the `auth.yaml` file. Instead, Solital will use the value of the `APP_HASH` variable.</h6>
+    <h6 class="fw-semibold">Don't change the value of this key too often, as you will need to create a new password each time this value changes. Change only if necessary or if your project is just starting. If you are using Solital Core >= 4.2, the <strong>pepper</strong> variable will not be present in the <strong>auth.yaml</strong> file. Instead, Solital will use the value of the <strong>APP_HASH</strong> variable.</h6>
 </div>
 
 <h3 id="changing-peeper-encryption">Changing Peeper encryption</h3>
 <p>By default, peeper is encrypted using OpenSSL. You can switch to Sodium encryption by changing the value of the <code>crypt_type</code> variable in the <code>auth.yaml</code> file.</p>
 <pre><code class="language-yaml">crypt_type: sodium
+</code></pre>
+<h2 id="password-policy">Password Policy</h2>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">Available since Core 4.6.0</h6>
+</div>
+
+<p>You can set some requirements when creating a password, such as password length, special characters, etc.</p>
+<pre><code class="language-php">use Solital\Core\Auth\Password;
+
+$password = new Password();
+$password-&gt;setMinimumLength(15);
+$password-&gt;requireUppercase();
+$password-&gt;requireDigits();
+$password-&gt;requireSpecialChars();
+$password-&gt;setSpecialChars('!@#%');
+$result = $password-&gt;validatePassword('strongpassword');
+
+if ($result === true) {
+    echo &quot;Password meets the policy requirements.&quot;;
+    // Go and do things with it
+} else {
+    echo &quot;Password validation failed. Errors:\n&quot;;
+    print_r($result);
+    // Go and display these error messages to your user
+}
+</code></pre>
+<h3 id="customizing-error-messages">Customizing error messages</h3>
+<p>To customize error messages, you should use the <code>setCustomErrorMessages</code> method. Using the example from the previous topic, the code would look like this:</p>
+<pre><code class="language-php">use Solital\Core\Auth\Password;
+
+$customErrorMessages = [
+    'min_length' =&gt; 'Your password is too short. It must be at least 15 characters long.',
+    'uppercase' =&gt; 'Your password must contain at least one uppercase letter.',
+];
+
+$password = new Password();
+$password-&gt;setMinimumLength(15);
+$password-&gt;requireUppercase();
+$password-&gt;requireDigits();
+$password-&gt;requireSpecialChars();
+$password-&gt;setSpecialChars('!@#%');
+$password-&gt;setCustomErrorMessages($customErrorMessages);
+$result = $password-&gt;validatePassword('strongpassword');
+
+if ($result === true) {
+    echo &quot;Password meets the policy requirements.&quot;;
+    // Go and do things with it
+} else {
+    echo &quot;Password validation failed. Errors:\n&quot;;
+    print_r($result);
+    // Go and display these error messages to your user
+}
 </code></pre>
                 
 
@@ -462,7 +527,7 @@
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-08-09 17:14:29.111682+00:00
+              Docs Build Date UTC : 2024-10-11 16:21:41.934441+00:00
               -->
 
           </section>

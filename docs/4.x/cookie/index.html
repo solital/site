@@ -5,7 +5,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTTP Client - Solital Framework 4.x</title>
+  <title>Cookie - Solital Framework 4.x</title>
   <link rel="shortcut icon" href="../img/favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,7 +153,7 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
     Components
   </a>
 
@@ -183,7 +183,7 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Event Loop
       </a>
     
-      <a href="./" class="dashboard-nav-dropdown-item text-black">
+      <a href="../http-client/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> HTTP Client
       </a>
     
@@ -205,7 +205,7 @@
         
         
 <div class="dashboard-nav-dropdown">
-  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle ">
+  <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle active ">
     Resources
   </a>
 
@@ -215,7 +215,7 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
-      <a href="../cookie/" class="dashboard-nav-dropdown-item text-black">
+      <a href="./" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cookie
       </a>
     
@@ -359,7 +359,7 @@
           <section class="container section">
             <div class="row">
               <div class="col-md-12 col-sm-12 w-100">
-                <h1 class="mt-4 font-weight-normal title-page">HTTP Client</h1>
+                <h1 class="mt-4 font-weight-normal title-page">Cookie</h1>
               </div>
 
               <div class="col-md-12 col-sm-12 mt-3">
@@ -368,222 +368,89 @@
                 <ul class="ml-5 mb-5">
                   
                     <li id="bullet-item">
-                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                      <a href="#static-method" class="menu-main-item">Static method</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#basic-use" class="menu-main-item">Basic use</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#supported-methods" class="menu-main-item">Supported methods</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#return-types" class="menu-main-item">Return types</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#sending-data" class="menu-main-item">Sending data</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#custom-headers" class="menu-main-item">Custom Headers</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#disabling-ssl-verification" class="menu-main-item">Disabling SSL verification</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#authentication" class="menu-main-item">Authentication</a>
+                      <a href="#builder-pattern" class="menu-main-item">Builder pattern</a>
                     </li>
                   
                     <li id="bullet-childern-item">
-                      <a href="#basic-authentication" class="menu-children-item">Basic authentication</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#bearer-authentication" class="menu-children-item">Bearer authentication</a>
+                      <a href="#delete-cookie" class="menu-children-item">Delete cookie</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#securing-your-api" class="menu-main-item">Securing your API</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#with-jwt-token" class="menu-children-item">With JWT token</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#with-basic-auth" class="menu-children-item">With Basic Auth</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#with-digest-auth" class="menu-children-item">With Digest Auth</a>
-                    </li>
-                  
-                    <li id="bullet-childern-item">
-                      <a href="#unauthorize-an-authenticated-user" class="menu-children-item">Unauthorize an authenticated user</a>
+                      <a href="#reading-cookies" class="menu-main-item">Reading cookies</a>
                     </li>
                   
                   
                     <li id="bullet-item">
-                      <a href="#asynchronous-requests" class="menu-main-item">Asynchronous requests</a>
-                    </li>
-                  
-                  
-                    <li id="bullet-item">
-                      <a href="#upload-and-download" class="menu-main-item">Upload and download</a>
+                      <a href="#parsing-cookies" class="menu-main-item">Parsing cookies</a>
                     </li>
                   
                   
                 </ul>
 
                 
-                <h2 id="introduction">Introduction</h2>
-<p>Solital has a component to manipulate the HTTP client, useful for consuming API and making HTTP requests.</p>
-<h2 id="basic-use">Basic use</h2>
-<p>To make basic use of the component, you will need use <code>HttpClient</code> class. Then, call the function <code>get</code>, <code>post</code> or other, and the url as a parameter.</p>
-<pre><code class="language-php">use Solital\Core\Http\Client\HttpClient;
+                <h2 id="static-method">Static method</h2>
+<p>This library provides a static method that is compatible to PHP’s built-in <code>setcookie(...)</code> function but includes support for more recent features such as the <code>SameSite</code> attribute:</p>
+<pre><code class="language-php">use Solital\Core\Resource\Cookie;
 
-$response = HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;responseJson();
-
-pre($response);
+Cookie::setcookie('SID', '31d4d96e407aad42');
+// or
+Cookie::setcookie('SID', '31d4d96e407aad42', time() + 3600, '/~rasmus/', 'example.com', true, true, 'Lax');
 </code></pre>
-<h2 id="supported-methods">Supported methods</h2>
-<p>HttpClient supports the methods below.</p>
-<pre><code class="language-php">HttpClient::get()
-HttpClient::post()
-HttpClient::put()
-HttpClient::delete()
-HttpClient::patch()
-HttpClient::options()
-</code></pre>
-<h2 id="return-types">Return types</h2>
-<p>You can return the answer in json, array or object. The methods below show an example.</p>
-<pre><code class="language-php">/** Return json */
-$client-&gt;responseJson();
+<h2 id="builder-pattern">Builder pattern</h2>
+<p>Instances of the <code>Cookie</code> class let you build a cookie conveniently by setting individual properties. This class uses reasonable defaults that may differ from defaults of the <code>setcookie</code> function.</p>
+<pre><code class="language-php">$cookie = new Cookie('SID');
+$cookie-&gt;setValue('31d4d96e407aad42');
+$cookie-&gt;setMaxAge(60 * 60 * 24);
+// $cookie-&gt;setExpiryTime(time() + 60 * 60 * 24);
+$cookie-&gt;setPath('/~rasmus/');
+$cookie-&gt;setDomain('example.com');
+$cookie-&gt;setHttpOnly(true);
+$cookie-&gt;setSecureOnly(true);
+$cookie-&gt;setSameSiteRestriction('Strict');
 
-/** Return array */
-$client-&gt;responseArray();
-
-/** Return object */
-$client-&gt;responseObject();
+// echo $cookie;
+// or
+$cookie-&gt;save();
+// or
+// $cookie-&gt;saveAndSet();
 </code></pre>
-<p>If you want to debug the request, use the <code>enableVerboseOutput()</code> method.</p>
-<pre><code class="language-php">$response = HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;enableVerboseOutput()-&gt;responseJson();
-
-pre($response);
+<p>The method calls can also be chained:</p>
+<pre><code class="language-php">(new Cookie('SID'))
+    -&gt;setValue('31d4d96e407aad42')
+    -&gt;setMaxAge(60 * 60 * 24)
+    -&gt;setSameSiteRestriction('None')
+    -&gt;save();
 </code></pre>
-<h2 id="sending-data">Sending data</h2>
-<p>If you are using a POST or PUT request, for example, and need to send data to the HTTP header, you can pass an array with the values on second parameter.</p>
-<pre><code class="language-php">$data = ['email' =&gt; 'solital@email.com'];
-
-$response = HttpClient::post('http://127.0.0.1:8080/api/post', $data)-&gt;responseJson();
-$response = HttpClient::put('http://127.0.0.1:8080/api/put', $data)-&gt;responseJson();
+<h3 id="delete-cookie">Delete cookie</h3>
+<p>A cookie can later be deleted simply like this:</p>
+<pre><code class="language-php">$cookie-&gt;delete();
+// or
+$cookie-&gt;deleteAndUnset();
 </code></pre>
-<h2 id="custom-headers">Custom Headers</h2>
-<p>By default, HttpClient has the following headers:</p>
+<p><strong>Note:</strong> For the deletion to work, the cookie must have the same settings as the cookie that was originally saved – except for its value, which doesn’t need to be set. So you should remember to pass appropriate values to <code>setPath(...)</code>, <code>setDomain(...)</code>, <code>setHttpOnly(...)</code> and <code>setSecureOnly(...)</code> again.</p>
+<h2 id="reading-cookies">Reading cookies</h2>
 <ul>
-<li>Content-Type: application/json</li>
-<li>Accept: application/json</li>
+<li>Checking whether a cookie exists:</li>
 </ul>
-<p>To add other headers to the request, use <code>setHeaders</code> method.</p>
-<pre><code class="language-php">$headers = [
-    'Content-Type: application/pdf'
-];
-
-HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;setHeaders($headers)-&gt;responseJson();
+<pre><code class="language-php">Cookie::exists('first_visit');
 </code></pre>
-<h2 id="disabling-ssl-verification">Disabling SSL verification</h2>
-<p>HttpClient, by default, use SSL verification. To disable verification, use the <code>disableSSL()</code> method.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;disableSSL()-&gt;responseJson();
+<ul>
+<li>Reading a cookie’s value (with optional default value):</li>
+</ul>
+<pre><code class="language-php">Cookie::get('first_visit');
+// or
+Cookie::get('first_visit', time());
 </code></pre>
-<h2 id="authentication">Authentication</h2>
-<h3 id="basic-authentication">Basic authentication</h3>
-<p>If you are handling an API with authentication in basic, you can use the <code>basicAuth()</code> method to do the authentication. The first parameter will be the username, while the second parameter will be the password.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;basicAuth('user', 'pass')-&gt;responseJson();
-</code></pre>
-<h3 id="bearer-authentication">Bearer authentication</h3>
-<p>For authentications using the bearer token, you can use the <code>bearerAuth()</code> method to provide the authentication token.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth('2edac0d91305c9207d36eda3cbf2c0d7')-&gt;responseJson();
-</code></pre>
-<h2 id="securing-your-api">Securing your API</h2>
-<p>When we work with REST API, we need to protect our routes from unauthorized users.</p>
-<h3 id="with-jwt-token">With JWT token</h3>
-<p>The most common way to secure an API is through a JWT token. To perform this type of protection, use the <code>protectRoute()</code> method of the <code>JWT</code> class.</p>
-<pre><code class="language-php">use Solital\Core\Http\Client\JWT;
-
-Course::get('/api/get', function () {
-
-    JWT::protectRoute(&quot;your-secret&quot;);
-
-});
-</code></pre>
-<p>To authenticate, you can generate a token using the <code>encode</code> method of the <code>JWT</code> class and send this token using the <code>bearerToken()</code> method.</p>
-<pre><code class="language-php">use Solital\Core\Http\Client\JWT;
-
-$secret = &quot;your-secret&quot;;
-
-$payload = [
-    &quot;sub&quot; =&gt; &quot;1234567890&quot;,
-    &quot;name&quot; =&gt; &quot;Brenno&quot;,
-    &quot;role&quot; =&gt; &quot;admin&quot;
-];
-
-$token = JWT::encode($payload, $secret);
-
-HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth($token)-&gt;responseJson();
-</code></pre>
-<h3 id="with-basic-auth">With Basic Auth</h3>
-<p>To secure your API using <code>basic</code> authentication, use <code>Guardian</code> class with <code>protectBasicAuth()</code> method providing the username and password to authenticate.</p>
-<pre><code class="language-php">use Solital\Core\Security\Guardian;
-
-Guardian::protectBasicAuth('admin', 'admin');
-</code></pre>
-<h3 id="with-digest-auth">With Digest Auth</h3>
-<p>To use <code>digest</code> to protect your API, use the <code>protectDigestAuth()</code> method. In this method, you must use an array to inform the username and password. You can define multiple users for this authentication type.</p>
-<pre><code class="language-php">use Solital\Core\Security\Guardian;
-
-Guardian::protectDigestAuth(['admin' =&gt; 'admin', 'user2' =&gt; 'pass2']);
-</code></pre>
-<h3 id="unauthorize-an-authenticated-user">Unauthorize an authenticated user</h3>
-<p>If you want to deauthorize a user already authenticating (using basic or digest), you can use the <code>unauthorizeAuth</code> method.</p>
-<pre><code class="language-php">use Solital\Core\Security\Guardian;
-
-Guardian::unauthorizeAuth();
-</code></pre>
-<h2 id="asynchronous-requests">Asynchronous requests</h2>
-<p>If you need to make multiple requests, you can use the <code>sendAsyncRequest()</code> method. This method makes use of PHP's <code>curl_multi_init</code> function. In routes, you will use the <code>async()</code> method to mark routes as asynchronous requests.</p>
-<pre><code class="language-php">$response = HttpClient::sendAsyncRequest(function () {
-
-    HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;async();
-    HttpClient::post('http://127.0.0.1:8080/api/post', ['email' =&gt; 'solital@email.com'])-&gt;async();
-
-})-&gt;responseObject();
-
-print_r($response);
-</code></pre>
-<h2 id="upload-and-download">Upload and download</h2>
-<p>You can upload or download a file using the <code>CurlHandle</code> class.</p>
-<pre><code class="language-php"># Upload
-$url = 'http://127.0.0.1:8080/api/file';
-
-CurlHandle::upload($url, 'data test', 'test.txt');
-
-# Download
-$url = 'https://images.pexels.com/photos/...';
-
-CurlHandle::downloader($url, 'photo.jpg');
+<h2 id="parsing-cookies">Parsing cookies</h2>
+<pre><code class="language-php">$cookieHeader = 'Set-Cookie: test=php.net; expires=Thu, 
+09-Jun-2016 16:30:32 GMT; Max-Age=3600; path=/~rasmus/; secure';
+$cookieInstance = Cookie::parse($cookieHeader);
 </code></pre>
                 
 
@@ -595,10 +462,10 @@ CurlHandle::downloader($url, 'photo.jpg');
                 <section aria-label="breadcrumb" class="mt-4">
                   <ol class="breadcrumb">
                     
-                      <li class="breadcrumb-item"><a href="../event-loop/">&#8592; Event Loop</a></li>
+                      <li class="breadcrumb-item"><a href="../browser-storage/">&#8592; Browser Storage</a></li>
                     
                     
-                      <li class="breadcrumb-item"><a href="../mailer-component/">Mailer &#8594;</a></li>
+                      <li class="breadcrumb-item"><a href="../collection/">Collection &#8594;</a></li>
                     
                   </ol>
                 </section>
@@ -617,7 +484,7 @@ CurlHandle::downloader($url, 'photo.jpg');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-10-11 16:21:41.887576+00:00
+              Docs Build Date UTC : 2024-10-11 16:21:41.856358+00:00
               -->
 
           </section>

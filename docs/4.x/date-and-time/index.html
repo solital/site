@@ -215,6 +215,10 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Browser Storage
       </a>
     
+      <a href="../cookie/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Cookie
+      </a>
+    
       <a href="../collection/" class="dashboard-nav-dropdown-item text-black">
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Collection
       </a>
@@ -243,12 +247,12 @@
         <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Queue
       </a>
     
-      <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
+      <a href="../session/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session
       </a>
     
-      <a href="../session-and-cookie/" class="dashboard-nav-dropdown-item text-black">
-        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Session and Cookie
+      <a href="../string-manipulate/" class="dashboard-nav-dropdown-item text-black">
+        <span class="text-danger" style="margin-right: 10px;">&#10140;</span> Strings
       </a>
     
       <a href="../validation/" class="dashboard-nav-dropdown-item text-black">
@@ -364,7 +368,11 @@
                 <ul class="ml-5 mb-5">
                   
                     <li id="bullet-item">
-                      <a href="#returning-in-different-formats" class="menu-main-item">Returning in different formats</a>
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#returning-in-different-formats" class="menu-children-item">Returning in different formats</a>
                     </li>
                   
                   
@@ -390,6 +398,10 @@
                   
                     <li id="bullet-childern-item">
                       <a href="#minutes" class="menu-children-item">Minutes</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#set-micro-seconds" class="menu-children-item">Set micro seconds</a>
                     </li>
                   
                   
@@ -422,29 +434,31 @@
     </h6>
 </div>
 
+<h2 id="introduction">Introduction</h2>
 <p>Dates are an important part of any system. To manipulate dates in Solital, you can use the <code>Temporal</code> component. The <code>Temporal</code> component uses the <code>DateTimeImmutable</code> class.</p>
 <pre><code class="language-php">use Solital\Core\Resource\Temporal\Temporal;
 
-$date_time = Temporal::now();
+$temporal = Temporal::now();
 </code></pre>
 <p>The <code>now()</code> method takes the current date and time.</p>
-<h2 id="returning-in-different-formats">Returning in different formats</h2>
+<h3 id="returning-in-different-formats">Returning in different formats</h3>
 <p>You can return a date using one of the following methods:</p>
-<pre><code class="language-php">$date_time-&gt;toAtom();
-$date_time-&gt;toCookie();
-$date_time-&gt;toISO8601Expanded();
-$date_time-&gt;toRFC1036();
-$date_time-&gt;toRFC1123();
-$date_time-&gt;toRFC2822();
-$date_time-&gt;toRFC3339();
-$date_time-&gt;toRFC3339Extended();
-$date_time-&gt;toRFC7231();
-$date_time-&gt;toRFC822();
-$date_time-&gt;toRFC850();
-$date_time-&gt;toRSS();
-$date_time-&gt;toW3C();
-$date_time-&gt;toUnixTimestamp();
-$date_time-&gt;toFormat('Y-m-d');
+<pre><code class="language-php">$temporal-&gt;toAtom();
+$temporal-&gt;toCookie();
+$temporal-&gt;toISO8601Expanded();
+$temporal-&gt;toRFC1036();
+$temporal-&gt;toRFC1123();
+$temporal-&gt;toRFC2822();
+$temporal-&gt;toRFC3339();
+$temporal-&gt;toRFC3339Extended();
+$temporal-&gt;toRFC7231();
+$temporal-&gt;toRFC822();
+$temporal-&gt;toRFC850();
+$temporal-&gt;toRSS();
+$temporal-&gt;toW3C();
+$temporal-&gt;toUnixTimestamp();
+$temporal-&gt;toFormat('Y-m-d');
+$temporal-&gt;toi18nFormat('YYYY-MM-dd'); // Available since Core 4.6.0
 </code></pre>
 <h2 id="adding-and-removing-date-and-time">Adding and removing date and time</h2>
 <p>Temporal has methods for adding and removing days, months and years to a date, and also adding and removing hours and minutes to a time.</p>
@@ -493,23 +507,50 @@ var_dump($result);
 <pre><code class="language-php">$result = Temporal::now()-&gt;subMinutes(3)-&gt;toFormat('H:i:s');
 var_dump($result);
 </code></pre>
+<h3 id="set-micro-seconds">Set micro seconds</h3>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">Abailable since Core 4.6.0</h6>
+</div>
+
+<pre><code class="language-php">$result = Temporal::now()-&gt;setMicrosecond(10000)-&gt;toFormat('H:i:s');
+var_dump($result);
+</code></pre>
 <h2 id="returning-specific-times">Returning specific times</h2>
 <p>The Temporal component has methods to return specific times from a date/time, such as years, days, name of the month, and others.</p>
 <p><strong>Date</strong></p>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">
+    The methods <strong>getMonthName</strong> and <strong>getMonthShortName</strong> are deprecated since Core 4.6.0. Instead of, use <strong>getTextualMonth</strong> and <strong>getTextualShortMonth</strong> methods
+    </h6>
+</div>
+
 <pre><code class="language-php">Temporal::now()-&gt;getDay();
 Temporal::now()-&gt;getYear();
 Temporal::now()-&gt;getMonthInt();
-Temporal::now()-&gt;getMonthName();
-Temporal::now()-&gt;getMonthShortName();
+Temporal::now()-&gt;getMonthName(); // Deprecated
+Temporal::now()-&gt;getMonthName(); // Deprecated
+</code></pre>
+<p>The methods below are available since Core 4.6.0</p>
+<pre><code class="language-php">Temporal::now()-&gt;getTextualDay();
+Temporal::now()-&gt;getTextualShortDay();
+Temporal::now()-&gt;getTextualMonth();
+Temporal::now()-&gt;getTextualShortMonth();
+Temporal::now()-&gt;getLastDayOfMonth();
+Temporal::now()-&gt;getEasterDate();
+Temporal::now()-&gt;getEasterDateOrthodox();
 </code></pre>
 <p><strong>Time</strong></p>
 <pre><code class="language-php">Temporal::now()-&gt;getHour();
 Temporal::now()-&gt;getMinute();
 Temporal::now()-&gt;getSecond();
+Temporal::now()-&gt;getMicrosecond(); // Available since Core 4.6.0
 </code></pre>
 <h2 id="date-on-different-days">Date on different days</h2>
 <p>If you want to manipulate a date other than the current date, you can use the <code>createDatetime()</code> method. This method, you can create a custom date and time.</p>
 <pre><code class="language-php">echo Temporal::createDatetime('2024-04-04 08:20:10')-&gt;toRFC1123();
+</code></pre>
+<p>Or, you can use <code>createFromTimeStamp</code> method (available since Core 4.6.0). This method has a polyfill to PHP 8.3.</p>
+<pre><code class="language-php">echo Temporal::createFromTimeStamp('1703155440')-&gt;toRFC1123();
 </code></pre>
 <p>If you need to get the date of the previous day, the current day or the next day, there are three methods to do this job.</p>
 <pre><code class="language-php">Temporal::today()-&gt;toRFC1036();
@@ -526,6 +567,7 @@ Temporal::now()-&gt;isFriday();
 Temporal::now()-&gt;isSaturday();
 Temporal::now()-&gt;isSunday();
 Temporal::now()-&gt;isWeekend();
+Temporal::now()-&gt;isLeapYear(); // Available since Core 4.6.0
 </code></pre>
 <h2 id="returning-datetimeimmutable-instance">Returning DateTimeImmutable instance</h2>
 <p>To return an instance of type <code>DateTimeImmutable</code>, use the <code>getDateTimeImmutableInstance</code> method.</p>
@@ -568,7 +610,7 @@ var_dump($modify_datetime); // 2024-07-04
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-08-09 17:14:29.033577+00:00
+              Docs Build Date UTC : 2024-10-11 16:21:41.871959+00:00
               -->
 
           </section>
