@@ -494,6 +494,10 @@
                     </li>
                   
                     <li id="bullet-childern-item">
+                      <a href="#between" class="menu-children-item">between()</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
                       <a href="#compare" class="menu-children-item">compare()</a>
                     </li>
                   
@@ -510,6 +514,10 @@
                     </li>
                   
                     <li id="bullet-childern-item">
+                      <a href="#doesntcontain" class="menu-children-item">doesntContain()</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
                       <a href="#endswith" class="menu-children-item">endsWith()</a>
                     </li>
                   
@@ -523,6 +531,10 @@
                   
                     <li id="bullet-childern-item">
                       <a href="#uniquechars" class="menu-children-item">uniqueChars()</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#uuid" class="menu-children-item">uuid()</a>
                     </li>
                   
                     <li id="bullet-childern-item">
@@ -755,6 +767,11 @@ echo $str-&gt;value();
 </code></pre>
 <h2 id="not-chainable-methods">Not chainable methods</h2>
 <p>The methods below must be used statically.</p>
+<h3 id="between"><code>between()</code></h3>
+<p>Returns everything in a source string that exists between the first occurance of each of the two key substrings</p>
+<pre><code class="language-php">$res = $ Str::between('Hello, this is a [sample] string.', '[', ']');
+pre($res); // sample
+</code></pre>
 <h3 id="compare"><code>compare()</code></h3>
 <p>Binary safe string comparison. </p>
 <ul>
@@ -782,6 +799,11 @@ echo $str-&gt;value();
 <pre><code class="language-php">$res = Str::countChars('abababcabc');
 pre($res);
 </code></pre>
+<h3 id="doesntcontain"><code>doesntContain()</code></h3>
+<p>Does current string not contain a subtring?</p>
+<pre><code class="language-php">$res = Str::doesntContain('dedede', 'abababcabc');
+pre($res);
+</code></pre>
 <h3 id="endswith"><code>endsWith()</code></h3>
 <p>Checks if haystack ends with needle</p>
 <pre><code class="language-php">echo Str::endsWith('foo is bar sometimes', 'sometimes');
@@ -797,6 +819,10 @@ pre($res);
 <h3 id="uniquechars"><code>uniqueChars()</code></h3>
 <p>Returns a string containing all unique characters (in current string).</p>
 <pre><code class="language-php">echo Str::uniqueChars('abcabdabcd');
+</code></pre>
+<h3 id="uuid"><code>uuid()</code></h3>
+<p>Returns the identifier as a raw binary string</p>
+<pre><code class="language-php">echo Str::uuid();
 </code></pre>
 <h3 id="wordcount"><code>wordCount()</code></h3>
 <p>Counts the number of words inside string.</p>
@@ -844,7 +870,7 @@ pre($res);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-10-11 16:21:41.950090+00:00
+              Docs Build Date UTC : 2025-03-31 14:04:32.330161+00:00
               -->
 
           </section>

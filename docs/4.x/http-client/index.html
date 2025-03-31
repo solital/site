@@ -515,7 +515,9 @@ HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;setHeaders($headers)-&gt;re
 </code></pre>
 <h3 id="bearer-authentication">Bearer authentication</h3>
 <p>For authentications using the bearer token, you can use the <code>bearerAuth()</code> method to provide the authentication token.</p>
-<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')-&gt;bearerAuth('2edac0d91305c9207d36eda3cbf2c0d7')-&gt;responseJson();
+<pre><code class="language-php">HttpClient::get('http://127.0.0.1:8080/api/get')
+    -&gt;bearerAuth('2edac0d91305c9207d36eda3cbf2c0d7')
+    -&gt;responseJson();
 </code></pre>
 <h2 id="securing-your-api">Securing your API</h2>
 <p>When we work with REST API, we need to protect our routes from unauthorized users.</p>
@@ -617,7 +619,7 @@ CurlHandle::downloader($url, 'photo.jpg');
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2024-10-11 16:21:41.887576+00:00
+              Docs Build Date UTC : 2025-03-31 14:04:32.267675+00:00
               -->
 
           </section>
