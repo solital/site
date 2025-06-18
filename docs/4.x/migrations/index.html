@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
   <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
   
 
@@ -58,6 +58,14 @@
           <img src="../img/solital-logo-2-sm-trans-2.png" alt="Solital Framework">
         </a>
       </header>
+
+      <!-- <section role="search">
+        <form action="../ search.html" method="get">
+          <div class="mb-3 input-group-sm">
+            <input type="search" name="search-docs" placeholder="&#xf002 Search..." class="form-control" autocomplete="off">
+          </div>
+        </form>
+      </section> -->
 
       <nav class="dashboard-nav-list">
         
@@ -381,6 +389,10 @@
                       <a href="#structure-of-the-migration" class="menu-main-item">Structure of the migration</a>
                     </li>
                   
+                    <li id="bullet-childern-item">
+                      <a href="#ignoring-a-migration" class="menu-children-item">Ignoring a migration</a>
+                    </li>
+                  
                   
                     <li id="bullet-item">
                       <a href="#running-migrations" class="menu-main-item">Running migrations</a>
@@ -389,6 +401,10 @@
                   
                     <li id="bullet-item">
                       <a href="#rollback-migrations" class="menu-main-item">Rollback migrations</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#resetting-migrations" class="menu-children-item">Resetting migrations</a>
                     </li>
                   
                   
@@ -477,6 +493,18 @@ class Migration20211220193145 extends Migration
     }
 }
 </code></pre>
+<h3 id="ignoring-a-migration">Ignoring a migration</h3>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">Available in Solital 4.8</h6>
+</div>
+
+<p>If for some reason you do not want to run a specific migration, you should use the <code>$ignore_migration</code> property with the value <code>true</code>.</p>
+<pre><code class="language-php">class Migration20211220193145 extends Migration
+{
+    protected bool $ignore_migration = true;
+
+    // ...
+</code></pre>
 <h2 id="running-migrations">Running migrations</h2>
 <p>To run migrations, it's simple: run the command below:</p>
 <pre><code class="language-bash">php vinci migrate
@@ -490,6 +518,17 @@ class Migration20211220193145 extends Migration
 </code></pre>
 <p>The previous command will roll back all migrations created using the <code>up()</code> method. To limit the number of migrations, assign a value to <code>--rollback</code>.</p>
 <pre><code class="language-bash">php vinci migrate --rollback=3
+</code></pre>
+<h3 id="resetting-migrations">Resetting migrations</h3>
+<div class="alert alert-info mt-4" role="alert">
+    <h6 class="fw-semibold">Available in Solital 4.8</h6>
+</div>
+
+<p>If you need to roll back all migrations, use the <code>--reset</code> option.</p>
+<pre><code class="language-bash">php vinci migrate --reset
+</code></pre>
+<p>If you want to roll back all migrations, and then run them again, use the <code>--refresh</code> command.</p>
+<pre><code class="language-bash">php vinci migrate --refresh
 </code></pre>
                 
 
@@ -523,7 +562,7 @@ class Migration20211220193145 extends Migration
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2025-03-31 14:04:32.314566+00:00
+              Docs Build Date UTC : 2025-06-18 13:19:39.626935+00:00
               -->
 
           </section>

@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/styles/default.css">
   <link rel="stylesheet" href="../css/styles/tomorrow-night-blue.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
   
 
@@ -58,6 +58,14 @@
           <img src="../img/solital-logo-2-sm-trans-2.png" alt="Solital Framework">
         </a>
       </header>
+
+      <!-- <section role="search">
+        <form action="../ search.html" method="get">
+          <div class="mb-3 input-group-sm">
+            <input type="search" name="search-docs" placeholder="&#xf002 Search..." class="form-control" autocomplete="off">
+          </div>
+        </form>
+      </section> -->
 
       <nav class="dashboard-nav-list">
         
@@ -367,29 +375,73 @@
 
                 <ul class="ml-5 mb-5">
                   
+                    <li id="bullet-item">
+                      <a href="#introduction" class="menu-main-item">Introduction</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#reduce-scaling-down-a-number" class="menu-children-item">reduce() – Scaling Down a Number</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#currency-formatting-a-number-as-currency" class="menu-children-item">currency() – Formatting a Number as Currency</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#percent-transforming-a-value-into-a-percentage" class="menu-children-item">percent() – Transforming a Value into a Percentage</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#spell-converts-numbers-to-words" class="menu-children-item">spell() – Converts Numbers to Words</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#format-number-formatting-for-readability" class="menu-children-item">format() – Number Formatting for Readability</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#clamp-restricting-a-number-within-a-range" class="menu-children-item">clamp() – Restricting a Number Within a Range</a>
+                    </li>
+                  
+                    <li id="bullet-childern-item">
+                      <a href="#toroman-converting-numbers-to-roman-numerals" class="menu-children-item">toRoman() – Converting Numbers to Roman Numerals</a>
+                    </li>
+                  
+                  
                 </ul>
 
                 
-                <p>Solital has the <code>Number</code> class to manipulate numbers. You can use one of the methods below:</p>
+                <h2 id="introduction">Introduction</h2>
+<p>The Number component in Solital Framework provides a set of powerful methods for handling numeric operations with precision and flexibility. Whether you're formatting, clamping, converting, or reducing numbers, this component ensures a streamlined approach to numerical manipulation.</p>
+<h3 id="reduce-scaling-down-a-number">reduce() – Scaling Down a Number</h3>
+<p>The <code>reduce()</code> method simplifies large numbers by converting them into more readable values using thousands (K), millions (M), and billions (B).</p>
 <pre><code class="language-php">use Solital\Core\Resource\Number;
 
-// Reduce a number
-Number::reduce(1.2335566);
-
-// Format a number to currency
-Number::currency(12345678.90, 'BRL');
-
-// Format a numer to percentage
-Number::percent(0.123);
-
-// Spellout rule-based format
-Number::spell(12345678);
-
-//Format a value
-Number::format(12345678.9);
-
-// lamp a given number between two other numbers
-Number::clamp(-2, 1, 100);
+echo Number::reduce(1.2335566);
+</code></pre>
+<h3 id="currency-formatting-a-number-as-currency">currency() – Formatting a Number as Currency</h3>
+<p>The <code>currency()</code> method formats a numerical value into a specific currency format, supporting different locales and currency symbols (USD, EUR, BRL, and others).</p>
+<pre><code class="language-php">echo Number::currency(12345678.90, 'BRL');
+</code></pre>
+<h3 id="percent-transforming-a-value-into-a-percentage">percent() – Transforming a Value into a Percentage</h3>
+<p>The <code>percent()</code> method converts a numerical value into its percentage representation.</p>
+<pre><code class="language-php">echo Number::percent(0.123);
+</code></pre>
+<h3 id="spell-converts-numbers-to-words">spell() – Converts Numbers to Words</h3>
+<p>Transforms numeric values into their text equivalent.</p>
+<pre><code class="language-php">echo Number::spell(12345678);
+</code></pre>
+<h3 id="format-number-formatting-for-readability">format() – Number Formatting for Readability</h3>
+<p>Formats numbers with thousand separators, decimal precision, and currency symbols.</p>
+<pre><code class="language-php">echo Number::format(12345678.9);
+</code></pre>
+<h3 id="clamp-restricting-a-number-within-a-range">clamp() – Restricting a Number Within a Range</h3>
+<p>Constrains a number to stay within the specified boundaries.</p>
+<pre><code class="language-php">echo Number::clamp(-2, 1, 100);
+</code></pre>
+<h3 id="toroman-converting-numbers-to-roman-numerals">toRoman() – Converting Numbers to Roman Numerals</h3>
+<p>The <code>toRoman()</code> method transforms an integer into its Roman numeral equivalent. This is useful for formatting dates, numbering lists, or historical references.</p>
+<pre><code class="language-php">echo Number::toRoman(10);
 </code></pre>
                 
 
@@ -423,7 +475,7 @@ Number::clamp(-2, 1, 100);
 
             <!--
               MkDocs version      : 1.5.3
-              Docs Build Date UTC : 2025-03-31 14:04:32.314566+00:00
+              Docs Build Date UTC : 2025-06-18 13:19:39.630925+00:00
               -->
 
           </section>
